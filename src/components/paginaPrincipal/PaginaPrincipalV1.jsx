@@ -7,7 +7,7 @@ const PaginaPrincipalV1 = () => {
     <>
     <Container>
         <Row>
-            <div className='div1 text-center'>Alfajores Del Tucumán</div>
+            <div className='div1 text-center'>Alfajores Del Tucumán Alfajores</div>
         </Row>
     </Container>
     
