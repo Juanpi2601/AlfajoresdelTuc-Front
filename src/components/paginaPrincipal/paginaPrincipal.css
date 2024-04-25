@@ -1,0 +1,9 @@
+:root {
+    --colorOne: #e3c567;
+    --colorTwo: #c8963e;
+    --colorThree: #d1462f;
+    --colorFour: #fff;
+  }
+.div1 {
+    background-color: var(--colorOne);
+}
