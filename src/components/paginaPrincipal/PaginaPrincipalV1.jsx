@@ -6,11 +6,8 @@ import NavBarV1 from '../NavBarV1/NavBarV1'
 const PaginaPrincipalV1 = () => {
   return (
     <>
-    <Container>
+    <Container fluid className='div1'>
       <NavBarV1/>
-        <Row>
-            <div className='div1 text-center'>Alfajores Del Tucumán</div>
-        </Row>
     </Container>
     
     </>

@@ -33,7 +33,7 @@ const NavBarV1 = () => {
       </Row>
       <Container>
         <Row>
-          <Col className=" d-none d-lg-block">
+          <Col className=" d-none d-lg-block pb-2">
             <Nav variant="underline" defaultActiveKey="/home">
             <Nav.Item>
               <Nav.Link href="/home">NOSOTROS</Nav.Link>
