@@ -1,3 +1,10 @@
+:root {
+  --colorOne: #e3c567;
+  --colorTwo: #c8963e;
+  --colorThree: #d1462f;
+  --colorFour: #fff;
+}
+
 body {
   font-family: "roca", sans-serif;
 font-weight: 700;
