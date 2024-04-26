@@ -50,7 +50,7 @@ const NavBarV1 = () => {
               <Nav.Link href="/home">NOSOTROS</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/link-1">PRODUCTOS</Nav.Link>
+              <Nav.Link href="/products">PRODUCTOS</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link href="/link-2">LOCALES</Nav.Link>
@@ -79,11 +79,11 @@ const NavBarV1 = () => {
         <Offcanvas.Body>
           <Nav className="flex-column">
             <Nav.Link href="/home">NOSOTROS</Nav.Link>
-            <Nav.Link href="/link-1">PRODUCTOS</Nav.Link>
+            <Nav.Link href="/products">PRODUCTOS</Nav.Link>
             <Nav.Link href="/link-2">LOCALES</Nav.Link>
             <Nav.Link href="/link-3">NOVEDADES</Nav.Link>
             <Nav.Link href="/link-4">CONTACTO</Nav.Link>
-            <Link to='./login' className="text-decoration-none">INICIAR SESION</Link>
+            <Nav.Link to='./login' className="text-decoration-none">INICIAR SESION</Nav.Link>
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>
