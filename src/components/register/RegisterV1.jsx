@@ -25,16 +25,16 @@ const RegisterUser = () => {
   });
 
   return (
-    <Container>
-      <Row className="formRegister">
-        <Col sm={6} className="imgFondo rounded">
+    <Container className="bg-white mt-5 w-75 border pt-5">
+      <Row className="d-flex">
+        <Col className='d-flex flex-column justify-content-center align-items-center'>
           {/* {registerErrors.map((error, i) => (
             <Alert key={i} variant="danger">
               {error}
             </Alert>
           ))} */}
-          <h3 className="text-white mt-3 pt-3">Formulario de Registro</h3>
-          <Form onSubmit={onSubmit}>
+          <h3 className="text-black mt-3 pt-3">Formulario de Registro</h3>
+          <Form onSubmit={onSubmit} >
             <Form.Group>
               <Form.Label htmlFor="name"></Form.Label>
               <Form.Control
@@ -190,7 +190,7 @@ const RegisterUser = () => {
               Registrarse
             </Button>
           </Form>
-          <p className="mt-2 d-flex justify-content-between text-white mt-5">
+          <p className="mt-2 d-flex justify-content-between text-black mt-5">
             Ya tienes una cuenta?
             <Link to="/login" className="text-decoration-none iniciarSesion">
               Iniciar sesión

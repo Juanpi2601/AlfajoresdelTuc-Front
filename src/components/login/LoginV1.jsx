@@ -12,23 +12,24 @@ const LoginV1 = () => {
   });
 
   return (
-    <Container className="fondoLog">
-      <Row className="fondoLogin">
-        <Col sm={6}>
+    <Container className="bg-white mt-5 w-75 border pt-5">
+      <Row className="d-flex">
+        <Col className='d-flex flex-column justify-content-center align-items-center'>
           {/* {signinErrors.map((error, i) => (
             <Alert key={i} variant="danger">
               {error}
             </Alert>
           ))} */}
-          <h3 className="text-white mb-5">Iniciar sesión</h3>
-          <Form onSubmit={onSubmit}>
-            <Form.Group className="">
-              <Form.Label htmlFor="email"></Form.Label>
+          <h3 className="text-black mb-5">Iniciar sesión</h3>
+          <Form  onSubmit={onSubmit}>
+            <Form.Group>
+              <Form.Label  htmlFor="email"></Form.Label>
               <Form.Control
                 type="text"
                 id="email"
                 placeholder="Email"
-                className={errors.email?.message ? "is-invalid" : ""}
+                // style={{ width: 'auto', fontSize: '16px' }}
+                className={` ${errors.email?.message ? "is-invalid" : ""}`} 
                 {...register("email", {
                   required: {
                     value: true,
@@ -61,7 +62,6 @@ const LoginV1 = () => {
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check
                 className="text-black"
-                
                 type="checkbox"
                 label="Mostrar contraseña"
               />
@@ -70,7 +70,7 @@ const LoginV1 = () => {
               Iniciar sesión
             </Button>
           </Form>
-          <p className="mt-5 d-flex justify-content-between text-white">
+          <p className="mt-2 d-flex justify-content-between text-black">
             Todavia no tienes cuenta?
             <Link to="/register" className="btnReg">
               Registrate
