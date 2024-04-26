@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <PaginaPrincipalV1 />
+      <PaginaPrincipalV1/>
     </>
   )
 }
