@@ -26,8 +26,8 @@ const RegisterUser = () => {
 
   return (
     <Container className="bg-white mt-5 w-75 border pt-5">
-      <Row className="d-flex">
-        <Col className='d-flex flex-column justify-content-center align-items-center'>
+      <Row>
+        <Col xs={6} className='mx-auto'>
           {/* {registerErrors.map((error, i) => (
             <Alert key={i} variant="danger">
               {error}

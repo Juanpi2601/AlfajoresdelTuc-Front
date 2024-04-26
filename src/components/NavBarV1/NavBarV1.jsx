@@ -5,6 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import CallIcon from '@mui/icons-material/Call';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
+
 const NavBarV1 = () => {
 
     const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -14,7 +15,7 @@ const NavBarV1 = () => {
   const handleCarrito = () => setShowCarrito(!showCarrito);
 
   return (
-    <Container fluid>
+    <Container fluid className='div1'>
       <Row className='py-3'>
         <Navbar expand="lg">
           <Container>

@@ -12,9 +12,9 @@ const LoginV1 = () => {
   });
 
   return (
-    <Container className="bg-white mt-5 w-75 border pt-5">
-      <Row className="d-flex">
-        <Col className='d-flex flex-column justify-content-center align-items-center'>
+    <Container className="bg-white mt-5 w-75 border py-5">
+      <Row >
+        <Col xs={6} className='mx-auto'>
           {/* {signinErrors.map((error, i) => (
             <Alert key={i} variant="danger">
               {error}
@@ -22,13 +22,12 @@ const LoginV1 = () => {
           ))} */}
           <h3 className="text-black mb-5">Iniciar sesión</h3>
           <Form  onSubmit={onSubmit}>
-            <Form.Group>
+            <Form.Group >
               <Form.Label  htmlFor="email"></Form.Label>
               <Form.Control
                 type="text"
                 id="email"
                 placeholder="Email"
-                // style={{ width: 'auto', fontSize: '16px' }}
                 className={` ${errors.email?.message ? "is-invalid" : ""}`} 
                 {...register("email", {
                   required: {
@@ -40,7 +39,7 @@ const LoginV1 = () => {
               <Form.Control.Feedback type="invalid">
                 {errors.email?.message}
               </Form.Control.Feedback>
-            </Form.Group>
+            </Form.Group >
             <Form.Group className="mb-3">
               <Form.Label htmlFor="password"></Form.Label>
               <Form.Control
