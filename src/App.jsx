@@ -7,6 +7,7 @@ import Register from './pages/Register';
 function App() {
 
   return (
+      
     <BrowserRouter>
       <main>
         <PaginaPrincipalV1></PaginaPrincipalV1>
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register />} />
       </Routes>
+    <PaginaPrincipalV1/>
       </main>
     </BrowserRouter>
   )
