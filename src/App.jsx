@@ -3,19 +3,20 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PaginaPrincipalV1 from './components/paginaPrincipal/PaginaPrincipalV1'
 import Login from './pages/Login';
 import Register from './pages/Register';
-
+import NavBarV1 from './components/NavBarV1/NavBarV1';
 function App() {
 
   return (
       
     <BrowserRouter>
+      <NavBarV1 />
       <main>
-        <PaginaPrincipalV1></PaginaPrincipalV1>
+      <PaginaPrincipalV1/>
         <Routes>
+
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register />} />
       </Routes>
-    <PaginaPrincipalV1/>
       </main>
     </BrowserRouter>
   )

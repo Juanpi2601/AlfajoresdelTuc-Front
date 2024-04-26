@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
-import NavBarV1 from '../NavBarV1/NavBarV1';
+import '../paginaPrincipal/paginaPrincipal.css'
 import PaginaProductos from '../paginaProductos/PaginaProductos'
 
 
@@ -8,10 +8,6 @@ const PaginaPrincipalV1 = () => {
   return (
     <>
       <Container>
-        <NavBarV1 />
-        <Row>
-          <div className='div1 text-center'>Alfajores Del Tucumán</div>
-        </Row>
         
           <div className='product-container'>
             <PaginaProductos
@@ -23,20 +19,9 @@ const PaginaPrincipalV1 = () => {
               nombre="conito"
               precio="2000"/>
 
-            <PaginaProductos
-              imagen = ""
-              nombre = ""
-              precio = ""
-            />
         </div>
         
-
-
-
       </Container>
-    <Container fluid className='div1'>
-      <NavBarV1/>
-    </Container>
 
     </>
   )

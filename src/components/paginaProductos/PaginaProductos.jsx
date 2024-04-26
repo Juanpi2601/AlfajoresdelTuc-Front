@@ -8,7 +8,7 @@ const PaginaProductos = ({imagen , nombre , precio}) => {
 
   return( 
     <>
-    <div className="product-card">
+    <div className="product-card bg-white">
       <img src={imagen} alt={nombre} className="product-image" />
       <div className="product-details">
         <h2 className="product-name">{nombre}</h2>
