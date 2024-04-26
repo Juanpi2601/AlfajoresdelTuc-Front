@@ -34,6 +34,9 @@ const PaginaPrincipalV1 = () => {
 
 
       </Container>
+    <Container fluid className='div1'>
+      <NavBarV1/>
+    </Container>
 
     </>
   )
