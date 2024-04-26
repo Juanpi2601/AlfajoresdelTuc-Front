@@ -27,7 +27,7 @@ const NavBarV1 = () => {
                 <Link to='' className="mx-3">
                   <CallIcon fontSize="large" style={{ color: 'black'}}/>
                 </Link>
-                <Link to='' className="mx-3">
+                <Link to='' className="mx-3" onClick={handleCarrito}>
                   <ShoppingCartIcon fontSize="large" style={{ color: 'black'}}/>
                 </Link>
                 <Link to='./login' className="mx-3">
@@ -36,7 +36,7 @@ const NavBarV1 = () => {
               </Nav>
             </Col>
             <Col className='d-flex justify-content-end d-lg-none'>
-              <Navbar.Toggle className='p-2 justify-content-end' aria-controls="basic-navbar-nav" onClick={handleCarrito}>CARRITO</Navbar.Toggle>
+              <Navbar.Toggle className='p-2 justify-content-end' aria-controls="basic-navbar-nav" onClick={handleCarrito}><ShoppingCartIcon fontSize="large" style={{ color: 'black'}}/></Navbar.Toggle>
               <Navbar.Toggle className="justify-content-end" aria-controls="basic-navbar-nav" onClick={handleOffcanvas} />
             </Col>
           </Container>
