@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Container, Nav, Navbar, Offcanvas, Row } from 'react-bootstrap';
+import { Col, Container, Nav, NavItem, NavLink, Navbar, Offcanvas, Row } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import CallIcon from '@mui/icons-material/Call';
@@ -27,9 +27,9 @@ const NavBarV1 = () => {
                 <Link to='' className="mx-3">
                   <CallIcon fontSize="large" style={{ color: 'black'}}/>
                 </Link>
-                <Link to='' className="mx-3" onClick={handleCarrito}>
+                <NavLink to='' className="p-0 mx-3 cursor-pointer" onClick={handleCarrito}>
                   <ShoppingCartIcon fontSize="large" style={{ color: 'black'}}/>
-                </Link>
+                </NavLink>
                 <Link to='./login' className="mx-3">
                   <PersonIcon fontSize="large" style={{ color: 'black'}}/>
                 </Link>
