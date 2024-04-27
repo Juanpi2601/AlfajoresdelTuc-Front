@@ -15,9 +15,10 @@
 }
 
 .video1 {
-    width: 1000px;
+    height: 55vh;
     margin: 0;
-    justify-content: end;
+    object-fit: cover;
+    
 }
 
 .img1 {
@@ -45,12 +46,12 @@
     transition: all 500ms ease-out;
     opacity: 0;
     visibility: hidden;
-    text-align: center
-}
-
-.text1 {
-    margin-top: 130px;
+    text-align: center;
     color: var(--colorFour);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardContainer {
