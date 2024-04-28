@@ -4,15 +4,22 @@ import { Link } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import CallIcon from '@mui/icons-material/Call';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import ProfileUser from "../profile/ProfileUser";
+import { useAuth } from "../../context/UserContext";
 
 const NavBarV1 = () => {
 
-    const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [showCarrito, setShowCarrito] = useState(false)
+  const { isAuthenticated } = useAuth();
 
   const handleOffcanvas = () => setShowOffcanvas(!showOffcanvas);
   const handleCarrito = () => setShowCarrito(!showCarrito);
+
+  const cerrarSesion = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <Container fluid className='div1'>
@@ -22,17 +29,21 @@ const NavBarV1 = () => {
             <Col sm={2} md={2} lg={2}>
               <img className="img-fluid w-50" src="https://i.postimg.cc/W1Z4mtcj/Screenshot-1-removebg-preview.png" alt=""/>
             </Col>
-            <Col className=" d-none d-lg-block ">
-              <Nav className="d-flex justify-content-end">
+            <Col className=" d-none d-lg-block">
+              <Nav className="d-flex justify-content-end ">
                 <Link to='' className="mx-3">
                   <CallIcon fontSize="large" style={{ color: 'black'}}/>
                 </Link>
                 <NavLink to='' className="p-0 mx-3 cursor-pointer" onClick={handleCarrito}>
                   <ShoppingCartIcon fontSize="large" style={{ color: 'black'}}/>
                 </NavLink>
-                <Link to='./login' className="mx-3">
-                  <PersonIcon fontSize="large" style={{ color: 'black'}}/>
-                </Link>
+                {isAuthenticated ? (
+                        <ProfileUser/>
+                    ) : (
+                        <Link to='./login' className="mx-3">
+                            <PersonIcon fontSize="large" style={{ color: 'black'}}/>
+                        </Link>
+                    )}
               </Nav>
             </Col>
             <Col className='d-flex justify-content-end d-lg-none'>
