@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Col, Container, Form, Row, Button, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/UserContext";
 import {
   passRegex,
   emailRegex,
@@ -16,9 +17,7 @@ const RegisterUser = () => {
     formState: { errors },
     watch,
   } = useForm();
-
-  const navigate = useNavigate();
-
+  const { signup, isAuthenticated, errors: registerErrors } = useAuth();
 
   const onSubmit = handleSubmit(async (values) => {
     signup(values);
@@ -28,11 +27,11 @@ const RegisterUser = () => {
     <Container className="bg-white mt-5 w-75 border pt-5">
       <Row>
         <Col xs={6} className='mx-auto'>
-          {/* {registerErrors.map((error, i) => (
+          {registerErrors.map((error, i) => (
             <Alert key={i} variant="danger">
               {error}
             </Alert>
-          ))} */}
+          ))}
           <h3 className="text-black mt-3 pt-3">Formulario de Registro</h3>
           <Form onSubmit={onSubmit} >
             <Form.Group>

@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Form, Row, Button, Alert } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/UserContext';
+import PassText from '../passText/PassText';
 
 const LoginV1 = () => {
 	const { register, handleSubmit, formState: { errors } } = useForm();
+  const { signin, errors: signinErrors, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (isAuthenticated) navigate("/home");
+  }, [isAuthenticated]);
+  
 	const onSubmit = handleSubmit((data) => {
     signin(data);
+    navigate("/home");
   });
 
   return (
     <Container className="bg-white mt-5 w-75 border py-5">
       <Row >
         <Col xs={6} className='mx-auto'>
-          {/* {signinErrors.map((error, i) => (
-            <Alert key={i} variant="danger">
-              {error}
-            </Alert>
-          ))} */}
+        {signinErrors && signinErrors.map((error, i) => (
+          <Alert key={i} variant="danger">
+            {error}
+          </Alert>
+        ))}
           <h3 className="text-black mb-5">Iniciar sesión</h3>
           <Form  onSubmit={onSubmit}>
             <Form.Group >
@@ -61,6 +69,7 @@ const LoginV1 = () => {
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check
                 className="text-black"
+                onClick={PassText}
                 type="checkbox"
                 label="Mostrar contraseña"
               />
