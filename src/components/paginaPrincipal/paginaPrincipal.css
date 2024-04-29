@@ -18,7 +18,7 @@
     height: 55vh;
     margin: 0;
     object-fit: cover;
-    
+
 }
 
 .img1 {
@@ -30,6 +30,8 @@
 
 .card1 {
     cursor: pointer;
+    flex: 1 1 200px;
+    margin: 15px;
 }
 
 .card1:hover>.cardText {
@@ -57,4 +59,11 @@
 .cardContainer {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: auto;
+    max-width: 1500px;
+    justify-content: center;
+
 }
+
