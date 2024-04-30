@@ -17,7 +17,7 @@ function App() {
         <NavBarV1 />
         <main>
           <Routes>
-            <Route path='/home' element = {<PaginaPrincipal/>} />
+            <Route path='/' element = {<PaginaPrincipal/>} />
             <Route path="/products" element = {<Products/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register />} />

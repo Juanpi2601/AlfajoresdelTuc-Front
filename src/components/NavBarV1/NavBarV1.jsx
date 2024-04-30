@@ -56,9 +56,9 @@ const NavBarV1 = () => {
       <Container>
         <Row>
           <Col className=" d-none d-lg-block pb-2">
-            <Nav variant="underline" defaultActiveKey="/home">
+            <Nav variant="underline" defaultActiveKey="/">
             <Nav.Item>
-              <Nav.Link href="/home">NOSOTROS</Nav.Link>
+              <Nav.Link href="/about">NOSOTROS</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link href="/products">PRODUCTOS</Nav.Link>
@@ -89,7 +89,7 @@ const NavBarV1 = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column">
-            <Nav.Link href="/home">NOSOTROS</Nav.Link>
+            <Nav.Link href="/about">NOSOTROS</Nav.Link>
             <Nav.Link href="/products">PRODUCTOS</Nav.Link>
             <Nav.Link href="/link-2">LOCALES</Nav.Link>
             <Nav.Link href="/link-3">NOVEDADES</Nav.Link>
