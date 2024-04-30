@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
 import PassText from '../passText/PassText';
-import LoginGoogle from './LoginGoogle';
+// import LoginGoogle from './LoginGoogle';
 
 const LoginV1 = () => {
 	const { register, handleSubmit, formState: { errors } } = useForm();
@@ -75,8 +75,8 @@ const LoginV1 = () => {
                 label="Mostrar contraseña"
               />
             </Form.Group>
-            <p>o</p>
-            <LoginGoogle/>
+            {/* <p>o</p>
+            <LoginGoogle/> */}
             <Button variant="primary" type="submit" className="btnLogin mt-4">
               Iniciar sesión
             </Button>
