@@ -16,7 +16,7 @@ const ProfileUser = () => {
 
 
   return (
-    <div className="mt-5">
+    <div>
       {isAuthenticated && user ? (
         <>
           <Container>
