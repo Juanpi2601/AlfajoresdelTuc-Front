@@ -7,6 +7,8 @@ import NavBarV1 from './components/NavBarV1/NavBarV1';
 import Products from './pages/Products';
 import PaginaPrincipal from './pages/PaginaPrincipal';
 import Profile from './pages/Profile';
+import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
+import Admin from './pages/Admin';
 
 function App() {
 
@@ -22,6 +24,11 @@ function App() {
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
+            <Route element={<ProtectedRouteAdmin />}>
+                <Route path="/admin" element={<Admin />} />
+            </Route>
+
+
           </Routes>
         </main>
       </UserProvider>

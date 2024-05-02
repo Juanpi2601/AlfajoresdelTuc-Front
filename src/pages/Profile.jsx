@@ -1,8 +1,8 @@
 import React from 'react'
-import ProfileUser from "../components/profile/ProfileUser";
+import UserEdit from '../components/profile/UserEdit';
 
 const Profile = () => {
-    return <ProfileUser />;
+    return <UserEdit />;
   };
   
 export default Profile;

@@ -19,47 +19,56 @@ const ProfileUser = () => {
     { label: "Cerrar Sesión", action: cerrarSesion }
   ];
 
-  if (isAuthenticated && user && user.role === "admin") {
-    dropdownItems.unshift({ label: "Administrador", action: () => navigate("/admin") });
-  }
-
-  if (isAuthenticated && user && user.role === "client") {
-    dropdownItems.unshift({ label: "Panel de Cliente", action: () => navigate("/cliente") });
+  if (isAuthenticated && user) {
+    if (user.role === "admin") {
+      dropdownItems.unshift({ label: "Administrador", action: () => navigate("/admin") });
+    } else if (user.role === "client") {
+      dropdownItems.unshift({ label: "Panel de Cliente", action: () => navigate("/profile") });
+    }
   }
 
   return (
     <div>
       {isAuthenticated && user ? (
-        <>
-          <Container>
-            <Row>
-              <Col className="cardProfile">
-                <Dropdown>
-                  <Dropdown.Toggle style={{ backgroundColor: 'transparent', border: 'none', color: 'black' }} className="p-0 mx-2" id="dropdown-basic">
-                    {user.role === "admin" ? (
-                      <ManageAccountsIcon fontSize="large" />
-                    ) : (
-                      <PersonAddAlt1Icon fontSize="large" />
-                    )}
-                  </Dropdown.Toggle>
+        <Container>
+          <Row>
+            <Col className="cardProfile">
+              <Dropdown>
+                <Dropdown.Toggle style={{ backgroundColor: 'transparent', border: 'none', color: 'black' }} className="p-0 mx-2" id="dropdown-basic">
+                  {user.role === "admin" ? (
+                    <ManageAccountsIcon fontSize="large" />
+                  ) : (
+                    <PersonAddAlt1Icon fontSize="large" />
+                  )}
+                </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
-                    {dropdownItems.map((item, index) => (
-                      <Dropdown.Item key={index} onClick={item.action}>
-                        {item.label}
-                      </Dropdown.Item>
-                    ))}
-                  </Dropdown.Menu>
-                </Dropdown>
-              </Col>
-            </Row>
-          </Container>
-        </>
-      ) : null}
+                <Dropdown.Menu>
+                  {dropdownItems.map((item, index) => (
+                    <Dropdown.Item key={index} onClick={item.action}>
+                      {item.label}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+          </Row>
+        </Container>
+      ) : (
+        user?.role === "admin" && (
+          <Button
+            variant="secondary"
+            size="sm"
+            className="mt-1 text-ligth fw-semibold"
+            onClick={() => navigate("/admin")}
+          >
+            Panel Admin
+          </Button>
+        )
+      )}
     </div>
   );
 };
 
-export default ProfileUser;
+export default ProfileUser;
 
 
