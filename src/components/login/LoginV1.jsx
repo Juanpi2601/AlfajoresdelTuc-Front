@@ -17,7 +17,6 @@ const LoginV1 = () => {
   
 	const onSubmit = handleSubmit((data) => {
     signin(data);
-    navigate("/");
   });
 
   return (

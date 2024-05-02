@@ -9,6 +9,7 @@ import PaginaPrincipal from './pages/PaginaPrincipal';
 import Profile from './pages/Profile';
 import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
 import Admin from './pages/Admin';
+import PanelUserAdmin from './components/Admin/PanelUserAdmin';
 
 function App() {
 
@@ -19,16 +20,15 @@ function App() {
         <NavBarV1 />
         <main>
           <Routes>
-            <Route path='/' element = {<PaginaPrincipal/>} />
-            <Route path="/products" element = {<Products/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route element={<ProtectedRouteAdmin />}>
-                <Route path="/admin" element={<Admin />} />
+            <Route path='/' element = {<PaginaPrincipal/>}/>
+            <Route path="/products" element = {<Products/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+            <Route element={<ProtectedRouteAdmin/>}>
+                <Route path="/admin" element={<Admin/>}/>
+                <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
             </Route>
-
-
           </Routes>
         </main>
       </UserProvider>

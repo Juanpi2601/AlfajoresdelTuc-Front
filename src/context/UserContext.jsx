@@ -4,6 +4,7 @@ import axios from "../api/axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 export const UserContext = createContext();
+import { alertCustom } from "../utils/alertCustom.js";
 
 export const useAuth = () => {
   const context = useContext(UserContext);
@@ -34,12 +35,19 @@ export const UserProvider = ({ children }) => {
 
   const signup = async (user) => {
     try {
+      setLoading(true);
       const res = await registerRequest(user);
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
-      navigate("/login")
+      alertCustom('¡Éxito!', 'Usuario creado correctamente.', 'success');
+      navigate("/login");
     } catch (error) {
-      setErrors(error.response.data);
+      alertCustom(
+        "Upps",
+        "Ocurrió un error al crear el usuario. Por favor, intente nuevamente.",
+        "error"
+      );
+      setLoading(false);
     }
   };
 
@@ -50,7 +58,11 @@ export const UserProvider = ({ children }) => {
       setUser(normalizedUser);
       setIsAuthenticated(true);
     } catch (error) {
-      setErrors(error.response.data);
+      alertCustom(
+        "Upps",
+        "Ocurrió un error al iniciar sesión. Por favor, intente nuevamente.",
+        "error"
+      );
     }
   };
 
