@@ -11,7 +11,7 @@ const NavBarV1 = () => {
 
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [showCarrito, setShowCarrito] = useState(false)
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   const handleOffcanvas = () => setShowOffcanvas(!showOffcanvas);
   const handleCarrito = () => setShowCarrito(!showCarrito);
@@ -27,7 +27,9 @@ const NavBarV1 = () => {
         <Navbar expand="lg">
           <Container>
             <Col sm={2} md={2} lg={2}>
-              <img className="img-fluid w-50" src="https://i.postimg.cc/W1Z4mtcj/Screenshot-1-removebg-preview.png" alt=""/>
+              <Link to="/">
+                <img className="img-fluid w-50" src="https://i.postimg.cc/W1Z4mtcj/Screenshot-1-removebg-preview.png" alt="" />
+            </Link>
             </Col>
             <Col className=" d-none d-lg-block">
               <Nav className="d-flex justify-content-end ">
@@ -89,12 +91,22 @@ const NavBarV1 = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column">
+              {isAuthenticated ? (
+                      <div className='d-flex align-items-end'> 
+                          <ProfileUser/>
+                          <p className="fs-5 m-0 text-black">Hola!! {user && user.name}</p>
+                      </div>
+                  ) : (
+                      <Link to='./login' className="mx-3">
+                          <PersonIcon fontSize="large" style={{ color: 'black'}}/>
+                      </Link>
+                  )}
             <Nav.Link href="/about">NOSOTROS</Nav.Link>
             <Nav.Link href="/products">PRODUCTOS</Nav.Link>
             <Nav.Link href="/link-2">LOCALES</Nav.Link>
             <Nav.Link href="/link-3">NOVEDADES</Nav.Link>
             <Nav.Link href="/link-4">CONTACTO</Nav.Link>
-            <Nav.Link to='./login' className="text-decoration-none">INICIAR SESION</Nav.Link>
+            
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>
@@ -102,4 +114,4 @@ const NavBarV1 = () => {
   )
 }
 
-export default NavBarV1
+export default NavBarV1;
