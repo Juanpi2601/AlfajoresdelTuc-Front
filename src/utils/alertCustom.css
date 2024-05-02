@@ -1,0 +1,14 @@
+.swal2-small-alert {
+    font-size: 20px; 
+    .swal2-popup {
+      width: auto; 
+      padding: 0.5em; 
+    }
+    .swal2-title {
+      font-size: 1em; 
+    }
+    .swal2-content {
+      font-size: 1em;
+    }
+  }
+  

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row, Button, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -9,7 +9,6 @@ import {
   nameRegex,
 } from "../../validation/registerValidation";
 
-
 const RegisterUser = () => {
   const {
     register,
@@ -18,6 +17,11 @@ const RegisterUser = () => {
     watch,
   } = useForm();
   const { signup, isAuthenticated, errors: registerErrors } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const onSubmit = handleSubmit(async (values) => {
     signup(values);
@@ -122,7 +126,7 @@ const RegisterUser = () => {
               <Form.Label htmlFor="password"></Form.Label>
               <Form.Control
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Contraseña"
                 className={errors.password?.message ? "is-invalid" : ""}
                 {...register("password", {
@@ -145,7 +149,7 @@ const RegisterUser = () => {
               <Form.Label htmlFor="passwordCheck"></Form.Label>
               <Form.Control
                 id="passwordCheck"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Repite la Contraseña"
                 className={errors.passwordCheck?.message ? "is-invalid" : ""}
                 {...register("passwordCheck", {
@@ -154,7 +158,7 @@ const RegisterUser = () => {
                     message: "La contraseña es requerida",
                   },
                   validate: (value) => {
-                    if (value == watch("password")) {
+                    if (value === watch("password")) {
                       return true;
                     }
                     return "Las contraseñas no coinciden";
@@ -165,7 +169,15 @@ const RegisterUser = () => {
                 {errors.passwordCheck?.message}
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Group className="mb-3 mt-3" controlId="formBasicCheckbox1">
+              <Form.Check
+                className="text-black"
+                type="checkbox"
+                label="Mostrar contraseña"
+                onClick={togglePasswordVisibility}
+              />
+              </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox2">
               <Form.Check
                 className="text-black mt-3"
                 type="checkbox"
