@@ -40,10 +40,9 @@ const PaginaPrincipalV1 = () => {
                     <section className='cardContainer cards2'>
                         <section className='mt-5'>
                             <Card style={{ width: '18rem' }} className='card1 cards3'>
-                                <Card.Img variant="top" src="/src/assets/Nuestro e-Comercve.png" className='img1' />
+                                <Card.Img variant="top" src="/src/assets/E-Comerce.png" className='img1' />
                                 <div className='cardText'>
-                                    <h4 className='text1'><img src="/src/assets/E-comerce.png" alt="E-Comerce" className='img3' /></h4>
-                                    <p className='text-white'>Conoce nuestra nueva tienda de Productos</p>
+                                    <h4 className='text1'><img src="/src/assets/Nuestro-E-comerce.png" alt="E-Comerce" className='img3' /></h4>
                                 </div>
                             </Card>
                         </section>
@@ -52,23 +51,27 @@ const PaginaPrincipalV1 = () => {
                                 <Card.Img variant="top" src="/src/assets/Sucursales.png" className='img1' />
                                 <div className='cardText'>
                                     <h4 className='text1'><img src="/src/assets/Sucursales2.png" alt="Sucursales solo" className='img2' /></h4>
-                                    <p className='text-white'>Conoce donde se ubican nuestras sucursales de productos regionales</p>
                                 </div>
                             </Card>
                         </section>
-                        <section className='mt-5'>
-                            <Card style={{ width: '18rem' }} className='card1 cards3'>
-                                <Card.Img variant="top" src="/src/assets/Sucursales.png" className='img1' />
-                                <div className='cardText'>
-                                    <h4 className='text1'>Sucursales</h4>
-                                    <p className='text-white'>Conoce donde se ubican nuestras sucursales de productos regionales</p>
-                                </div>
-                            </Card>
-                        </section>
+                    </section>
+                    <section>
 
+                        <p><img src="/src/assets/Letras-DelTucuman.png" alt="AlfajoresDelTucuman" className='img4' /></p>
+                    </section>
+                    <section className='div2 conatiner mt-5'>
+                        <div>
+                            <h2 className='text-center mt-4'>Primero comenzareos con la historia de la Casa Historica De Tucumán</h2>
+                            <div className='text2 mt-4'>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur commodi enim accusamus officiis! Iste beatae recusandae ex veniam distinctio illum deleniti quasi, esse, ducimus enim illo amet ea tempore. Nam? </p>
+                            </div>
+                            <img src="/src/assets/casaHistoricaRota.jpeg" alt="CasaHistoricaRota.jpeg" className='img5'/>
+                        </div>
                     </section>
                 </Row>
             </Container>
+
+
 
 
             <h1 className='mt-5'>FOOTER</h1>
