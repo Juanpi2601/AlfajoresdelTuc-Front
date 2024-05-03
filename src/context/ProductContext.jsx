@@ -37,6 +37,22 @@ export const ProductProvider = ({ children }) => {
         setProductos(currentProducts => [...currentProducts, product]);
     };
 
+    const getAllProduct = async () => {
+        try {
+          const res = await axios.get('/products/getAll');
+          setProductos(res.data);
+        } catch (error) {
+          setErrors(
+            error.response.data.message ||
+              alertCustom("Upps", "Ha ocurrido un error.", "error")
+          );
+        }
+      };
+
+    useEffect(() => {
+        getAllProduct();
+    }, []);
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setErrors("");
@@ -49,6 +65,8 @@ export const ProductProvider = ({ children }) => {
             value={{
                 signin,
                 addProduct,
+                getAllProduct,
+                productos,
                 errors,
             }}
         >
