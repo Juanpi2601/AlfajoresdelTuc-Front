@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Container, Form, Row, InputGroup, Button, Table } from 'react-bootstrap';
+import { Container, Form, InputGroup, Button, Table } from 'react-bootstrap';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { alertCustom, alertConfirm } from '../../utils/alertCustom';
 import { useProductAuth } from '../../context/ProductContext';
 
 const PanelProductos = () => {
-    const { signin } = useProductAuth()
+    const { signin, productos, getAllProduct } = useProductAuth();
     const [formData, setFormData] = useState({
         nombre: '',
         precio: '',
         imagenUrl: '',
         categoria: ''
     });
-    const [loading, setLoading] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
-    const [productos, setProductos] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
-    
+    const [product, setProduct] = useState([]);
+
     useEffect(() => {
-        
         if (editIndex !== null) {
             const productoEditado = productos[editIndex];
             setFormData({
@@ -36,7 +33,7 @@ const PanelProductos = () => {
                 categoria: ''
             });
         }
-    }, [editIndex, productos]);
+    }, [editIndex, productos, getAllProduct]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -50,50 +47,43 @@ const PanelProductos = () => {
         e.preventDefault();
         const { nombre, precio, imagenUrl, categoria } = formData;
         try {
-            
             if (!nombre || !precio || !imagenUrl || !categoria) {
                 alertCustom("Por favor, completa todos los campos.");
                 return;
             }
             if (editIndex !== null) {
-
                 const productosActualizados = [...productos];
                 productosActualizados[editIndex] = formData;
-                setProductos(productosActualizados);
+                setProduct(productosActualizados);
                 setEditIndex(null);
             } else {
-
-                setProductos(prevProductos => [...prevProductos, formData]);
+                setProduct(prevProductos => [...prevProductos, formData]);
             }
-            await signin(formData)
+            await signin(formData);
             alertCustom('¡Éxito!', 'El producto fue agregado correctamente.', 'success');
+            getAllProduct();
         } catch (error) {
             alertCustom('Upps', 'Ha ocurrido un error al crear el producto.', 'error');
         }
-
     };
+
     const handleDelete = async (index) => {
         try {
-            setIsLoading(true);
             const confirmacion = window.confirm("¿Estás seguro de que quieres eliminar este producto?");
             if (confirmacion) {
                 const nuevosProductos = [...productos];
                 nuevosProductos.splice(index, 1);
-                setProductos(nuevosProductos);
+                setProduct(nuevosProductos);
 
                 // await axios.delete(`ruta_del_backend/${producto.id}`);
                 alertCustom('Éxito', 'Producto eliminado correctamente', 'success');
             }
         } catch (error) {
             alertCustom('Error', 'Ha ocurrido un error al eliminar el producto', 'error');
-        } finally {
-            setIsLoading(false);
         }
     };
 
-
     const handleEdit = (index) => {
-
         setEditIndex(index);
     };
 
@@ -142,7 +132,7 @@ const PanelProductos = () => {
                                 <td>${producto.precio}</td>
                                 <td>{producto.imagenUrl}</td>
                                 <td>{producto.categoria}</td>
-                                <td >
+                                <td>
                                     <Button variant="danger" className='mx-1' onClick={() => handleDelete(index)}> <DeleteIcon /> </Button>
                                     <Button variant="warning" className='mx-1' onClick={() => handleEdit(index)}> <EditIcon /> </Button>
                                 </td>
@@ -151,9 +141,8 @@ const PanelProductos = () => {
                     </tbody>
                 </Table>
             </Container>
-
         </>
     );
-}
+};
 
 export default PanelProductos;
