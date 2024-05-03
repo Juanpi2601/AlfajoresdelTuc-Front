@@ -90,6 +90,18 @@
     opacity: 1;
   }
 
+  
+.columnaCategorias{
+  background-image: url('/src/assets/bannerProductos.jpg');
+  background-size:cover ;
+  background-repeat: no-repeat;
+  background-position:bottom;
+  
+  height: 250px;
+  
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
   @media screen and (max-width: 800px) {
     .product-container {
       flex-direction: column;

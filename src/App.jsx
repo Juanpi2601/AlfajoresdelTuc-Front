@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
 import Admin from './pages/Admin';
 import PanelUserAdmin from './components/Admin/PanelUserAdmin';
+import PanelProductos from './components/paginaProductos/PanelProductos';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <Route element={<ProtectedRouteAdmin/>}>
                 <Route path="/admin" element={<Admin/>}/>
                 <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
+                <Route path="/admin/productos" element={<PanelProductos />} />
             </Route>
           </Routes>
         </main>
@@ -36,4 +38,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
