@@ -19,7 +19,7 @@ export const ProductProvider = ({ children }) => {
 
     const signin = async (product) => {
         try {
-            const res = await axios.post('/productos/create', product);
+            const res = await axios.post('/products/create', product);
             if (res.status === 200 || res.status === 201) {
                 alertCustom('Éxito', 'Producto creado exitosamente', 'success');
             } else {

@@ -17,8 +17,9 @@ const PanelProductos = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [productos, setProductos] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
-
+    
     useEffect(() => {
+        
         if (editIndex !== null) {
             const productoEditado = productos[editIndex];
             setFormData({
@@ -64,7 +65,7 @@ const PanelProductos = () => {
 
                 setProductos(prevProductos => [...prevProductos, formData]);
             }
-            await signin(e)
+            await signin(formData)
             alertCustom('¡Éxito!', 'El producto fue agregado correctamente.', 'success');
         } catch (error) {
             alertCustom('Upps', 'Ha ocurrido un error al crear el producto.', 'error');
@@ -114,9 +115,9 @@ const PanelProductos = () => {
                     </Form.Group>
                     <Form.Select aria-label="Default select example" name="categoria" value={formData.categoria} onChange={handleChange}>
                         <option>Seleccionar Categoria</option>
-                        <option value="1">Alfajores</option>
-                        <option value="2">Conitos</option>
-                        <option value="3">Nueces</option>
+                        <option value="Alfajores">Alfajores</option>
+                        <option value="Conitos">Conitos</option>
+                        <option value="Nueces">Nueces</option>
                     </Form.Select>
                     <Button type="submit" className='my-3'>Agregar Producto</Button>
                 </Form>
