@@ -3,10 +3,10 @@ import { Col, Container, Form, Row, InputGroup, Button, Table } from 'react-boot
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { alertCustom, alertConfirm } from '../../utils/alertCustom';
-
+import { useProductAuth } from '../../context/ProductContext';
 
 const PanelProductos = () => {
-
+    const { signin } = useProductAuth()
     const [formData, setFormData] = useState({
         nombre: '',
         precio: '',
@@ -45,26 +45,31 @@ const PanelProductos = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const { nombre, precio, imagenUrl, categoria } = formData;
+        try {
+            
+            if (!nombre || !precio || !imagenUrl || !categoria) {
+                alertCustom("Por favor, completa todos los campos.");
+                return;
+            }
+            if (editIndex !== null) {
 
-        
-        if (!nombre || !precio || !imagenUrl || !categoria) {
-            alertCustom("Por favor, completa todos los campos.");
-            return;
+                const productosActualizados = [...productos];
+                productosActualizados[editIndex] = formData;
+                setProductos(productosActualizados);
+                setEditIndex(null);
+            } else {
+
+                setProductos(prevProductos => [...prevProductos, formData]);
+            }
+            await signin(e)
+            alertCustom('¡Éxito!', 'El producto fue agregado correctamente.', 'success');
+        } catch (error) {
+            alertCustom('Upps', 'Ha ocurrido un error al crear el producto.', 'error');
         }
 
-        if (editIndex !== null) {
-            
-            const productosActualizados = [...productos];
-            productosActualizados[editIndex] = formData;
-            setProductos(productosActualizados);
-            setEditIndex(null);
-        } else {
-            
-            setProductos(prevProductos => [...prevProductos, formData]);
-        }
     };
     const handleDelete = async (index) => {
         try {
@@ -72,8 +77,8 @@ const PanelProductos = () => {
             const confirmacion = window.confirm("¿Estás seguro de que quieres eliminar este producto?");
             if (confirmacion) {
                 const nuevosProductos = [...productos];
-                nuevosProductos.splice(index, 1); 
-                setProductos(nuevosProductos); 
+                nuevosProductos.splice(index, 1);
+                setProductos(nuevosProductos);
 
                 // await axios.delete(`ruta_del_backend/${producto.id}`);
                 alertCustom('Éxito', 'Producto eliminado correctamente', 'success');
@@ -87,7 +92,7 @@ const PanelProductos = () => {
 
 
     const handleEdit = (index) => {
-        
+
         setEditIndex(index);
     };
 

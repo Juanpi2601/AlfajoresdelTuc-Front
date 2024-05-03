@@ -11,13 +11,14 @@ import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
 import Admin from './pages/Admin';
 import PanelUserAdmin from './components/Admin/PanelUserAdmin';
 import PanelProductos from './components/paginaProductos/PanelProductos';
-
+import { ProductProvider } from './context/ProductContext';
 function App() {
 
   return (
       
     <BrowserRouter>
       <UserProvider>
+        <ProductProvider>
         <NavBarV1 />
         <main>
           <Routes>
@@ -33,6 +34,7 @@ function App() {
             </Route>
           </Routes>
         </main>
+        </ProductProvider>
       </UserProvider>
     </BrowserRouter>
   )
