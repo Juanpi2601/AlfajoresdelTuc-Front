@@ -33,7 +33,7 @@ const NavBarV1 = () => {
             </Col>
             <Col className=" d-none d-lg-block">
               <Nav className="d-flex justify-content-end ">
-                <Link to='' className="mx-3">
+                <Link to='./contact' className="mx-3">
                   <CallIcon fontSize="large" style={{ color: 'black'}}/>
                 </Link>
                 <NavLink to='' className="p-0 mx-3 cursor-pointer" onClick={handleCarrito}>
@@ -105,7 +105,7 @@ const NavBarV1 = () => {
             <Nav.Link href="/products">PRODUCTOS</Nav.Link>
             <Nav.Link href="/link-2">LOCALES</Nav.Link>
             <Nav.Link href="/link-3">NOVEDADES</Nav.Link>
-            <Nav.Link href="/link-4">CONTACTO</Nav.Link>
+            <Nav.Link href="/contact">CONTACTO</Nav.Link>
             
           </Nav>
         </Offcanvas.Body>

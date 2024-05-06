@@ -12,6 +12,7 @@ import Admin from './pages/Admin';
 import PanelUserAdmin from './components/Admin/PanelUserAdmin';
 import PanelProductos from './components/paginaProductos/PanelProductos';
 import { ProductProvider } from './context/ProductContext';
+import ContactPage from './pages/Contact';
 function App() {
 
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/profile" element={<Profile/>}/>
+            <Route path="/contact" element={<ContactPage/>}/>
             <Route element={<ProtectedRouteAdmin/>}>
                 <Route path="/admin" element={<Admin/>}/>
                 <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
