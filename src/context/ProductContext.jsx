@@ -39,15 +39,31 @@ export const ProductProvider = ({ children }) => {
 
     const getAllProduct = async () => {
         try {
-          const res = await axios.get('/products/getAll');
-          setProductos(res.data);
+            const res = await axios.get('/products/getAll');
+            setProductos(res.data);
         } catch (error) {
-          setErrors(
-            error.response.data.message ||
-              alertCustom("Upps", "Ha ocurrido un error.", "error")
-          );
+            setErrors(
+                error.response.data.message ||
+                alertCustom("Upps", "Ha ocurrido un error.", "error")
+            );
         }
-      };
+    };
+
+    const deleteProduct = async (id) => {
+        try {
+            await axios.delete(`/products/delete/${id}`);
+        } catch (error) {
+            alertCustom('Error', 'Ha ocurrido un error al eliminar el producto', 'error');
+        }
+    };
+
+    const editProduct = async (id, updatedProduct) => {
+        try {
+            await axios.patch(`/products/edit/${id}`, updatedProduct);
+        } catch (error) {
+            alertCustom('Error', 'Ha ocurrido un error al editar el producto', 'error');
+        }
+    };
 
     useEffect(() => {
         getAllProduct();
@@ -66,6 +82,8 @@ export const ProductProvider = ({ children }) => {
                 signin,
                 addProduct,
                 getAllProduct,
+                deleteProduct,
+                editProduct,
                 productos,
                 errors,
             }}
