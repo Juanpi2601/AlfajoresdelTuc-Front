@@ -13,6 +13,7 @@ import PanelUserAdmin from './components/Admin/PanelUserAdmin';
 import PanelProductos from './components/paginaProductos/PanelProductos';
 import { ProductProvider } from './context/ProductContext';
 import ContactPage from './pages/Contact';
+import ButtonWhatsapp from '/src/components/Contact/ButtonWhatsapp.jsx'
 function App() {
 
   return (
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/admin/productos" element={<PanelProductos />} />
             </Route>
           </Routes>
+          <ButtonWhatsapp/>
         </main>
         </ProductProvider>
       </UserProvider>
