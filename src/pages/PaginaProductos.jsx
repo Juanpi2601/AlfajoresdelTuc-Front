@@ -33,12 +33,12 @@ const PaginaProductos = () => {
 
     return (
         <Container fluid>
-            <Row className="listado">
+            <Row className="">
                 <div className="columnaCategorias text-center pt-4">
-                    <h1 className='text-light my-5'>Nuestros Productos!</h1>
+                    <h1 className='text-light'>Nuestros Productos!</h1>
                 </div>
                 
-                <section className="container mt-5 pt-5">
+                <section className="container mt-3 pt-3">
                     <Form
                         ref={searchFormRef}
                         onSubmit={submitHandler}
@@ -56,8 +56,8 @@ const PaginaProductos = () => {
                                         e.code == "Enter"
                                             ? handleQueryParams({
                                                 valueSearchInput: searchInputRef.current.value,
-                                                valueCategoryInput: categoriaInputRef.current.value,
-                                                valuePriceInput: precioInputRef.current.value,
+                                                valueCategoryInput: categoryInputRef.current.value,
+                                                valuePriceInput: priceInputRef.current.value,
                                                 setQueryParams: setQueryParams,
                                             })
                                             : ""
@@ -74,8 +74,8 @@ const PaginaProductos = () => {
                                 onChange={(e) =>
                                     handleQueryParams({
                                         valueSearchInput: searchInputRef.current.value,
-                                        valueCategoriaInput: categoriaInputRef.current.value,
-                                        valuePrecioInput: precioInputRef.current.value,
+                                        valuecategoryInput: categoryInputRef.current.value,
+                                        valuepriceInput: priceInputRef.current.value,
                                         setQueryParams: setQueryParams,
                                     })
                                 }
@@ -96,8 +96,8 @@ const PaginaProductos = () => {
                                 onChange={(e) =>
                                     handleQueryParams({
                                         valueSearchInput: searchInputRef.current.value,
-                                        valueCategoriaInput: categoriaInputRef.current.value,
-                                        valuePrecioInput: precioInputRef.current.value,
+                                        valueCategoryInput: valueCategoryInput.current.value,
+                                        valuepriceInput: priceInputRef.current.value,
                                         setQueryParams: setQueryParams,
                                     })
                                 }
@@ -118,8 +118,8 @@ const PaginaProductos = () => {
                                 onClick={() =>
                                     handleQueryParams({
                                         valueSearchInput: searchInputRef.current.value,
-                                        valueCategoriaInput: categoriaInputRef.current.value,
-                                        valuePrecioInput: precioInputRef.current.value,
+                                        valuecategoryInput: categoryInputRef.current.value,
+                                        valuepriceInput: priceInputRef.current.value,
                                         setQueryParams: setQueryParams,
                                     })
                                 }
