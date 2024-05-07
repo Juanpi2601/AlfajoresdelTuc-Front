@@ -51,8 +51,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .add-to-cart-btn,
-  .favorite-btn {
+  .btnAddCart,
+  .btnVisibility {
     padding: 2px ;
     font-size: 15px;
     background-color: #fff;
@@ -62,7 +62,7 @@
     cursor: pointer;
   }
   
-  .favorite-btn {
+  .btnVisibility {
     
     margin-left: 3px;
   }
@@ -71,7 +71,7 @@
     position: relative;
   }
   
-  .product-buttons button::after {
+  .product-buttons Button::after {
     content: attr(data-text);
     position: absolute;
     top: 100%;
@@ -86,7 +86,7 @@
     pointer-events: none;
   }
   
-  .product-buttons button:hover::after {
+  .product-buttons Button:hover::after {
     opacity: 1;
   }
 
@@ -96,10 +96,8 @@
   background-size:cover ;
   background-repeat: no-repeat;
   background-position:bottom;
-  
   height: 250px;
   
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
   @media screen and (max-width: 800px) {
