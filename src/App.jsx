@@ -4,7 +4,6 @@ import { UserProvider } from './context/UserContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NavBarV1 from './components/NavBarV1/NavBarV1';
-import Products from './pages/Products';
 import PaginaPrincipal from './pages/PaginaPrincipal';
 import Profile from './pages/Profile';
 import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
@@ -14,6 +13,7 @@ import PanelProductos from './components/paginaProductos/PanelProductos';
 import { ProductProvider } from './context/ProductContext';
 import ContactPage from './pages/Contact';
 import ButtonWhatsapp from '/src/components/Contact/ButtonWhatsapp.jsx'
+import PaginaProductos from './pages/PaginaProductos';
 function App() {
 
   return (
@@ -25,7 +25,7 @@ function App() {
         <main>
           <Routes>
             <Route path='/' element = {<PaginaPrincipal/>}/>
-            <Route path="/products" element = {<Products/>}/>
+            <Route path="/products" element = {<PaginaProductos/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/profile" element={<Profile/>}/>
