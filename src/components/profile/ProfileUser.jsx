@@ -21,7 +21,9 @@ const ProfileUser = () => {
 
   if (isAuthenticated && user) {
     if (user.role === "admin") {
-      dropdownItems.unshift({ label: "Administrador", action: () => navigate("/admin") });
+      dropdownItems.unshift({ label: "Panel Usuarios", action: () => navigate("/admin/usuarios") });
+      dropdownItems.unshift({ label: "Panel Productos", action: () => navigate("/admin/productos") });
+
     } else if (user.role === "client") {
       dropdownItems.unshift({ label: "Panel de Cliente", action: () => navigate("/profile") });
     }

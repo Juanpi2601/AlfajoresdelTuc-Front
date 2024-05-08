@@ -61,7 +61,7 @@ const PanelUserAdmin = () => {
           <p className="text-center">No hay usuarios para mostrar</p>
         ) : (
           <>
-            <Table striped bordered variant='dark' className="mt-3">
+            <Table striped bordered className="mt-3" style={{ backgroundColor: '#F2F2F2' }}>
               <thead>
                 <tr>
                   <th className="text-center"><b>Nombre y Apellido</b></th>
