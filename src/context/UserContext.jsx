@@ -29,6 +29,18 @@ export const UserProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userChangeFlag, setUserChangeFlag] = useState(false);
+  const [cart, setCart] = useState([]);
+
+  const getCartFromBackend = async () => {
+    try {
+      // Lógica para obtener el carrito desde el backend
+      const res = await axios.get('/user/cart');
+      setCart(res.data.cart);
+    } catch (error) {
+      console.error("Error fetching cart from backend:", error);
+    }
+  };
+
   const triggerUserUpdate = () => {
     setUserChangeFlag((prevFlag) => !prevFlag);
   };
@@ -70,6 +82,53 @@ export const UserProvider = ({ children }) => {
     Cookies.remove("token");
     setIsAuthenticated(false);
     setUser(null);
+  };
+
+  const addToCart = (product) => {
+    setCart((currentCart) => {
+      const productExists = currentCart.find(
+        (item) => item._id === product._id
+      );
+      if (productExists) {
+        return currentCart.map((item) =>
+          item._id === product._id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...currentCart, { ...product, quantity: 1 }];
+      }
+    });
+  };
+
+  const removeFromCart = (productId) => {
+    setCart((currentCart) =>
+      currentCart.filter((item) => item._id !== productId)
+    );
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const incrementQuantity = (productId) => {
+    setCart((currentCart) =>
+      currentCart.map((product) =>
+        product._id === productId
+          ? { ...product, quantity: product.quantity + 1 }
+          : product
+      )
+    );
+  };
+
+  const decrementQuantity = (productId) => {
+    setCart((currentCart) =>
+      currentCart.map((product) =>
+        product._id === productId && product.quantity > 1
+          ? { ...product, quantity: product.quantity - 1 }
+          : product
+      )
+    );
   };
 
   useEffect(() => {
@@ -121,6 +180,13 @@ export const UserProvider = ({ children }) => {
         isAuthenticated,
         errors,
         logout,
+        addToCart,
+        cart,
+        removeFromCart,
+        incrementQuantity,
+        decrementQuantity,
+        clearCart,
+        getCartFromBackend,
       }}
     >
       {children}
