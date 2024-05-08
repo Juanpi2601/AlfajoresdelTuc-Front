@@ -74,11 +74,11 @@ const PanelProductos = () => {
         }
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id , nombre) => {
         try {
             alertConfirm(
                 '¿Estás seguro?',
-                `Estás por eliminar el Producto de manera definitiva`,
+                `Estás por eliminar el Producto ${nombre} de manera definitiva`,
                 'warning',
                 'Eliminar',
                 async () => {
@@ -145,7 +145,7 @@ const PanelProductos = () => {
                                 </td>
                                 <td>{producto.categoria}</td>
                                 <td>
-                                    <Button variant="danger" className='mx-1' onClick={() => handleDelete(producto._id)}> <DeleteIcon /> </Button>
+                                    <Button variant="danger" className='mx-1' onClick={() => handleDelete(producto._id, producto.nombre)}> <DeleteIcon /> </Button>
                                     <Button variant="warning" className='mx-1' onClick={() => handleEdit(index)}> <EditIcon /> </Button>
                                 </td>
                             </tr>
