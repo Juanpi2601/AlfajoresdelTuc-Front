@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Container, Form, InputGroup, Button, Table } from 'react-bootstrap';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { alertCustom } from '../../utils/alertCustom';
+import { alertCustom ,alertConfirm } from '../../utils/alertCustom';
 import { useProductAuth } from '../../context/ProductContext';
+import axios from "../../api/axios"; 
 
 const PanelProductos = () => {
     const { signin, productos, getAllProduct, deleteProduct, editProduct } = useProductAuth();
@@ -75,16 +76,21 @@ const PanelProductos = () => {
 
     const handleDelete = async (id) => {
         try {
-            const confirmacion = window.confirm("¿Estás seguro de que quieres eliminar este producto?");
-            if (confirmacion) {
-                await deleteProduct(id);
-                alertCustom('Éxito', 'Producto eliminado correctamente', 'success');
-                getAllProduct();
-            }
+            alertConfirm(
+                '¿Estás seguro?',
+                `Estás por eliminar el Producto de manera definitiva`,
+                'warning',
+                'Eliminar',
+                async () => {
+                    await deleteProduct(id);
+                    alertCustom('Éxito', 'Producto eliminado correctamente', 'success');
+                    getAllProduct();
+                }
+            );
         } catch (error) {
             alertCustom('Error', 'Ha ocurrido un error al eliminar el producto', 'error');
         }
-    };
+    };    
 
     const handleEdit = (index) => {
         setEditIndex(index);
