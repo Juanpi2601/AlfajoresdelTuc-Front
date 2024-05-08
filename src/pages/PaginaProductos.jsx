@@ -34,14 +34,15 @@ const PaginaProductos = () => {
     };
 
 
+
     return (
-        <Container fluid>
-            <Row className="">
-                <div className="columnaCategorias text-center pt-4">
-                    <h1 className='text-light'>Nuestros Productos!</h1>
+        <Container fluid className=''>
+            <Row >
+                <div className="columnaCategorias text-center px-0">
+                    <h1 className='text-light '>Nuestros Productos!</h1>
                 </div>
                 
-                <section className="container mt-3 pt-3">
+                <section className="container mt-3 ">
                     <Form
                         ref={searchFormRef}
                         onSubmit={submitHandler}
@@ -86,7 +87,7 @@ const PaginaProductos = () => {
                                 <option disabled hidden value="">
                                     Filtrar por precio
                                 </option>
-                                <option value="asc" >Precio ascendente</option>
+                                <option value="asc" className='' >Precio ascendente</option>
                                 <option value="desc">Precio descendiente</option>
                             </Form.Select>
                         </div>

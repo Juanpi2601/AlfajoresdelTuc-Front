@@ -1,22 +1,22 @@
 .columnaCategorias{
   background-image: url('/src/assets/bannerProductos.jpg');
   background-size:cover ;
-  background-repeat: no-repeat;
   background-position:bottom;
   height: 250px;
-  padding: 0px;
-  margin: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+
+
 }
 
 .columnaCategorias h1{
-  margin: none;
+    margin: none;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 100px;
     width: 100%;
     height: 100%;
-    
 }
-  
+
   .cardProduct {
     border-radius: 8px;
     border: none;
@@ -32,6 +32,12 @@
   
   .cardProduct  .priceProduct{
     color: #c8963e;
+  }
+
+  .imgCard {
+    width: 100%;
+    border-radius: 6px;
+    height: 278px;
   }
   
   .product-buttons {
