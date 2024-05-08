@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Button, Table, Container, Row, Col} from "react-bootstrap";
+import { Button, Table, Container, Row, Col } from "react-bootstrap";
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "../../api/axios"; 
 import LoadingScreen from "../loadingScreen/LoadingScreen";
 import { alertCustom, alertConfirm } from '../../utils/alertCustom';
-
+import PaginationRounded from "../pagination/Pagination"; 
 
 const PanelUserAdmin = () => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [changeFlag, setChangeFlag] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5); 
 
- 
   const fetchData = async () => {
     try {
       const response = await axios.get(`/user/getAll`); 
@@ -26,19 +27,22 @@ const PanelUserAdmin = () => {
     }
   };
 
-  const handleDeleteUser = async (_id,userName) => {
+  const handleDeleteUser = async (_id, userName) => {
     try {
       setIsLoading(true);
       alertConfirm(
-        '¿Estas seguro?',
-        `Estas por eliminar el usuario ${userName} de manera definitiva`,
+        '¿Estás seguro?',
+        `Estás por eliminar el usuario ${userName} de manera definitiva`,
         'warning',
         'Eliminar',
         async () => {
           await axios.delete(`user/delete/${_id}`);
-          setUsers(users.filter(user => user.id !== user._id));
-          fetchData();
-        });
+          const totalPagesAfterDelete = Math.ceil((users.length - 1) / itemsPerPage);
+          const newCurrentPage = Math.min(currentPage, totalPagesAfterDelete); 
+          setCurrentPage(newCurrentPage);
+          setChangeFlag(!changeFlag);
+        }
+      );
     } catch (error) {
       alertCustom('Upps', 'Ha ocurrido un error.', 'error');
     } finally {
@@ -46,9 +50,20 @@ const PanelUserAdmin = () => {
     }
   };
   
+  
   useEffect(() => {
     fetchData()
   }, [changeFlag]);
+
+  const totalPages = Math.ceil(users.length / itemsPerPage);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handleChangePage = (event, value) => {
+    setCurrentPage(value);
+  };
 
   return (
     <Container className="justify-content-center">
@@ -70,7 +85,7 @@ const PanelUserAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user, i) => (
+                {currentItems.map((user, i) => (
                   <tr key={i}>
                     <td className="text-center">{user.name}</td>
                     <td className="text-center">{user.dni}</td>
@@ -83,6 +98,9 @@ const PanelUserAdmin = () => {
                 ))}
               </tbody>
             </Table>
+            <div style={{ position: "fixed", bottom: "80px", left: "50%", transform: "translateX(-50%)", width: "fit-content", backgroundColor: "#FFF", zIndex: 1 }}>
+                <PaginationRounded count={totalPages} onChange={handleChangePage} />
+              </div>
           </>
         )}
       </Col>

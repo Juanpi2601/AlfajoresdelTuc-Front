@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { alertCustom ,alertConfirm } from '../../utils/alertCustom';
 import { useProductAuth } from '../../context/ProductContext';
-import axios from "../../api/axios"; 
+import PaginationRounded from "../pagination/Pagination"; 
 
 const PanelProductos = () => {
     const { signin, productos, getAllProduct, deleteProduct, editProduct } = useProductAuth();
@@ -16,6 +16,8 @@ const PanelProductos = () => {
     });
     const [editIndex, setEditIndex] = useState(null);
     const [submitButtonText, setSubmitButtonText] = useState('Agregar Producto');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(5); 
 
     useEffect(() => {
         if (editIndex !== null) {
@@ -97,6 +99,17 @@ const PanelProductos = () => {
         setSubmitButtonText('Editar Producto');
     };
 
+    const totalPages = Math.ceil(productos.length / itemsPerPage);
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = productos.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handleChangePage = (event, value) => {
+        setCurrentPage(value);
+    };
+
+
     return (
         <>
             <Container className="bg-white mt-5 w-75 py-5 border rounded ">
@@ -151,8 +164,15 @@ const PanelProductos = () => {
                             </tr>
                         ))}
                     </tbody>
+                    
                 </Table>
+                <div style={{ position: "fixed", bottom: "20px", left: "50%", transform: "translateX(-50%)", width: "fit-content", backgroundColor: "#FFF", zIndex: 1, margin: "0 auto" }}>
+    <PaginationRounded count={totalPages} onChange={handleChangePage} />
+</div>
+
+
             </Container>
+            
         </>
     );
 };
