@@ -1,15 +1,15 @@
 import React from "react";
-import { useAuth } from "../../context/UserContext";
+import { useProductAuth } from "../../context/ProductContext";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { alertAdd } from "../../utils/alertCustom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const CardProductos = ({ formData }) => {
-  const { addToCart } = useAuth();
+  const { addProduct } = useProductAuth(); 
 
-  const handleAddToCart = (productc) => {
-    addToCart(producto);
+  const handleAddToCart = (product) => {
+    addProduct(product); 
     alertAdd("top-end", "success", "Su pedido fue agregado al carrito");
   };
 
@@ -30,15 +30,14 @@ const CardProductos = ({ formData }) => {
                       className="btnAddCart mx-2 text-center"
                       data-text="Agregar al Carrito"
                       onClick={() => handleAddToCart(producto)}>
-                      <ShoppingCartIcon ></ShoppingCartIcon>
+                      <ShoppingCartIcon />
                     </Button>
                     <Button 
-                    className="btnVisibility" 
-                    data-text="Ver Más">
-                      <VisibilityIcon ></VisibilityIcon>
+                      className="btnVisibility" 
+                      data-text="Ver Más">
+                      <VisibilityIcon />
                     </Button>
                   </div>
-
                 </div>
               </Card.Body>
             </Card>

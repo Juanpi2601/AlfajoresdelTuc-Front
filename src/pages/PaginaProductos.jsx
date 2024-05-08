@@ -28,7 +28,10 @@ const PaginaProductos = () => {
     const submitHandler = (e) => {
         e.preventDefault();
     };
-
+    
+    const handleAddToCart = (product) => {
+        addToCart(product); 
+    };
 
 
     return (
@@ -149,7 +152,7 @@ const PaginaProductos = () => {
                 ) : (
                     <>
                         {formData?.length > 0 ? (
-                                <CardProductos formData={formData} />
+                                <CardProductos formData={formData} handleAddToCart={handleAddToCart}/>
                         ) : (
                             <>
                                 <p className="mb-5 fs-3">
