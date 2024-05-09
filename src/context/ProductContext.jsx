@@ -108,6 +108,15 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
+    const getById = async (id) => {
+      try {
+          const res = await axios.get(`/products/getById/${id}`);
+          return res.data;
+      } catch (error) {
+          throw new Error("Error al obtener el producto por ID");
+      }
+  };
+
     useEffect(() => {
         getAllProduct();
     }, []);
@@ -132,6 +141,7 @@ export const ProductProvider = ({ children }) => {
                 getAllProduct,
                 deleteProduct,
                 editProduct,
+                getById,
                 productos,
                 errors,
             }}

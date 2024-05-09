@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useProductAuth } from "../../context/ProductContext";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { alertAdd } from "../../utils/alertCustom";
@@ -34,11 +35,9 @@ const CardProductos = ({ formData }) => {
                                                 onClick={() => handleAddToCart(producto)}>
                                                 <ShoppingCartIcon />
                                             </Button>
-                                            <Button 
-                                                className="btnVisibility" 
-                                                data-text="Ver Más">
+                                            <Link to={`/products/detalles/${producto._id}`} className="btnVisibility p-2 text-center ">
                                                 <VisibilityIcon />
-                                            </Button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </Card.Body>

@@ -16,6 +16,8 @@ import ButtonWhatsapp from '/src/components/Contact/ButtonWhatsapp.jsx'
 import PaginaProductos from './pages/PaginaProductos';
 import About from './pages/About';
 import Footer from './pages/Footer';
+import DetallesProductos from './pages/DetallesProductos';
+
 function App() {
 
   return (
@@ -28,7 +30,8 @@ function App() {
           <Routes>
             <Route path='/' element = {<PaginaPrincipal/>}/>
             <Route path="/about" element = {<About/>}/>
-            <Route path="/products" element = {<PaginaProductos/>}/>
+            <Route path="/products" element = {<PaginaProductos/>}/> 
+            <Route path="/products/detalles/:id" element={<DetallesProductos />} />
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/profile" element={<Profile/>}/>
