@@ -14,6 +14,8 @@ import { ProductProvider } from './context/ProductContext';
 import ContactPage from './pages/Contact';
 import ButtonWhatsapp from '/src/components/Contact/ButtonWhatsapp.jsx'
 import PaginaProductos from './pages/PaginaProductos';
+import About from './pages/About';
+import Footer from './pages/Footer';
 function App() {
 
   return (
@@ -25,6 +27,7 @@ function App() {
         <main>
           <Routes>
             <Route path='/' element = {<PaginaPrincipal/>}/>
+            <Route path="/about" element = {<About/>}/>
             <Route path="/products" element = {<PaginaProductos/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
@@ -38,6 +41,7 @@ function App() {
           </Routes>
           <ButtonWhatsapp/>
         </main>
+        <Footer/>
         </ProductProvider>
       </UserProvider>
     </BrowserRouter>

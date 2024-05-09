@@ -23,7 +23,7 @@ const NavBarV1 = () => {
           <Container>
             <Col sm={2} md={2} lg={2}>
               <Link to="/">
-                <img className="img-fluid w-50" src="https://i.postimg.cc/W1Z4mtcj/Screenshot-1-removebg-preview.png" alt="" />
+                <img className="img-fluid imgNav" src="/src/assets/LetrasDelTucuman.png" alt="" />
               </Link>
             </Col>
             <Col className=" d-none d-lg-block">
@@ -55,16 +55,16 @@ const NavBarV1 = () => {
           <Col className=" d-none d-lg-block pb-2">
             <Nav variant="underline" defaultActiveKey="/">
               <Nav.Item>
-                <Nav.Link href="/about">NOSOTROS</Nav.Link>
+                <Nav.Link className='text-danger' href="/about">NOSOTROS</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/products">PRODUCTOS</Nav.Link>
+                <Nav.Link className='text-danger' href="/products">PRODUCTOS</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/link-2">LOCALES</Nav.Link>
+                <Nav.Link className='text-danger' href="/link-2">LOCALES</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/link-3">NOVEDADES</Nav.Link>
+                <Nav.Link className='text-danger' href="/link-3">NOVEDADES</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
@@ -87,11 +87,11 @@ const NavBarV1 = () => {
                 <PersonIcon fontSize="large" style={{ color: 'black'}}/>
               </Link>
             )}
-            <Nav.Link href="/about">NOSOTROS</Nav.Link>
-            <Nav.Link href="/products">PRODUCTOS</Nav.Link>
-            <Nav.Link href="/link-2">LOCALES</Nav.Link>
-            <Nav.Link href="/link-3">NOVEDADES</Nav.Link>
-            <Nav.Link href="/contact">CONTACTO</Nav.Link>
+            <Nav.Link className='text-danger' href="/about">NOSOTROS</Nav.Link>
+            <Nav.Link className='text-danger' href="/products">PRODUCTOS</Nav.Link>
+            <Nav.Link className='text-danger' href="/link-2">LOCALES</Nav.Link>
+            <Nav.Link className='text-danger' href="/link-3">NOVEDADES</Nav.Link>
+            <Nav.Link className='text-danger' href="/contact">CONTACTO</Nav.Link>
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>
