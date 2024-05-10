@@ -30,12 +30,14 @@ const CardProductos = ({ formData }) => {
                                         <Card.Title className="priceProduct text-center">$ {producto.precio}</Card.Title>
                                         <div className="product-buttons d-flex ">
                                             <Button
-                                                className="btnAddCart mx-2 text-center"
-                                                data-text="Agregar al Carrito"
+                                                className="btnAddCart mx-2 text-center p-2"
+                                                data-text="Agregar al Carrito" variant = "none"
                                                 onClick={() => handleAddToCart(producto)}>
                                                 <ShoppingCartIcon />
                                             </Button>
-                                            <Link to={`/products/detalles/${producto._id}`} className="btnVisibility p-2 text-center ">
+                                            <Link to={`/products/detalles/${producto._id}`} 
+                                            className="btnVisibility p-2 text-center " 
+                                            data-text="Ver más" variant = "none">
                                                 <VisibilityIcon />
                                             </Link>
                                         </div>
