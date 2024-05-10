@@ -1,8 +1,9 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import CardProductos from '../components/paginaProductos/CardProductos';
 import { useProductAuth } from '../context/ProductContext';
 import { Container, Row, Form, Button } from 'react-bootstrap';
+import Categorias from '../components/paginaProductos/Categorias';
 import "../components/paginaProductos/paginaProductos.css"
 
 const PaginaProductos = () => {
@@ -12,14 +13,18 @@ const PaginaProductos = () => {
     const location = useLocation();
     const searchInputRef = useRef();
     const priceInputRef = useRef();
-    const categoryInputRef = useRef();
     const searchFormRef = useRef();
-
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('');
+    const [todasLasCategorias, setTodasLasCategorias] = useState([]);
 
     useEffect(() => {
         setFormData(productos);
         setLoading(false);
+        const categoriasUnicas = [...new Set(productos.map(producto => producto.categoria))];
+        setTodasLasCategorias(categoriasUnicas);
     }, [productos]);
+
+
 
     useEffect(() => {
         getAllProduct();
@@ -27,28 +32,50 @@ const PaginaProductos = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        const searchValue = searchInputRef.current.value.trim().toLowerCase();
+        const priceValue = priceInputRef.current.value;
+
+        let filteredProducts = productos;
+
+        if (searchValue !== '') {
+            filteredProducts = filteredProducts.filter(producto =>
+                producto.nombre.toLowerCase().includes(searchValue)
+            );
+        }
+        if (priceValue !== '') {
+            if (priceValue === 'asc') {
+                filteredProducts = filteredProducts.sort((a, b) => a.precio - b.precio);
+            } else if (priceValue === 'desc') {
+                filteredProducts = filteredProducts.sort((a, b) => b.precio - a.precio);
+            }
+        }
+
+        setCategoriaSeleccionada('');
+        setFormData(filteredProducts);
     };
-    
+
     const handleAddToCart = (product) => {
-        addToCart(product); 
+        addToCart(product);
     };
 
-
+    const productosFiltrados = categoriaSeleccionada === '' || categoriaSeleccionada === 'Todas las categorias'
+        ? formData
+        : formData.filter(producto => producto.categoria === categoriaSeleccionada);
 
     return (
-        <Container fluid className=''>
-            <Row >
-                <div className="columnaCategorias text-center px-0">
-                    <h1 className='text-light '>Nuestros Productos!</h1>
-                </div>
-                
-                <section className="container mt-3 ">
+        <>
+            <div className="columnaCategorias text-center px-0">
+                <h1 className='text-light '>Nuestros Productos!</h1>
+            </div>
+            <Container className="w-100" >
+                <section className="d-flex justify-content-center text-center w-100">
                     <Form
                         ref={searchFormRef}
                         onSubmit={submitHandler}
-                        className="row g-3 align-items-center"
+                        className="align-items-center "
                     >
-                        <div className="col-12 col-md-4">
+                        <div className="d-flex">
+                        <div className="d-flex col-12 col-md-4 w-50 m-2">
                             <div className="input-group">
                                 <Form.Control
                                     className="colColor"
@@ -58,116 +85,52 @@ const PaginaProductos = () => {
                                     ref={searchInputRef}
                                     onKeyDown={(e) =>
                                         e.code == "Enter"
-                                            ? handleQueryParams({
-                                                valueSearchInput: searchInputRef.current.value,
-                                                valueCategoryInput: categoryInputRef.current.value,
-                                                valuePriceInput: priceInputRef.current.value,
-                                                setQueryParams: setQueryParams,
-                                            })
-                                            : ""
                                     }
                                 />
                             </div>
                         </div>
-                        <div className="col-12 col-md-3">
+                        <div className="d-flex col-12 col-md-3 w-50 my-2">
                             <Form.Select
                                 className="form-select colColor"
                                 id="priceSelect"
                                 defaultValue={""}
                                 ref={priceInputRef}
-                                onChange={(e) =>
-                                    handleQueryParams({
-                                        valueSearchInput: searchInputRef.current.value,
-                                        valuecategoryInput: categoryInputRef.current.value,
-                                        valuepriceInput: priceInputRef.current.value,
-                                        setQueryParams: setQueryParams,
-                                    })
-                                }
+                                
                             >
-                                <option disabled hidden value="">
+                                <option disabled hidden value="" className='my-2'>
                                     Filtrar por precio
                                 </option>
-                                <option value="asc" className='' >Precio ascendente</option>
-                                <option value="desc">Precio descendiente</option>
+                                <option value="asc" className='my-2 border border-radius' >Precio ascendente</option>
+                                <option value="desc" className='my-2 border border-radius'>Precio descendiente</option>
                             </Form.Select>
+                            <Button type="submit" variant="primary" className='mx-2'>Filtrar</Button>
                         </div>
-                        <div className="col-12 col-md-3">
-                            <Form.Select
-                                className="form-select colColor"
-                                id="categorySelect"
-                                defaultValue={""}
-                                ref={categoryInputRef}
-                                onChange={(e) =>
-                                    handleQueryParams({
-                                        valueSearchInput: searchInputRef.current.value,
-                                        valueCategoryInput: valueCategoryInput.current.value,
-                                        valuepriceInput: priceInputRef.current.value,
-                                        setQueryParams: setQueryParams,
-                                    })
-                                }
-                            >
-                                <option disabled hidden value="">
-                                    Filtrar por categoria
-                                </option>
-                                <option value="Alfajor">Alfajor</option>
-                                <option value="Conitos">Conitos</option>
-                                <option value="Nueces">Nueces</option>
-                                
-                            </Form.Select>
                         </div>
-                        <div className="col-lg-1">
-                            <button
-                                type="button"
-                                className="btn btn-primary w-100 btnFiltrar"
-                                onClick={() =>
-                                    handleQueryParams({
-                                        valueSearchInput: searchInputRef.current.value,
-                                        valuecategoryInput: categoryInputRef.current.value,
-                                        valuepriceInput: priceInputRef.current.value,
-                                        setQueryParams: setQueryParams,
-                                    })
-                                }
-                            >
-                                Filtrar
-                            </button>
-
+                        <div className="col-12 col-md-3 w-100 m-3 ">
+                            <Categorias categoria={['Todas las categorias', ...todasLasCategorias]} handleCategoriaSeleccionada={setCategoriaSeleccionada} />
                         </div>
-                        <div className="col-lg-1">
-                            <button
-                                type="button"
-                                className="btn btn-dark border-1 border-light w-100 boton6"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    searchFormRef.current.reset();
-                                    setQueryParams();
-                                }}
-                            >
-                                Limpiar filtros
-                            </button>
-                        </div>
+                        
                     </Form>
                 </section>
-                
-                {loading ? (
-                    <LoadingScreen />
-                ) : (
-                    <>
-                        {formData?.length > 0 ? (
-                                <CardProductos formData={formData} handleAddToCart={handleAddToCart}/>
-                        ) : (
-                            <>
-                                <p className="mb-5 fs-3">
-                                    Disculpa, no encontramos ningún producto
-                                </p>
-                            </>
-                        )}
-                    </>
-                )}
-            </Row>
-        </Container>
+                <Row className="">
+
+                    {loading ? (
+                        <LoadingScreen />
+                    ) : (
+                        <>
+                            {productosFiltrados.length > 0 ? (
+                                <CardProductos formData={productosFiltrados} handleAddToCart={handleAddToCart} />
+                            ) : (
+                                <p className="mb-5 fs-3">No hay productos disponibles para la categoría seleccionada.</p>
+                            )}
+                        </>
+                    )}
+
+                </Row>
+            </Container>
+        </>
     );
 };
-
 
 export default PaginaProductos;
 

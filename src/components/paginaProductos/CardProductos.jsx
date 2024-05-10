@@ -16,11 +16,11 @@ const CardProductos = ({ formData }) => {
 
     return (
         <Container>
-            <Row>
+            <Row className="d-flex">
                 {formData && formData.map((producto) => (
                     producto && (
-                        <Col key={producto._id} xs={12} sm={6} md={6} lg={4} xl={3}>
-                            <Card className="cardProduct my-4 mx-4 ">
+                        <Col key={producto._id} xs={12} sm={12} md={6} lg={4} xl={4} >
+                            <Card className="cardProduct m-3 border-0">
                                 {producto.imagenUrl && (
                                     <Card.Img className="imgCard" variant="top" src={producto.imagenUrl} alt="" />
                                 )}
