@@ -14,7 +14,6 @@ const DetallesProductos = () => {
             try {
                 const productoData = await getById(id);
                 setProducto(productoData);
-                console.log(productoData);
             } catch (error) {
                 console.error("Error al obtener detalles del producto:", error);
                 navigate('/');
