@@ -138,6 +138,8 @@ const PanelProductos = () => {
                         <option value="Alfajores">Alfajores</option>
                         <option value="Conitos">Conitos</option>
                         <option value="Nueces">Nueces</option>
+                        <option value="Cajas">Cajas</option>
+                        <option value="Bombones">Bombones</option>
                     </Form.Select>
                     <Form.Group controlId="formDescripcion" className="mb-3">
                         <Form.Control  type='text' name="descripcion" placeholder="Descripcion del Producto" aria-label="Amount (to the nearest dollar)" value={formData.descripcion} onChange={handleChange} />
