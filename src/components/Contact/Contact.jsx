@@ -3,18 +3,26 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import LoadingScreen from "../../components/loadingScreen/LoadingScreen";
 import { alertCustom } from "../../utils/alertCustom";
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import axios from '../../api/axios';
 
 const Contact = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (data) => {
-    // setIsLoading(true);
-    console.log(data);
-    alertCustom('Consulta registrada', 'Su consulta fue registrada', 'success');
-    reset();
-  };
+  const onSubmit = async (data) => {
+    try {
+        setIsLoading(true);
+        await axios.post('/sendmail', data);
+        alertCustom('Consulta registrada', 'Su consulta fue registrada', 'success');
+        reset();
+    } catch (error) {
+        console.error('Error al enviar el formulario:', error);
+        alertCustom('Error', 'Hubo un error al enviar el formulario', 'error');
+    } finally {
+        setIsLoading(false);
+    }
+};
+
 
   return (
     <Container fluid className="mt-2">
@@ -34,6 +42,21 @@ const Contact = () => {
         <Col xs={12} md={6} lg={4}>
           <div className="formulario-contacto">
             <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="mb-3">
+                <input
+                  placeholder="Nombre y Apellido"
+                  type="text" 
+                  className={`form-control ${errors?.name ? "is-invalid" : ""}`}
+                  {...register("name", {
+                    required: "Nombre y Apellido son requeridos",
+                    pattern: {
+                      value: /^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+(?: [A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)?$/, 
+                      message: "El nombre y apellido deben empezar con mayúscula"
+                    }
+                  })}
+                />
+                {errors?.name && <div className="invalid-feedback">{errors.name.message}</div>}
+              </div>
               <div className="mb-3">
                 <input
                   placeholder="Email"
