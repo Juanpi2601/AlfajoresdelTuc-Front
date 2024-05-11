@@ -8,7 +8,7 @@ import ProfileUser from "../profile/ProfileUser";
 import { useAuth } from "../../context/UserContext";
 import NavbarCart from "../Carrito/Carrito"; // Importa el componente NavbarCart
 
-const NavBarV1 = () => {
+const NavBarV1 = ({ producto }) => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const [showCarrito, setShowCarrito] = useState(false);
   const { isAuthenticated, user } = useAuth();

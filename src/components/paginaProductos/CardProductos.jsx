@@ -1,16 +1,19 @@
+// CardProductos.js
 import React from "react";
 import { Link } from "react-router-dom";
-import { useProductAuth } from "../../context/ProductContext";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { alertAdd } from "../../utils/alertCustom";
+import { useProductAuth } from "../../context/ProductContext";
+import { useCartAuth } from "../../context/CartContext";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { alertAdd } from "../../utils/alertCustom";
 
 const CardProductos = ({ formData }) => {
-    const { addToCart } = useProductAuth(); 
+    const { addToCart } = useCartAuth(); 
+    const { productos } = useProductAuth(); 
 
     const handleAddToCart = (product) => {
-        addToCart(product); 
+        addToCart(product, 1); 
         alertAdd("top-end", "success", "Su pedido fue agregado al carrito");
     };
 

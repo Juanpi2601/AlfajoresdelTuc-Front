@@ -1,61 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { useProductAuth } from "../../context/ProductContext";
-import { alertAdd } from "../../utils/alertCustom";
+import { useCartAuth } from "../../context/CartContext"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router-dom";
+import CarritoCheck from "../../pages/CarritoCheck";
 
-const NavbarCart = () => {
-    const { cart, removeFromCart, incrementQuantity, decrementQuantity, clearCart } = useProductAuth();
+const NavbarCart = ({ id }) => {
+    const { cart, removeFromCart, incrementQuantity, decrementQuantity, clearCart } = useCartAuth();
     const [show, setShow] = useState(false);
-    const [tableNumber, setTableNumber] = useState("");
-    const [triggerRerender, setTriggerRerender] = useState(false);
+    const totalItems = cart ? cart.reduce((acc, item) => acc + item.quantity, 0) : 0;
+    const total = cart ? cart.reduce((acc, currentItem) => acc + currentItem.precio * currentItem.quantity, 0) : 0;    
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const total = cart.reduce(
-        (acc, currentItem) => acc + currentItem.precio * currentItem.quantity,
-        0
-    );
-
-    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-
-    useEffect(() => {
-        const handleStorageChange = (event) => {
-            if (event.key === "tableNumber") {
-                setTriggerRerender((prev) => !prev);
-            }
-        };
-
-        window.addEventListener("storage", handleStorageChange);
-        return () => {
-            window.removeEventListener("storage", handleStorageChange);
-        };
-    }, []);
-
-    const handleConfirmOrder = () => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alertAdd("center", "success", "Pedido confirmado");
-        const orderDetails = {
-            tableNumber,
-            cart,
-            total: total.toFixed(2), 
-        };
-
-        localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
-        clearCart();
-        alertAdd(
-            "center",
-            "success",
-            `Pedido confirmado`
-        );
-    };
-
-    useEffect(() => {
-        const savedTableNumber = localStorage.getItem("tableNumber");
-        if (savedTableNumber) {
-            setTableNumber(savedTableNumber);
-        }
-    }, [triggerRerender]);
+    console.log({cart});
 
     return (
         <div>
@@ -68,7 +27,7 @@ const NavbarCart = () => {
                     <Offcanvas.Title>Carrito de compra</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    {cart.length > 0 ? (
+                    {!!cart?.length ? (
                         <>
                             {cart.map((item) => (
                                 <div key={item._id} className="mb-3">
@@ -101,9 +60,10 @@ const NavbarCart = () => {
                             <div className="cart-total mb-4">
                                 <h5>Total del Pedido: ${total.toFixed(2)}</h5>
                             </div>
-                            <Button variant="success" onClick={handleConfirmOrder}>
+                            <Link to={'/CarritoCheck'} className="btn bg-warning">
                                 Confirmar Pedido
-                            </Button>
+                                <CarritoCheck/>
+                            </Link>
                         </>
                     ) : (
                         <p>Tu carrito está vacío</p>

@@ -11,12 +11,14 @@ import Admin from './pages/Admin';
 import PanelUserAdmin from './components/Admin/PanelUserAdmin';
 import PanelProductos from './components/paginaProductos/PanelProductos';
 import { ProductProvider } from './context/ProductContext';
+import { CartProvider } from './context/CartContext';
 import ContactPage from './pages/Contact';
-import ButtonWhatsapp from '/src/components/Contact/ButtonWhatsapp.jsx'
+import ButtonWhatsapp from './components/Contact/ButtonWhatsapp';
 import PaginaProductos from './pages/PaginaProductos';
 import About from './pages/About';
 import Footer from './pages/Footer';
 import DetallesProductos from './pages/DetallesProductos';
+import CarritoCheck from './pages/CarritoCheck';
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
     <BrowserRouter>
       <UserProvider>
         <ProductProvider>
+          <CartProvider>
         <NavBarV1 />
         <main>
           <Routes>
@@ -36,6 +39,7 @@ function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/contact" element={<ContactPage/>}/>
+            <Route path="products/CarritoCheck/:id" element={<CarritoCheck />} />
             <Route element={<ProtectedRouteAdmin/>}>
                 <Route path="/admin" element={<Admin/>}/>
                 <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
@@ -45,6 +49,7 @@ function App() {
           <ButtonWhatsapp/>
         </main>
         <Footer/>
+        </CartProvider>
         </ProductProvider>
       </UserProvider>
     </BrowserRouter>
