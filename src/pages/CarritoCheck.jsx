@@ -21,7 +21,7 @@ const CarritoCheck = () => {
                 setLoading(false);
             } catch (error) {
                 console.error("Error al obtener detalles del producto:", error);
-                navigate('/');
+                
             }
         };
 
@@ -32,7 +32,7 @@ const CarritoCheck = () => {
 
     return (
         <div>
-            {producto && <CarritoCheckV1 producto={producto} />}
+            {<CarritoCheckV1/>}
         </div>
     );
 }

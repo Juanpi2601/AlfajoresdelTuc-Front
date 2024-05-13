@@ -13,13 +13,13 @@ const CardProductos = ({ formData }) => {
     const { productos } = useProductAuth(); 
 
     const handleAddToCart = (product) => {
-        addToCart(product, 1); 
+        addToCart(product, 1, product.nombre); 
         alertAdd("top-end", "success", "Su pedido fue agregado al carrito");
     };
 
     return (
         <Container>
-            <Row className="d-flex">
+            <Row className="d-flex">    
                 {formData && formData.map((producto) => (
                     producto && (
                         <Col key={producto._id} xs={12} sm={12} md={6} lg={4} xl={4} >
