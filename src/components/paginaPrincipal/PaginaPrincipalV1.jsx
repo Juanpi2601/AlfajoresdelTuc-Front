@@ -58,15 +58,6 @@ const PaginaPrincipalV1 = () => {
                     
                 </Row>
             </Container>
-
-
-
-
-            <h1 className='mt-5'>FOOTER</h1>
-
-
-
-
         </>
     )
 }

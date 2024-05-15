@@ -13,6 +13,7 @@ const SettingsUserV1 = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset
   } = useForm();
 
   const togglePasswordVisibility = () => {
@@ -21,6 +22,7 @@ const SettingsUserV1 = () => {
 
   const onSubmit = handleSubmit(async (values) => {
     await updatePassword(values);
+    reset();
   });
 
   return (
@@ -52,7 +54,6 @@ const SettingsUserV1 = () => {
                 {errors.currentPassword?.message}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Form.Group>
               <Form.Label htmlFor="newPassword">Nueva Contraseña</Form.Label>
               <Form.Control
@@ -70,13 +71,18 @@ const SettingsUserV1 = () => {
                     message:
                       "La contraseña debe tener por lo menos una letra mayúscula, una minúscula, un caracter especial (ej:! - $). Debe tener una longitud entre 6 y 20 caracteres",
                   },
+                  validate: (value) => {
+                    if (value !== watch("currentPassword")) {
+                      return true;
+                    }
+                    return "La nueva contraseña debe ser diferente a la actual";
+                  },
                 })}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.newPassword?.message}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Form.Group>
               <Form.Label htmlFor="confirmNewPassword">Confirmar Nueva Contraseña</Form.Label>
               <Form.Control
@@ -101,7 +107,6 @@ const SettingsUserV1 = () => {
                 {errors.confirmNewPassword?.message}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Form.Group className="mb-3 mt-3" controlId="formBasicCheckbox1">
               <Form.Check
                 className="text-black"
