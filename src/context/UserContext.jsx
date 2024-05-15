@@ -4,7 +4,8 @@ import axios from "../api/axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 export const UserContext = createContext();
-import { alertCustom } from "../utils/alertCustom.js";
+import { alertCustom,alertCustomWithTimerInterval } from "../utils/alertCustom.js";
+import { updatePasswordRequest } from "../api/user";
 
 export const useAuth = () => {
   const context = useContext(UserContext);
@@ -75,6 +76,26 @@ export const UserProvider = ({ children }) => {
     setUser(null);
   };
 
+  const updatePassword = async (data) => {
+    try {
+      setLoading(true);
+      await updatePasswordRequest(data); 
+      alertCustomWithTimerInterval('¡Éxito!', 'Contraseña actualizada correctamente. Inicia sesión nuevamente.', 'success');
+      const alertTimeout = setTimeout(() => {
+        logout();
+      }, 2000); 
+      return () => clearTimeout(alertTimeout);
+    } catch (error) {
+      setErrors(["Error al actualizar la contraseña."]);
+      alertCustom(
+        "Upps",
+        "Ocurrió un error al actualizar la contraseña. Por favor, intente nuevamente.",
+        "error"
+      );
+      setLoading(false);
+    }
+  };   
+
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -124,6 +145,7 @@ export const UserProvider = ({ children }) => {
         isAuthenticated,
         errors,
         logout,
+        updatePassword
       }}
     >
       {children}

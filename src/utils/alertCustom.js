@@ -58,3 +58,32 @@ export const alertAdd = (position, icon, title) => {
     }
   });
 }
+
+export const alertCustomWithTimerInterval = (title, text, icon, action) => {
+  let timerInterval; 
+
+  Swal.fire({
+    title,
+    text,
+    icon,
+    confirmButtonColor: "#3085d6",
+    timer: 2000,
+    timerProgressBar: true, 
+    didOpen: () => {
+      Swal.showLoading();
+      const timer = Swal.getPopup().querySelector("b");
+      timerInterval = setInterval(() => {
+        timer.textContent = `${Swal.getTimerLeft()}`;
+      }, 100);
+    },
+    willClose: () => {
+      clearInterval(timerInterval);
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (typeof action === "function") {
+        action();
+      }
+    }
+  });
+};
