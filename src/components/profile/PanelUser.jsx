@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import EditNoteIcon from '@mui/icons-material/EditNote'; 
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
 const UserEdit = () => {
   return (
