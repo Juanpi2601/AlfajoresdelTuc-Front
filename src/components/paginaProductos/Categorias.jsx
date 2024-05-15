@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 
 const Categorias = ({ categoria, handleCategoriaSeleccionada }) => {
     const handleClick = (categoria) => {
@@ -7,15 +8,19 @@ const Categorias = ({ categoria, handleCategoriaSeleccionada }) => {
     };
 
     return (
-        <div className='d-flex justify-content-center'>
-            
-            {categoria.map((categoria, index) => (
-                
-                <Button className=' mx-1 w-100 bg-warning border-warning text-dark ' key={index} onClick={() => handleClick(categoria)}>
-                    {categoria}
-                </Button>
-            ))}
-        </div>
+        <Dropdown className=''>
+            <Dropdown.Toggle className='w-100 mx-1 my-1 border'  variant="light" id="dropdown-basic">
+                Seleccionar Categoría
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className=''>
+                {categoria.map((categoria, index) => (
+                    <Dropdown.Item key={index} onClick={() => handleClick(categoria)}>
+                        {categoria}
+                    </Dropdown.Item>
+                ))}
+            </Dropdown.Menu>
+        </Dropdown>
     );
 };
 

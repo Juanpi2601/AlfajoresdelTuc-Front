@@ -25,7 +25,7 @@ const DetallesProductos = () => {
 
     return (
         <div>
-            {producto && <DetallesProductosV1 producto={producto} />}
+            {producto && <DetallesProductosV1 producto={producto}/>}
         </div>
     );
 };
