@@ -1,29 +1,27 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useProductAuth } from "../../context/ProductContext";
+import { useCartAuth } from "../../context/CartContext";
 import { alertAdd } from "../../utils/alertCustom";
 
 const DetallesProductosV1 = ({ producto }) => {
-    const { addToCart } = useProductAuth();
-    const [quantity, setQuantity] = useState(1);
+    const { addToCart } = useCartAuth();
+    // const [cantidad, setCantidad] = useState(1);
 
-    const handleAddToCart = () => {
-        addToCart({ ...producto, quantity });
+    const handleAddToCart = (product) => {
+        // if (cantidad <= 0) {
+        //     alert("Sin stock");
+        //     return;
+        // }
+        addToCart(product, 1); 
         alertAdd("top-end", "success", "Su pedido fue agregado al carrito");
-    };
-
-    const handleDecreaseQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
-        }
-    };
-
-    const handleIncreaseQuantity = () => {
-        setQuantity(quantity + 1);
+        // setCantidad(cantidad - 1);
+        // if (cantidad === 1) {
+        //     setCantidad("No hay stock");
+        // }
     };
 
     return (
-        <Container fluid className=''>
+        <Container>
             <Row className="my-5 ">
                 <Col className='d-flex justify-content-center p-0 '>
                     <Col className=' p-5 bg-white '>
@@ -34,18 +32,14 @@ const DetallesProductosV1 = ({ producto }) => {
                     </Col>
                     <Col className='p-5 bg-white border-left'>
                         <div className='divDatos'>
-                            <h1 className='txtNombre mx-2'>{producto.nombre}</h1>
-                            <h2 className='txtPrecio mx-2'>${producto.precio}</h2>
-                            <span className='mx-2'>Cantidad: {producto.cantidad} </span>
+                            <h1 className='txtNombre my-4'>{producto.nombre}</h1>
+                            <h2 className='txtPrecio my-4'>${producto.precio}</h2>
+                            <span className='my-4'>{producto.cantidad <= 0 ? '✖ Sin stock' : `✔ Hay stock`}</span>
                         </div>
                         <div className="align-items-center justify-content-between">
-                            <div className='divCantidad p-3'>
-                                <Button className='btnDisminuir' variant="none" onClick={handleDecreaseQuantity}>-</Button>
-                                <span className="mx-2">{quantity}</span>
-                                <Button className='btnIncrementar' variant="none" onClick={handleIncreaseQuantity}>+</Button>
-                            </div>
-                            <div className='divCarrito d-flex '>
-                                <Button className='añadirAlCarrito' onClick={handleAddToCart} variant='none'>
+                            
+                            <div className='divCarrito d-flex my-4'>
+                                <Button className='añadirAlCarrito' onClick={() => handleAddToCart(producto)} variant='none'>
                                     Añadir al carrito
                                 </Button>
                                 <Button className='btnComprar mx-3' variant='none'>
@@ -57,8 +51,8 @@ const DetallesProductosV1 = ({ producto }) => {
                         <div className='divDescripcion d-flex justify-content-center' variant='none'>
                             <h1 className='txtDescripcion'>Descripcion</h1>
                         </div>
-                        <div className='d-flex '>
-                            <p>{producto.descripcion} </p>
+                        <div className=''>
+                            <p className='my-3 text-justify'>{producto.descripcion} </p>
                         </div>
                     </Col>
 
@@ -69,5 +63,4 @@ const DetallesProductosV1 = ({ producto }) => {
         </Container>
     );
 }
-
 export default DetallesProductosV1;
