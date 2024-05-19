@@ -1,40 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useProductAuth } from "../context/ProductContext";
-import CarritoCheckV1 from '../components/Carrito/CarritoCheckV1'
+import React from "react";
+import CarritoCheckV1 from '../components/Carrito/CarritoCheckV1';
 
 const CarritoCheck = () => {
-    const { id } = useParams();
-    const { getById } = useProductAuth();
-    const [producto, setProducto] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); 
-
-    useEffect(() => {
-        const fetchProducto = async () => {
-            try {
-                if (!id) {
-                    throw new Error("ID del producto no definido");
-                }
-                const productoData = await getById(id);
-                setProducto(productoData);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error al obtener detalles del producto:", error);
-                
-            }
-        };
-
-        fetchProducto();
-    }, [getById, id, navigate]);
-
-    
-
-    return (
-        <div>
-            {<CarritoCheckV1/>}
-        </div>
-    );
-}
+  return (
+    <div>
+      <CarritoCheckV1 />
+    </div>
+  );
+};
 
 export default CarritoCheck;

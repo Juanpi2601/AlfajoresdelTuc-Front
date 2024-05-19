@@ -12,7 +12,7 @@ const CardProductos = ({ formData }) => {
     const { productos } = useProductAuth();
 
     const handleAddToCart = (product) => {
-        addToCart(product, 1, product.nombre);
+        addToCart(product, 1);
         alertAdd("top-end", "success", "Su pedido fue agregado al carrito");
     };
 

@@ -40,7 +40,7 @@ function App() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/contact" element={<ContactPage/>}/>
-                <Route path="/products/CarritoCheck/:id" element={<CarritoCheck />} />
+                <Route path="/CarritoCheck" element={<CarritoCheck />} />
                 <Route element={<ProtectedRouteAdmin/>}>
                   <Route path="/admin" element={<Admin/>}/>
                   <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
