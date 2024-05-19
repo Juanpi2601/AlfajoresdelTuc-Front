@@ -42,7 +42,7 @@ const ProfileUser = () => {
           <Row>
             <Col className="cardProfile">
               <Dropdown>
-                <Dropdown.Toggle style={{ backgroundColor: 'transparent', border: 'none', color: 'black' }} className="p-0 mx-2" id="dropdown-basic">
+              <Dropdown.Toggle style={{ backgroundColor: 'transparent', border: 'none', color: 'black', padding: '0 4px' }} className="p-0 mx-2" id="dropdown-basic">
                   {user.role === "admin" ? (
                     <ManageAccountsIcon fontSize="large" />
                   ) : (
@@ -50,12 +50,12 @@ const ProfileUser = () => {
                   )}
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu align="end">
                   {dropdownItems.map((item, index) => (
                     <Dropdown.Item key={index} onClick={item.action}>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <div className="d-flex align-items-center">
                         {item.icon}
-                        <span style={{ marginLeft: 8 }}>{item.label}</span>
+                        <span style={{ marginLeft: 4, fontSize: '0.9rem' }}>{item.label}</span>
                       </div>
                     </Dropdown.Item>
                   ))}

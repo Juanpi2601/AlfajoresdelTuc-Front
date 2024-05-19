@@ -6,7 +6,7 @@ import CallIcon from '@mui/icons-material/Call';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ProfileUser from "../profile/ProfileUser";
 import { useAuth } from "../../context/UserContext";
-import NavbarCart from "../Carrito/Carrito"; // Importa el componente NavbarCart
+import NavbarCart from "../Carrito/Carrito"; 
 
 const NavBarV1 = ({ producto }) => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);

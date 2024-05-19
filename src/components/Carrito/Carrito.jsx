@@ -4,19 +4,24 @@ import { useProductAuth } from "../../context/ProductContext";
 import { useCartAuth } from "../../context/CartContext"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
-import CarritoCheck from "../../pages/CarritoCheck";
+import { useNavigate } from "react-router-dom";
 
 const NavbarCart = ({ id }) => {
-    const { cart, removeFromCart, incrementQuantity, decrementQuantity, clearCart, cartItems } = useCartAuth();
+    const { cart, removeFromCart, incrementQuantity, decrementQuantity, totalPrice, cartItems } = useCartAuth();
     const [show, setShow] = useState(false);
-    const totalItems = cartItems ? cartItems.reduce((acc, item) => acc + item.quantity, 0) : 0;
-    const total = cartItems ? cartItems.reduce((acc, currentItem) => acc + currentItem.price * currentItem.quantity, 0) : 0;    
+     const totalItems = cartItems ? cartItems.reduce((acc, item) => acc + item.quantity, 0) : 0;
+     const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleConfirm = () => {
+        handleClose();
+        navigate('/CarritoCheck');
+    };
     console.log({cart});
-    console.log({totalItems});
-    console.log({total});
+    
+   
     console.log({cartItems});
     
     
@@ -45,14 +50,14 @@ const NavbarCart = ({ id }) => {
                                         <Button
                                             className="btnQuantity"
                                             variant="primary"
-                                            onClick={() => decrementQuantity(item._id)}
+                                            onClick={() => decrementQuantity(item.productId._id)}
                                         >
                                             -
                                         </Button>
                                         <Button
                                             className="mx-2 btnQuantity"
                                             variant="primary"
-                                            onClick={() => incrementQuantity(item._id)}
+                                            onClick={() => incrementQuantity(item.productId._id)}
                                         >
                                             +
                                         </Button>
@@ -65,12 +70,11 @@ const NavbarCart = ({ id }) => {
                                     </div>
                                 ))}
                             <div className="cart-total mb-4">
-                                <h5>Total del Pedido: ${total.toFixed(2)}</h5>
+                                <h5>Total del Pedido: ${totalPrice.toFixed(2)}</h5>
                             </div>
-                            <Link to={'/CarritoCheck'} className="btn bg-warning">
+                            <Button className="btn bg-warning text-dark border-0" onClick={handleConfirm}>
                                 Confirmar Pedido
-                                {/* <CarritoCheck/> */}
-                            </Link>
+                            </Button>
                         </>
                     ) : (
                         <p>Tu carrito está vacío</p>

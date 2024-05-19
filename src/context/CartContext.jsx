@@ -39,29 +39,12 @@ export const CartProvider = ({ children } ) => {
     }, [user]);
     
 
-    const calculateTotal = (cartItems) => {
-        const { totalPrice, totalItems, cart } = cartItems?.reduce((accumulator, item) => {
-            const product = productos.find((product) => item._id === item.productId);
-            
-            if (item.productId) {
-                accumulator.quantity += item.quantity;
-                accumulator.price += product ? product.precio * item.quantity : 0;
-                if (product) accumulator.cart.push(product);
-            }
-      
-            return accumulator;
-        }, {
-            totalPrice: 0,
-            totalItems: 0,
-            cart: []
-        });
-    
-        console.log({cart, cartItems});
-        setTotalItems(totalItems);
-        setTotalPrice(totalPrice);
-        setCart(cart);
-        
+    const calculateTotal = (items) => {
+        const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        setTotalPrice(total);
     };
+    
+
 
     const addToCart = async (product, quantity) => {
         console.log({quantity});
@@ -98,8 +81,7 @@ export const CartProvider = ({ children } ) => {
         try {
             await axios.delete(`/cart/${user._id}/${productId}`);
             const updatedCart = cartItems.filter((item) => item._id !== productId);
-            setCartItems(updatedCart);
-            calculateTotal(updatedCart);
+           
             getCartItems();
         } catch (error) {
             console.error("Error al eliminar el producto del carrito:", error);
@@ -107,19 +89,27 @@ export const CartProvider = ({ children } ) => {
     };
 
     const incrementQuantity = async (productId) => {
-        const updatedCart = cartItems.map((item) =>
-            item._id === productId ? { ...item, quantity: item.quantity + 1 } : item
-        );
-        setCartItems(updatedCart);
-        calculateTotal(updatedCart);
+        try {
+            await axios.post(`/cart/increment`, {
+                userId: user._id,
+                productId
+            });
+            getCartItems();
+        } catch (error) {
+            console.error("Error al incrementar la cantidad del producto en el carrito:", error);
+        }
     };
     
     const decrementQuantity = async (productId) => {
-        const updatedCart = cartItems.map((item) =>
-            item._id === productId && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item 
-        );
-        setCartItems(updatedCart);
-        calculateTotal(updatedCart);
+        try {
+            await axios.post(`/cart/decrement`, {
+                userId: user._id,
+                productId
+            });
+            getCartItems();
+        } catch (error) {
+            console.error("Error al decrementar la cantidad del producto en el carrito:", error);
+        }
     };
 
     return (
