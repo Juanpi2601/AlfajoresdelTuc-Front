@@ -76,7 +76,8 @@ const LoginV1 = () => {
             </Form.Group>
             {/* <p>o</p>
             <LoginGoogle/> */}
-            <Button variant="primary" type="submit" className="btnLogin mt-4">
+            <Link to="/forgot-password" className="text-black">¿Olvidaste tu contraseña?</Link>
+            <Button variant="primary" type="submit" className="btnLogin mt-2 mb-3">
               Iniciar sesión
             </Button>
           </Form>
