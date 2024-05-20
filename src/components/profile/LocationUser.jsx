@@ -8,7 +8,7 @@ import { alertCustom, alertConfirm } from '../../utils/alertCustom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-const LocationUserV1 = () => {
+const LocationUserV1 = ({ userId, addresses }) => {
   const [selectedProvinceShipping, setSelectedProvinceShipping] = useState('');
   const [citiesShipping, setCitiesShipping] = useState([]);
   const [provincesList, setProvincesList] = useState([]);
@@ -241,21 +241,19 @@ const LocationUserV1 = () => {
               </tr>
             </thead>
             <tbody>
-                {savedAddresses.map((address) => (
-                  <tr key={address._id} style={{ textAlign: 'center' }}>
-                  {/* <td>{address.firstName}</td>
-                  <td>{address.lastName}</td> */}
+              {savedAddresses.map((address) => (
+                <tr key={`${userId}-${address._id}`} style={{ textAlign: 'center' }}>
                   <td>{address.address}</td>
                   <td>{address.city}</td>
                   <td>{address.province}</td>
                   <td>{address.postalCode}</td>
                   <td>
-                  <Button variant="warning" onClick={() => handleEditAddress(address)}>
-                  <EditIcon />
-                  </Button>{' '}
-                  <Button variant="danger" onClick={() => handleDeleteAddress(address._id, address.address)}>
-                  <DeleteIcon/>
-                  </Button>
+                    <Button variant="warning" onClick={() => handleEditAddress(address)}>
+                      <EditIcon />
+                    </Button>{' '}
+                    <Button variant="danger" onClick={() => handleDeleteAddress(address._id, address.address)}>
+                      <DeleteIcon/>
+                    </Button>
                   </td>
                 </tr>
               ))}

@@ -23,6 +23,7 @@ import SettingsUser from './pages/SettingsUser';
 import LocationUser from './pages/LocationUser';
 import OrderUser from './pages/OrderUser';
 import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
+import RecoverPassword from './pages/RecoverPassword';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/contact" element={<ContactPage/>}/>
+                <Route path="/forgot-password" element={<RecoverPassword />} />
                 <Route path="/CarritoCheck" element={<CarritoCheck />} />
                 <Route element={<ProtectedRouteAdmin/>}>
                   <Route path="/admin" element={<Admin/>}/>
