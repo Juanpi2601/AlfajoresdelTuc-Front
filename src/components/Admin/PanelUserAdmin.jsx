@@ -98,9 +98,9 @@ const PanelUserAdmin = () => {
                 ))}
               </tbody>
             </Table>
-            <div style={{ position: "fixed", bottom: "80px", left: "50%", transform: "translateX(-50%)", width: "fit-content", backgroundColor: "#FFF", zIndex: 1 }}>
-                <PaginationRounded count={totalPages} onChange={handleChangePage} />
-              </div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <PaginationRounded count={totalPages} onChange={handleChangePage} />
+            </div>
           </>
         )}
       </Col>

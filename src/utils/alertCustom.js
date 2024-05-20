@@ -80,7 +80,7 @@ export const alertCustomWithTimerInterval = (title, text, icon, action) => {
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    if (result.isConfirmed) {
+    if (result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
       if (typeof action === "function") {
         action();
       }
