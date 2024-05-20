@@ -3,10 +3,17 @@ import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/UserContext";
 import { passRegex } from "../../validation/registerValidation";
+import axios from "../../api/axios";
+import { alertCustom, alertConfirm, alertCustomWithTimerInterval } from '../../utils/alertCustom';
+import { useNavigate } from "react-router-dom";
+import LoadingScreen from '../loadingScreen/LoadingScreen';
 
 const SettingsUserV1 = () => {
+  const navigate = useNavigate();
   const { user, updatePassword, errors: updateErrors } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [users, setUsers] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -25,10 +32,38 @@ const SettingsUserV1 = () => {
     reset();
   });
 
+  const handleDeleteAccount = async () => {
+    try {
+      setIsLoading(true);
+      alertConfirm(
+        '¿Estás seguro?',
+        'Estás por eliminar tu cuenta de manera definitiva. Esta acción no se puede deshacer.',
+        'warning',
+        'Eliminar Cuenta',
+        async () => {
+          try {
+            await axios.delete(`/user/delete/${user._id}`);
+            alertCustomWithTimerInterval('¡Adiós!', 'Tu cuenta ha sido eliminada correctamente.', 'success', () => {
+              navigate("/login");
+              window.location.reload();
+            });
+          } catch (error) {
+            alertCustom('Upps', 'Ha ocurrido un error al eliminar la cuenta.', 'error');
+          } finally {
+            setIsLoading(false);
+          }
+        }
+      );
+    } catch (error) {
+      alertCustom('Upps', 'Ha ocurrido un error al eliminar la cuenta.', 'error');
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Container className="bg-white mt-5 w-75 border pt-5">
       <Row>
-        <Col xs={6} className="mx-auto">
+        <Col xs={12} md={6} className="mx-auto">
           {updateErrors && updateErrors.length > 0 && (
             <Alert variant="danger">
               {updateErrors}
@@ -124,16 +159,15 @@ const SettingsUserV1 = () => {
             </Button>
           </Form>
 
-          <div className="mt-4">
+          <div className="mt-4 pb-3">
             <h5 className="text-black">¿Deseas eliminar la cuenta?</h5>
             <Button
-              variant="danger"
-              onClick={() => {
-                console.log("Eliminar cuenta");
-              }}
-            >
-              Presiona aquí
-            </Button>
+                variant="danger"
+                onClick={handleDeleteAccount}
+                disabled={isLoading}
+              >
+              Eliminar Cuenta
+              </Button>
           </div>
         </Col>
       </Row>

@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap'
 const ButtonWhatsapp = () => {
   return (
     <Container>
-    <div className="position-fixed bottom-0 end-0 m-5">
+    <div className="position-fixed" style={{ bottom: '10px', right: '1px'}}>
         <a href="https://api.whatsapp.com/send?phone=5493813257054&text=¡Hola! Me encantaría obtener más información sobre sus productos/servicios. ¿Podría ayudarme?" target="_blank" rel="noopener noreferrer">
         <svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" viewBox="0 0 48 48" style={{ cursor: 'pointer' }}>
           <path fill="#fff" fillRule="evenodd" d="M4.9,43.3l2.7-9.8C5.9,30.6,5,27.3,5,24C5,13.5,13.5,5,24,5c5.1,0,9.8,2,13.4,5.6	C41,14.2,43,18.9,43,24c0,10.5-8.5,19-19,19c0,0,0,0,0,0h0c-3.2,0-6.3-0.8-9.1-2.3L4.9,43.3z"></path>

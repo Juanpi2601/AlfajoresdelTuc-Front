@@ -213,7 +213,7 @@ const PanelProductos = () => {
                         </tr>
                     </thead>
                     <tbody style={{ textAlign: 'center' }}>
-                        {productos.map((producto, index) => (
+                        {currentItems.map((producto, index) => (
                             <tr key={producto._id}>
                                 <td>{producto.nombre}</td>
                                 <td>${producto.precio}</td>
@@ -231,7 +231,7 @@ const PanelProductos = () => {
                     </tbody>
 
                 </Table>
-                <div style={{ position: "fixed", bottom: "20px", left: "50%", transform: "translateX(-50%)", width: "fit-content", backgroundColor: "#FFF", zIndex: 1, margin: "0 auto" }}>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <PaginationRounded count={totalPages} onChange={handleChangePage} />
                 </div>
 
