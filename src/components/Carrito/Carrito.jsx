@@ -18,13 +18,10 @@ const NavbarCart = ({ id }) => {
     const handleConfirm = () => {
         handleClose();
         navigate('/CarritoCheck');
+        location.reload();
     };
-    console.log({cart});
     
-   
-    console.log({cartItems});
-    
-    
+
 
     return (
         <div>

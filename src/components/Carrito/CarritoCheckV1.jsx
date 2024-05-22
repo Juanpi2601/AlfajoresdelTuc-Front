@@ -1,10 +1,16 @@
 import React from 'react';
 import { useCartAuth } from '../../context/CartContext';
-import { Container, Row, Button, Col } from 'react-bootstrap';
+import { Container, Row, Button, Col, Form } from 'react-bootstrap';
 
 const CarritoCheckV1 = () => {
-  const { cartItems, totalPrice } = useCartAuth();
-  
+  const { cartItems, totalPrice, savedAddresses, selectedAddress, setSelectedAddress } = useCartAuth();
+
+  const handleAddressChange = (e) => {
+    const addressId = e.target.value;
+    const address = savedAddresses.find((addr) => addr._id === addressId);
+    setSelectedAddress(address);
+  };
+
   return (
     <Container className='vh-100'>
       <Row>
@@ -13,7 +19,7 @@ const CarritoCheckV1 = () => {
           <Col xs={8} className='p-5 bg-white'>
             {cartItems.length > 0 ? (
               cartItems.map((item, index) => (
-                <div key={index} className="mb-3 d-flex align-items-center ">
+                <div key={index} className="mb-3 d-flex align-items-center">
                   <div className='divImg me-3'>
                     <img src={item.productId.imagenUrl} alt={item.name} className="imgProducto img-fluid" />
                   </div>
@@ -30,9 +36,21 @@ const CarritoCheckV1 = () => {
             )}
             <div className='d-flex justify-content-between'>
               <h5>Total del Pedido: ${totalPrice.toFixed(2)}</h5>
-            <Button className="btn bg-warning text-dark border-0" >Comprar</Button>
             </div>
-            
+            <Form.Group className='mt-3'>
+              <Form.Label>Selecciona una dirección de envío:</Form.Label>
+              <Form.Control as="select" onChange={handleAddressChange} value={selectedAddress ? selectedAddress._id : ''}>
+                <option value="">Selecciona una dirección</option>
+                {savedAddresses.map((address) => (
+                  <option key={address._id} value={address._id}>
+                    {`${address.address}, ${address.city}, ${address.province}, ${address.postalCode}`}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+            <Button className="btn bg-warning text-dark border-0 mt-3" disabled={!selectedAddress}>
+              Comprar
+            </Button>
           </Col>
         </Col>
       </Row>
@@ -41,4 +59,3 @@ const CarritoCheckV1 = () => {
 };
 
 export default CarritoCheckV1;
-
