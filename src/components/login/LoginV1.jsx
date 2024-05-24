@@ -22,7 +22,7 @@ const LoginV1 = () => {
   return (
     <Container className="bg-white mt-5 w-75 border py-5">
       <Row >
-        <Col xs={6} className='mx-auto'>
+        <Col xs={12} className='mx-auto'>
         {signinErrors && signinErrors.map((error, i) => (
           <Alert key={i} variant="danger">
             {error}

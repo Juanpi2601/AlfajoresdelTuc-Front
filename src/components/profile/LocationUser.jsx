@@ -7,13 +7,25 @@ import axios from '../../api/axios';
 import { alertCustom, alertConfirm } from '../../utils/alertCustom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import PaginationRounded from "../pagination/Pagination";
 
-const LocationUserV1 = ({ userId, addresses }) => {
+const LocationUserV1 = ({ userId }) => {
   const [selectedProvinceShipping, setSelectedProvinceShipping] = useState('');
   const [citiesShipping, setCitiesShipping] = useState([]);
   const [provincesList, setProvincesList] = useState([]);
   const [editingAddress, setEditingAddress] = useState(null);
-  const [savedAddresses, setSavedAddresses] = useState([]); 
+  const [savedAddresses, setSavedAddresses] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const totalPages = Math.ceil(savedAddresses.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = savedAddresses.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handleChangePage = (event, value) => {
+    setCurrentPage(value);
+  };
 
   useEffect(() => {
     setProvincesList(provincias.provincias);
@@ -27,6 +39,7 @@ const LocationUserV1 = ({ userId, addresses }) => {
       alertCustom('Upps', 'Ha ocurrido un error al obtener las direcciones guardadas.', 'error');
     }
   };
+
   useEffect(() => {
     fetchSavedAddresses();
   }, []);
@@ -39,21 +52,11 @@ const LocationUserV1 = ({ userId, addresses }) => {
     reset
   } = useForm();
 
-  useEffect(() => {
-    if (editingAddress) {
-      Object.keys(editingAddress).forEach((key) => {
-        setValue(key, editingAddress[key]);
-      });
-    } else {
-      reset();
-    }
-  }, [editingAddress, setValue, reset]);
-
   const handleCreateAddress = async (data) => {
     try {
       const response = await axios.post('/address/addresses', data);
       alertCustom('¡Éxito!', 'La dirección fue agregada correctamente.', 'success');
-      setSavedAddresses([...savedAddresses, response.data]);  
+      setSavedAddresses([...savedAddresses, response.data]);
       reset();
     } catch (error) {
       alertCustom('Upps', 'Ha ocurrido un error al guardar la dirección.', 'error');
@@ -64,14 +67,13 @@ const LocationUserV1 = ({ userId, addresses }) => {
     try {
       const response = await axios.patch(`/address/updateAddress/${editingAddress._id}`, data);
       alertCustom('¡Éxito!', 'La dirección fue editada correctamente.', 'success');
-      setSavedAddresses(savedAddresses.map(addr => addr._id === editingAddress._id ? response.data : addr));  
+      setSavedAddresses(savedAddresses.map(addr => addr._id === editingAddress._id ? response.data : addr));
       setEditingAddress(null);
       fetchSavedAddresses();
     } catch (error) {
       alertCustom('Error', 'Ha ocurrido un error al actualizar la dirección', 'error');
     }
   };
-  
 
   const handleDeleteAddress = async (addressId, addressName) => {
     try {
@@ -85,6 +87,9 @@ const LocationUserV1 = ({ userId, addresses }) => {
             await axios.delete(`/address/deleteAddress/${addressId}`);
             setSavedAddresses(savedAddresses.filter(address => address._id !== addressId));
             alertCustom('Éxito', 'Dirección eliminada correctamente', 'success');
+            if (currentItems.length === 1 && currentPage > 1) {
+              setCurrentPage(currentPage - 1);
+            }
           } catch (error) {
             alertCustom('Error', 'Ha ocurrido un error al eliminar la dirección', 'error');
           }
@@ -94,10 +99,8 @@ const LocationUserV1 = ({ userId, addresses }) => {
       alertCustom('Error', 'Ha ocurrido un error al mostrar la confirmación', 'error');
     }
   };
-  
 
-  const onSubmitShipping = async (data, e) => {
-    e.preventDefault();
+  const onSubmitShipping = async (data) => {
     if (editingAddress) {
       handleUpdateAddress(data);
     } else {
@@ -105,12 +108,29 @@ const LocationUserV1 = ({ userId, addresses }) => {
     }
   };
 
-  const handleProvinceChangeShipping = (e) => {
+  useEffect(() => {
+    if (editingAddress) {
+      Object.keys(editingAddress).forEach((key) => {
+        setValue(key, editingAddress[key]);
+      });
+      handleProvinceChangeShipping({ target: { value: editingAddress.province } }, editingAddress.city);
+    } else {
+      reset();
+    }
+  }, [editingAddress, setValue, reset]);
+
+  const handleProvinceChangeShipping = (e, preselectedCity = '') => {
     const selectedProvinceName = e.target.value;
     setSelectedProvinceShipping(selectedProvinceName);
     const selectedProvinceId = provincesList.find(provincia => provincia.nombre === selectedProvinceName).id;
     const selectedCities = ciudades.provincias.filter((departamento) => departamento.provincia.id === selectedProvinceId);
     setCitiesShipping(selectedCities);
+
+    if (preselectedCity) {
+      setTimeout(() => setValue('city', preselectedCity), 0);
+    } else {
+      setValue('city', '');
+    }
   };
 
   const handleEditAddress = (address) => {
@@ -118,34 +138,12 @@ const LocationUserV1 = ({ userId, addresses }) => {
   };
 
   return (
-    <Container className="bg-white mt-5 w-75 border pt-5">
+    <Container className="bg-white mt-3 w-100 border pt-3">
       <Row>
-        <Col xs={6}>
+        <Col xs={12}>
           <div className="d-flex justify-content-center">
             <Form onSubmit={handleSubmitShipping(onSubmitShipping)}>
               <h3 className="text-black">Dirección</h3>
-              {/* <Form.Group>
-                <Form.Label>Nombre *</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Nombre"
-                  {...registerShipping("firstName", { required: "El nombre es requerido" })}
-                />
-                {errorsShipping.firstName && (
-                  <Form.Text className="text-danger">{errorsShipping.firstName.message}</Form.Text>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Apellidos *</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Apellidos"
-                  {...registerShipping("lastName", { required: "Los apellidos son requeridos" })}
-                />
-                {errorsShipping.lastName && (
-                  <Form.Text className="text-danger">{errorsShipping.lastName.message}</Form.Text>
-                )}
-              </Form.Group> */}
               <Form.Group>
                 <Form.Label>Dirección (calle y nro) *</Form.Label>
                 <Form.Control
@@ -223,49 +221,52 @@ const LocationUserV1 = ({ userId, addresses }) => {
       </Row>
       <Row>
         <Col>
-        {savedAddresses.length === 0 ? (
-          <p className="text-center mt-3">Sin direcciones, cree una por favor.</p>
-        ) : (
-          <>
-            <h4 className="text-center mt-5">Direcciones Guardadas</h4>
-            <Table striped bordered hover >
-            <thead>
-              <tr style={{ textAlign: 'center' }}>
-                {/* <th>Nombre</th>
-                <th>Apellidos</th> */}
-                <th>Dirección</th>
-                <th>Ciudad</th>
-                <th>Provincia</th>
-                <th>Código Postal</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {savedAddresses.map((address) => (
-                <tr key={`${userId}-${address._id}`} style={{ textAlign: 'center' }}>
-                  <td>{address.address}</td>
-                  <td>{address.city}</td>
-                  <td>{address.province}</td>
-                  <td>{address.postalCode}</td>
-                  <td>
-                    <Button variant="warning" onClick={() => handleEditAddress(address)}>
-                      <EditIcon />
-                    </Button>{' '}
-                    <Button variant="danger" onClick={() => handleDeleteAddress(address._id, address.address)}>
-                      <DeleteIcon/>
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          </>
+          {savedAddresses.length === 0 ? (
+            <p className="text-center small">Sin direcciones, cree una por favor.</p>
+          ) : (
+            <>
+              <h4 className="text-center">Direcciones Guardadas</h4>
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr style={{ textAlign: 'center' }}>
+                    <th>Dirección</th>
+                    <th>Ciudad</th>
+                    <th>Provincia</th>
+                    <th>Código Postal</th>
+                    <th>Acciones</th>
+                  </tr>
+
+                  </thead>
+                <tbody>
+                  {currentItems.map((address) => (
+                    <tr key={`${userId}-${address._id}`} style={{ textAlign: 'center' }}>
+                      <td>{address.address}</td>
+                      <td>{address.city}</td>
+                      <td>{address.province}</td>
+                      <td>{address.postalCode}</td>
+                      <td>
+                        <Button variant="warning" onClick={() => handleEditAddress(address)}>
+                          <EditIcon />
+                        </Button>{' '}
+                        <Button variant="danger" onClick={() => handleDeleteAddress(address._id, address.address)}>
+                          <DeleteIcon />
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <PaginationRounded count={totalPages} onChange={handleChangePage} />
+              </div>
+            </>
           )}
         </Col>
       </Row>
-      </Container>
+    </Container>
   );
 };
 
 export default LocationUserV1;
+
 
