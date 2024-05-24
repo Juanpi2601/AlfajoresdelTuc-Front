@@ -27,10 +27,10 @@ const RecoverPassword = () => {
 };
 
   return (
-    <Container fluid className="mt-2">
+    <Container className="mt-2 w-75">
       <h1 className="text-center contacto">Recuperar Contraseña</h1>
       <Row className="justify-content-center mt-5">
-        <Col xs={12} md={6} lg={4}>
+        <Col xs={12}>
           <div className="formulario-contacto">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-3">

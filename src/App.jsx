@@ -9,7 +9,7 @@ import Profile from './pages/Profile';
 import ProtectedRouteUser from './protectecRoute/ProtectedRouteUser';
 import Admin from './pages/Admin';
 import PanelUserAdmin from './components/Admin/PanelUserAdmin';
-import PanelProductos from './components/paginaProductos/PanelProductos';
+import PanelProductosAdmin from './components/Admin/PanelProductosAdmin';
 import { ProductProvider } from './context/ProductContext';
 import { CartProvider } from './context/CartContext';
 import ContactPage from './pages/Contact';
@@ -26,6 +26,7 @@ import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
 import RecoverPassword from './pages/RecoverPassword';
 import PaginaNovedad from './pages/PaginaNovedad'
 import SectionNovedades from './pages/SectionNovedades'
+import Locales from './pages/Locales'
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/products" element={<PaginaProductos/>}/> 
                 <Route path="/products/:id" element={<DetallesProductos />} />
+                <Route path="/locales" element= {<Locales/>} ></Route>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/contact" element={<ContactPage/>}/>
@@ -50,7 +52,7 @@ function App() {
                   <Route path="/admin" element={<Admin/>}/>
                   <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
                   <Route path="/admin/novedad" element={<PaginaNovedad/>}/>
-                  <Route path="/admin/productos" element={<PanelProductos />} />
+                  <Route path="/admin/productos" element={<PanelProductosAdmin />} />
                 </Route>
                 <Route element={<ProtectedRouteUser/>}>
                   <Route path="/profile" element={<Profile/>}/>

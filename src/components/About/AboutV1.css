@@ -1,0 +1,70 @@
+section{
+    margin-bottom: 0px;
+}
+
+
+
+section .filaImagen {
+
+    background-image: url('https://scontent.faep6-1.fna.fbcdn.net/v/t31.18172-8/11082287_353502421522273_5674692475067185494_o.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=7yuB757a2DkQ7kNvgFzUchJ&_nc_ht=scontent.faep6-1.fna&oh=00_AYAg8XvqAQyS05VO3NISBM-K-jYfSln4D21OWfb9TTEeFA&oe=6676D785');
+    height: 300px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+section .filaImagen .fondoImagen {
+    margin: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 110px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 70px;
+    
+}
+
+section div h1 {
+    color: #FCCB38;
+    font-weight: bold;
+}
+
+section div .sobreNosotros,
+section div .mision,
+section div .vision {
+    justify-content: center;
+    text-align: justify;
+}
+
+section div .sobreNosotros p,
+section div .mision p,
+section div .vision p {
+    color: rgb(0, 0, 0);
+    padding: 10px;
+}
+
+section span {
+    color: #ffbf00;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+
+}
+
+@media screen and  (max-width:600px) {
+    section .filaImagen .fondoImagen {
+        margin: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 110px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        font-size: 30px;
+    }
+}

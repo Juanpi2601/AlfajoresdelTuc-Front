@@ -1,0 +1,38 @@
+
+.cardCompleta{
+    background-image: url("/src/assets/productosLocales.png");
+    background-color: #fff;
+}
+
+.cardbody , .mapa , iframe {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.ubicacion{
+    background-color: rgba(0, 0, 0, 0.7);
+
+}
+.cardbody div{
+    background-position: center;
+    background-size: contain;
+    
+}
+.cardbody p{
+    color: #fff;
+    padding: 10px;
+}
+.titulo{
+    color: #fff !important;
+    font-weight: bold;
+    height: 100px;
+    background-position: center;
+    padding: 30px;
+}
+
+
+.cardbody .direccion , .direccion{
+    color: #ffbf00;
+    padding: 20px;
+    font-size: 25px;
+}
+

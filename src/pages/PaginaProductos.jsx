@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import CardProductos from '../components/paginaProductos/CardProductos';
 import { useProductAuth } from '../context/ProductContext';
-import { Container, Row, Form, Button, Modal } from 'react-bootstrap'; // Quité Dropdown y Modal de la importación
+import { Container, Row, Form, Button, Modal } from 'react-bootstrap';
 import Categorias from '../components/paginaProductos/Categorias';
 import "../components/paginaProductos/paginaProductos.css";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';

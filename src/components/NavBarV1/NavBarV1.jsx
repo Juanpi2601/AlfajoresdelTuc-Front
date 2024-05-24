@@ -55,16 +55,16 @@ const NavBarV1 = ({ producto }) => {
           <Col className=" d-none d-lg-block pb-2">
             <Nav variant="underline" defaultActiveKey="/">
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/about">NOSOTROS</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
                 <Nav.Link className='text-danger' href="/products">PRODUCTOS</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/link-2">LOCALES</Nav.Link>
+                <Nav.Link className='text-danger' href="/link-3">NOVEDADES</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/novedad">NOVEDADES</Nav.Link>
+                <Nav.Link className='text-danger' href="/locales">LOCALES</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link className='text-danger' href="/about">SOBRE NOSOTROS</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
@@ -89,8 +89,8 @@ const NavBarV1 = ({ producto }) => {
             )}
             <Nav.Link className='text-danger' href="/about">NOSOTROS</Nav.Link>
             <Nav.Link className='text-danger' href="/products">PRODUCTOS</Nav.Link>
-            <Nav.Link className='text-danger' href="/link-2">LOCALES</Nav.Link>
             <Nav.Link className='text-danger' href="/novedad">NOVEDADES</Nav.Link>
+            <Nav.Link className='text-danger' href="/locales">LOCALES</Nav.Link>
             <Nav.Link className='text-danger' href="/contact">CONTACTO</Nav.Link>
           </Nav>
         </Offcanvas.Body>

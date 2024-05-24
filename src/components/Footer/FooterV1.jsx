@@ -14,8 +14,11 @@ const FooterV1 = () => {
             <div className='footer-section'>
               <ul className='text-center list-unstyled'>
                 <h3 className='title3'>Alfajores Del Tucumán</h3>
-                <li> <a href="/about">Sobre Nosotros</a></li>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/products">Productos</a></li>
+                <li><a href="/locales">Novedades</a></li>
                 <li><a href="/locales">Locales</a></li>
+                <li> <a href="/about">Sobre Nosotros</a></li>
                 <li><a href="/alfatuc"><img src="/src/assets/LOGO ALFATUC.png" alt="Alfatuc" className='alfatuc' /></a></li>
               </ul>
             </div>
@@ -29,8 +32,8 @@ const FooterV1 = () => {
             <div>
               <h2 className='title3'>Redes Sociales</h2>
               <ul className='text-center list-unstyled'>
-                <li> <img src="/src/assets/Facebook.png" alt="facebook" className='facebook' /> <a href="https://www.facebook.com/alfajores.deltucuman">Facebook</a></li>
-                <li> <img src="/src/assets/instagram.png" alt="Instagram" className='facebook' /> <a href="https://www.instagram.com/alfajoresdeltucuman/">Instagram</a></li>
+                <li> <img src="/src/assets/Facebook.png" alt="facebook" className='facebook p-1 m-1' /> <a target="_blank" href="https://www.facebook.com/alfajores.deltucuman">Facebook</a> </li>
+                <li> <img src="/src/assets/instagram.png" alt="Instagram" className='facebook p-1 m-1' /> <a target="_blank" href="https://www.instagram.com/alfajoresdeltucuman/">Instagram</a></li>
 
               </ul>
             </div>

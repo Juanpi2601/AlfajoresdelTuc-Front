@@ -21,7 +21,10 @@ export const CartProvider = ({ children } ) => {
     const [cartItems, setCartItems] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [savedAddresses, setSavedAddresses] = useState([]); 
+    const [selectedAddress, setSelectedAddress] = useState(null);
 
+    
     const getCartItems = async () => {
         try {
             if (user) {
@@ -34,8 +37,23 @@ export const CartProvider = ({ children } ) => {
         }
     };
     
+    const fetchSavedAddresses = async () => {
+        try {
+            const response = await axios.get('/address/getAddresses');
+            setSavedAddresses(response.data);
+            
+        } catch (error) {
+            console.error('Error al obtener las direcciones guardadas:', error);
+        }
+        
+    };
+
+
     useEffect(() => {
-        getCartItems();
+        if (user) {
+            getCartItems();
+            fetchSavedAddresses();
+        }
     }, [user]);
     
 
@@ -47,7 +65,7 @@ export const CartProvider = ({ children } ) => {
 
 
     const addToCart = async (product, quantity) => {
-        console.log({quantity});
+        
         try {
             if (!user) {
 
@@ -56,7 +74,7 @@ export const CartProvider = ({ children } ) => {
             }
             const price = product.precio;
             const name = product.nombre;
-            console.log(product);
+           
             await axios.post("/cart/add", {
                 userId: user._id, 
                 product,
@@ -76,8 +94,7 @@ export const CartProvider = ({ children } ) => {
 
      
     const removeFromCart = async (productId) => {
-        console.log({ productId });
-        console.log(setCartItems);
+       
         try {
             await axios.delete(`/cart/${user._id}/${productId}`);
             const updatedCart = cartItems.filter((item) => item._id !== productId);
@@ -123,6 +140,10 @@ export const CartProvider = ({ children } ) => {
                 incrementQuantity,
                 decrementQuantity,
                 cart,
+                savedAddresses,
+                selectedAddress, 
+                setSelectedAddress, 
+                     
             }}
         >
             {children}
