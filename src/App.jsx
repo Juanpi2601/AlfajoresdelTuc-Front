@@ -24,7 +24,7 @@ import LocationUser from './pages/LocationUser';
 import OrderUser from './pages/OrderUser';
 import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
 import RecoverPassword from './pages/RecoverPassword';
-
+import Locales from './pages/Locales'
 function App() {
   return (
     <BrowserRouter>
@@ -38,6 +38,7 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/products" element={<PaginaProductos/>}/> 
                 <Route path="/products/:id" element={<DetallesProductos />} />
+                <Route path="/locales" element= {<Locales/>} ></Route>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/contact" element={<ContactPage/>}/>
