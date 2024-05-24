@@ -6,7 +6,7 @@ const FooterV1 = () => {
   return (
     <Container fluid>
       <Row>
-        <div className='ft1 display-flex'>
+        <div className='ft1 display-flex mt-4'>
           <div className='logo5 mt-3'>
             <span><img src="/src/assets/LogoCasaHistorica.png" alt="Alfajores-Del-Tucuman" className='img7' /></span>
           </div>
