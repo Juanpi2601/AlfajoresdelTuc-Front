@@ -24,7 +24,10 @@ import LocationUser from './pages/LocationUser';
 import OrderUser from './pages/OrderUser';
 import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
 import RecoverPassword from './pages/RecoverPassword';
+import PaginaNovedad from './pages/PaginaNovedad'
+import SectionNovedades from './pages/SectionNovedades'
 import Locales from './pages/Locales'
+
 function App() {
   return (
     <BrowserRouter>
@@ -44,9 +47,11 @@ function App() {
                 <Route path="/contact" element={<ContactPage/>}/>
                 <Route path="/forgot-password" element={<RecoverPassword />} />
                 <Route path="/CarritoCheck" element={<CarritoCheck />} />
+                <Route path="/novedad" element={<SectionNovedades/>} />
                 <Route element={<ProtectedRouteAdmin/>}>
                   <Route path="/admin" element={<Admin/>}/>
                   <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
+                  <Route path="/admin/novedad" element={<PaginaNovedad/>}/>
                   <Route path="/admin/productos" element={<PanelProductosAdmin />} />
                 </Route>
                 <Route element={<ProtectedRouteUser/>}>
