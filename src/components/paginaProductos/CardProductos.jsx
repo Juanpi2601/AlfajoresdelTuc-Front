@@ -40,7 +40,7 @@ const CardProductos = ({ formData }) => {
                                     <Card.Title className="nameProduct text-center w-100">{producto.nombre}</Card.Title>
                                     <div className="d-flex flex-column">
                                         <Card.Title className="priceProduct text-center">$ {producto.precio}</Card.Title>
-                                        <div className="product-buttons ">
+                                        <div className="product-buttons">
                                             <Button
                                                 className="btnAddCart mx-2 text-center p-2 "
                                                 data-text="Agregar al Carrito" variant="none"

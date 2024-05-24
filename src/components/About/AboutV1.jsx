@@ -1,37 +1,51 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
+import '/src/components/About/AboutV1.css'
+
 
 const AboutV1 = () => {
     return (
-        <Container>
-            <Row>
-                <div></div>
-                        <h2 className='text-center mt-4 titulo1'>Primero comenzareos con la historia de la <small className='text-warning'>Casa Historica De Tucumán</small></h2>
-                <section className='div2 conatiner mt-5'>
-                    <div>
-                        <div className='text2 mt-4'>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur commodi enim accusamus officiis! Iste beatae recusandae ex veniam distinctio illum deleniti quasi, esse, ducimus enim illo amet ea tempore. Nam? </p>
-                        </div>
-                        <img src="/src/assets/casaHistoricaRota.jpeg" alt="CasaHistoricaRota.jpeg" className='img5' />
+        <>
+                <section >
+                    <div className='filaImagen'>
+                        <h1 className='fondoImagen'>Sobre Nosotros</h1>
                     </div>
-                </section>
-                        <h2 className='mt-5 display-3 text-center'>Nuestra <small className='text-danger'>Historia</small></h2>
-                <section className='div2 conatiner mt-5'>
-                    <div>
-                        <div className='text2 mt-4'>
+                    <Container className='bg-light '>
+                    <div className='p-3'>
+                        <div className='sobreNosotros'>
                             <p>
-                                ALFAJORES DEL TUCUMÁN se estableció oficialmente el 9 de Junio de 1970 en la vibrante ciudad de San Miguel de Tucumán, como un modesto proyecto dirigido exclusivamente por su fundador, el Fundador.
-                                Después de exhaustivos análisis de mercado, eligieron estratégicamente ubicar su primera tienda justo frente a la majestuosa Casa Histórica de Tucumán, dando así origen a la reconocida marca "Alfajores del Tucumán".
-                                Al emplazar su fábrica en la intersección de Av. Adolfo de La Vega y La Madrid, manteniendo la esencia del método artesanal, gradualmente incorporaron tecnología de vanguardia en sus procesos productivos. Esto no solo permitió mejorar la eficiencia, sino también atrajo la atención de instituciones educativas y grupos turísticos que se maravillan al presenciar la meticulosa elaboración de sus productos.
-                                La calidad inigualable de sus productos ha sido consistentemente reconocida con numerosos premios tanto a nivel nacional como internacional, siendo un testimonio de su compromiso con la excelencia.
-                                Hoy en día, ALFAJORES DEL TUCUMÁN ha expandido su presencia con éxito, contando con cuatro sucursales adicionales en la provincia y extendiendo su alcance a las vecinas provincias de Salta y Santiago del Estero con sus aclamadas marcas "Alfajores Salteños" y "Alfajores Termeños", respectivamente.
-                                La marca sigue siendo una elección popular entre los residentes locales del norte argentino, y su reputación ha trascendido las fronteras de Tucumán para llegar a otros rincones del país. </p>
+                                Alfajores del Tucumán se fundó en San Miguel de Tucumán el 9 de junio de 1970. Desde entonces, nuestra fábrica, situada en la Av. Adolfo de la Vega esquina Lamadrid, ha sido el corazón donde combinamos métodos artesanales con tecnología avanzada para crear los alfajores más deliciosos y auténticos de la región.
+                            </p>
+                            <p>
+                                Nuestra dedicación a la calidad ha sido reconocida con numerosos premios, lo que refleja nuestro compromiso con la excelencia en cada bocado. A lo largo de los años, hemos crecido y nos hemos expandido, estableciendo cuatro sucursales en la provincia de Tucumán. Además, hemos llevado el sabor inigualable de nuestros alfajores a las provincias vecinas de Salta y Santiago del Estero bajo las marcas "Alfajores Salteños" y "Alfajores Termeños".
+                            </p>
+                            <p>
+                                Hoy en día, Alfajores del Tucumán sigue siendo una marca querida y popular no solo en el norte argentino, sino también más allá de nuestras fronteras. Nuestra pasión por los alfajores y nuestro compromiso con la calidad continúan guiando cada paso de nuestro camino, asegurando que cada producto que ofrecemos sea un testimonio de nuestra historia y tradición.
+                            </p>
                         </div>
-                        <img src="/src/assets/casaHistoricaRota.jpeg" alt="CasaHistoricaRota.jpeg" className='img5' />
                     </div>
+                    <div className='my-1 p-3'>
+                        <h1>Misión</h1>
+                        <div className='mision'>
+                            <p>
+                                En Alfajores del Tucumán, nuestra misión es elaborar alfajores de la más alta calidad, combinando métodos artesanales con tecnología avanzada.
+                                Nos esforzamos por mantener viva la tradición y el sabor auténtico que nos ha caracterizado desde 1970, brindando experiencias dulces y memorables a nuestros clientes.
+                            </p>
+                        </div>
+                    </div>
+                    <div className='my-1 p-3'>
+                        <h1>Visión</h1>
+                        <div className='vision'>
+                            <p>
+                                Nuestra visión es ser la marca líder de alfajores en el norte argentino y expandir nuestro reconocimiento y presencia a nivel nacional e internacional.
+                                Aspiramos a crecer y evolucionar continuamente, manteniendo nuestro compromiso con la excelencia y la innovación, mientras seguimos siendo fieles a nuestras raíces y valores tradicionales.
+                            </p>
+                        </div>
+                    </div>
+                    <span>¡Gracias por ser parte de nuestra historia y por permitirnos endulzar sus momentos especiales!</span>
+                    </Container>
                 </section>
-            </Row>
-        </Container>
+                </>
     )
 }
 
