@@ -9,7 +9,7 @@ import Profile from './pages/Profile';
 import ProtectedRouteUser from './protectecRoute/ProtectedRouteUser';
 import Admin from './pages/Admin';
 import PanelUserAdmin from './components/Admin/PanelUserAdmin';
-import PanelProductos from './components/paginaProductos/PanelProductos';
+import PanelProductosAdmin from './components/Admin/PanelProductosAdmin';
 import { ProductProvider } from './context/ProductContext';
 import { CartProvider } from './context/CartContext';
 import ContactPage from './pages/Contact';
@@ -47,7 +47,7 @@ function App() {
                 <Route element={<ProtectedRouteAdmin/>}>
                   <Route path="/admin" element={<Admin/>}/>
                   <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
-                  <Route path="/admin/productos" element={<PanelProductos />} />
+                  <Route path="/admin/productos" element={<PanelProductosAdmin />} />
                 </Route>
                 <Route element={<ProtectedRouteUser/>}>
                   <Route path="/profile" element={<Profile/>}/>
