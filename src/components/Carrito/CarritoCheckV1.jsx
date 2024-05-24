@@ -1,14 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCartAuth } from '../../context/CartContext';
 import { Container, Row, Button, Col, Form } from 'react-bootstrap';
+import axios from '../../api/axios'; 
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+
+const KEY_MP = import.meta.env.VITE_KEY_MP;
 
 const CarritoCheckV1 = () => {
   const { cartItems, totalPrice, savedAddresses, selectedAddress, setSelectedAddress } = useCartAuth();
+  const [preferenceId, setPreferenceId] = useState(null);
 
+  useEffect(() => {
+    initMercadoPago(KEY_MP, { locale: 'es-AR' });
+  }, []);
+  
   const handleAddressChange = (e) => {
     const addressId = e.target.value;
     const address = savedAddresses.find((addr) => addr._id === addressId);
     setSelectedAddress(address);
+  };
+
+  const handleBuy = async () => {
+    try {
+      if (cartItems.length > 0) {
+        const body = {
+          items: cartItems.map(item => ({
+            title: item.name,
+            quantity: item.quantity,
+            unit_price: item.price,
+            currency_id: 'ARS',
+          })),
+          back_urls: {
+            success: 'http://localhost:5173',
+            failure: 'http://localhost:5173',
+            pending: 'http://localhost:5173',
+          },
+          auto_return: 'approved',
+        };
+        
+        const response = await axios.post('/mercadopago/create_preference', body); 
+        const { id } = response.data;
+        setPreferenceId(id);
+      } else {
+        console.error('No hay productos en el carrito');
+      }
+    } catch (error) {
+      console.error('Error al crear preferencia:', error);
+    }
   };
 
   return (
@@ -48,9 +86,14 @@ const CarritoCheckV1 = () => {
                 ))}
               </Form.Control>
             </Form.Group>
-            <Button className="btn bg-warning text-dark border-0 mt-3" disabled={!selectedAddress}>
+            <Button className="btn bg-warning text-dark border-0 mt-3" disabled={!selectedAddress} onClick={handleBuy}>
               Comprar
             </Button>
+            {preferenceId && (
+              <div className="mt-3">
+                <Wallet initialization={{ preferenceId }} />
+              </div>
+            )}
           </Col>
         </Col>
       </Row>
