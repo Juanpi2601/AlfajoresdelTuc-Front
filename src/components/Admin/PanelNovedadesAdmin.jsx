@@ -5,9 +5,10 @@ import ErrorIcon from '@mui/icons-material/Error';
 import Checkbox from '@mui/material/Checkbox';
 import axios from '../../api/axios';
 import { alertCustom, alertConfirm } from '../../utils/alertCustom';
-import SectionNovedadV1 from './SectionNovedadV1';
+import PaginationRounded from '../pagination/Pagination';
+import SectionNovedadV1 from '../Novedades/SectionNovedadV1';
 
-const PanelNovedades = () => {
+const PanelNovedadesAdmin = () => {
     const [novedades, setNovedades] = useState([]);
     const [formData, setFormData] = useState({
         nombre: '',
@@ -64,7 +65,7 @@ const PanelNovedades = () => {
             if (editIndex !== null) {
                 const updatedNovedades = [...novedades];
                 updatedNovedades[editIndex] = formData;
-                await axios.put(`/novedad/${novedades[editIndex]._id}`, formData);
+                await axios.patch(`/novedad/${novedades[editIndex]._id}`, formData);
                 setNovedades(updatedNovedades);
             } else {
                 const response = await axios.post('/novedad/create', formData);
@@ -103,6 +104,16 @@ const PanelNovedades = () => {
             }
         );
     };
+    const handleVisibilityChange = async (novedadId) => {
+        const updatedNovedades = novedades.map(n => n._id === novedadId ? { ...n, visible: !n.visible } : n);
+        setNovedades(updatedNovedades);
+        try {
+            await axios.patch(`/novedad/updateVisibility/${novedadId}`, { visible: !novedades.find(n => n._id === novedadId).visible });
+        } catch (error) {
+            console.error('Error al actualizar visibilidad de la novedad:', error);
+        }
+    };
+    
 
     const validateForm = () => {
         const { nombre, imgUrl } = formData;
@@ -119,6 +130,12 @@ const PanelNovedades = () => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = novedades.filter((item, index) => index >= indexOfFirstItem && index < indexOfLastItem);
+
+    const totalPages = Math.ceil(novedades.length / itemsPerPage);
+
+    const handleChangePage = (event, value) => {
+        setCurrentPage(value);
+    };
 
     return (
         <>
@@ -138,7 +155,6 @@ const PanelNovedades = () => {
                     </FormGroup>
                 </Form>
             </Container>
-
             <Container className="mt-5">
                 <h3 className="text-center">Novedades cargadas</h3>
                 <Table striped bordered hover className='my-5'>
@@ -160,11 +176,7 @@ const PanelNovedades = () => {
                                     <Checkbox
                                         checked={novedad.visible}
                                         sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
-                                        onChange={async () => {
-                                            const updatedNovedades = novedades.map(n => n._id === novedad._id ? { ...n, visible: !n.visible } : n);
-                                            setNovedades(updatedNovedades);
-                                            await axios.put(`/novedad/${novedad._id}`, { visible: !novedad.visible });
-                                        }}
+                                        onChange={() => handleVisibilityChange(novedad._id)}
                                     />
                                     <Button variant="danger" className='mx-1' onClick={() => handleDelete(novedad._id, novedad.nombre)}> <DeleteIcon /> </Button>
                                 </td>
@@ -172,20 +184,13 @@ const PanelNovedades = () => {
                         ))}
                     </tbody>
                 </Table>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <PaginationRounded count={totalPages} onChange={handleChangePage} />
+                </div>
             </Container>
-
-            {/* Render the SectionNovedad component */}
-            <SectionNovedadV1 novedades={novedades.filter(n => n.visible)} />
         </>
     );
 };
 
-export default PanelNovedades;
-
-
-
-
-
-
-
+export default PanelNovedadesAdmin;
 

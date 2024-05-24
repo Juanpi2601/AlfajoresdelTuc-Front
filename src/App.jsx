@@ -10,6 +10,7 @@ import ProtectedRouteUser from './protectecRoute/ProtectedRouteUser';
 import Admin from './pages/Admin';
 import PanelUserAdmin from './components/Admin/PanelUserAdmin';
 import PanelProductosAdmin from './components/Admin/PanelProductosAdmin';
+import PanelNovedadesAdmin from './components/Admin/PanelNovedadesAdmin';
 import { ProductProvider } from './context/ProductContext';
 import { CartProvider } from './context/CartContext';
 import ContactPage from './pages/Contact';
@@ -24,7 +25,6 @@ import LocationUser from './pages/LocationUser';
 import OrderUser from './pages/OrderUser';
 import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
 import RecoverPassword from './pages/RecoverPassword';
-import PaginaNovedad from './pages/PaginaNovedad'
 import SectionNovedades from './pages/SectionNovedades'
 import Locales from './pages/Locales'
 
@@ -51,7 +51,7 @@ function App() {
                 <Route element={<ProtectedRouteAdmin/>}>
                   <Route path="/admin" element={<Admin/>}/>
                   <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
-                  <Route path="/admin/novedad" element={<PaginaNovedad/>}/>
+                  <Route path="/admin/novedad" element={<PanelNovedadesAdmin/>}/>
                   <Route path="/admin/productos" element={<PanelProductosAdmin />} />
                 </Route>
                 <Route element={<ProtectedRouteUser/>}>

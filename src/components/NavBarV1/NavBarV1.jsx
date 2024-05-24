@@ -58,7 +58,7 @@ const NavBarV1 = ({ producto }) => {
                 <Nav.Link className='text-danger' href="/products">PRODUCTOS</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/link-3">NOVEDADES</Nav.Link>
+                <Nav.Link className='text-danger' href="/novedad">NOVEDADES</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link className='text-danger' href="/locales">LOCALES</Nav.Link>
