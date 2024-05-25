@@ -27,9 +27,10 @@ const ProfileUser = () => {
 
   if (isAuthenticated && user) {
     if (user.role === "admin") {
+      dropdownItems.unshift({ label: "Configuración", action: () => navigate("/profile/settings"), icon: <SettingsIcon fontSize="small" /> });
+      dropdownItems.unshift({ label: "Panel Novedades", action: () => navigate("/admin/novedad"), icon: <NewReleasesIcon fontSize="small" /> });
       dropdownItems.unshift({ label: "Panel Usuarios", action: () => navigate("/admin/usuarios"), icon: <GroupIcon fontSize="small" /> });
       dropdownItems.unshift({ label: "Panel Productos", action: () => navigate("/admin/productos"), icon: <InventoryIcon fontSize="small" /> });
-      dropdownItems.unshift({ label: "Panel Novedades", action: () => navigate("/admin/novedad"), icon: <NewReleasesIcon fontSize="small" /> });
     } else if (user.role === "client") {
       dropdownItems.unshift({ label: "Configuración", action: () => navigate("/profile/settings"), icon: <SettingsIcon fontSize="small" /> });
       dropdownItems.unshift({ label: "Mis pedidos", action: () => navigate("/profile/myorders"), icon: <EditNoteIcon fontSize="small" /> });

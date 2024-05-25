@@ -85,19 +85,6 @@
         "iso_nombre": "Catamarca"
       },
       {
-        "id": "90",
-        "nombre": "Tucumán",
-        "nombre_completo": "Provincia de Tucumán",
-        "fuente": "IGN",
-        "categoria": "Provincia",
-        "centroide": {
-          "lon": -65.3647655803683,
-          "lat": -26.948283501723
-        },
-        "iso_id": "AR-T",
-        "iso_nombre": "Tucumán"
-      },
-      {
         "id": "22",
         "nombre": "Chaco",
         "nombre_completo": "Provincia del Chaco",

@@ -2247,22 +2247,6 @@
         }
       },
       {
-        "id": "90084",
-        "nombre": "Capital",
-        "nombre_completo": "Departamento Capital",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.00403200129994109
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.2170208037282,
-          "lat": -26.8332209186353
-        }
-      },
-      {
         "id": "82007",
         "nombre": "Belgrano",
         "nombre_completo": "Departamento Belgrano",
@@ -2452,22 +2436,6 @@
         "centroide": {
           "lon": -65.9017191021383,
           "lat": -28.9094976289814
-        }
-      },
-      {
-        "id": "90007",
-        "nombre": "Burruyacú",
-        "nombre_completo": "Departamento Burruyacú",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.160147116921214
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -64.8195981132229,
-          "lat": -26.5305481465544
         }
       },
       {
@@ -5063,22 +5031,6 @@
         }
       },
       {
-        "id": "90028",
-        "nombre": "Famaillá",
-        "nombre_completo": "Departamento Famaillá",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0203676309877116
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.4789084982894,
-          "lat": -26.9759689777425
-        }
-      },
-      {
         "id": "06408",
         "nombre": "Hurlingham",
         "nombre_completo": "Partido de Hurlingham",
@@ -6839,70 +6791,6 @@
         }
       },
       {
-        "id": "90014",
-        "nombre": "Cruz Alta",
-        "nombre_completo": "Departamento Cruz Alta",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0534640665108381
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -64.9738642266054,
-          "lat": -26.9180036848972
-        }
-      },
-      {
-        "id": "90063",
-        "nombre": "Lules",
-        "nombre_completo": "Departamento Lules",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0273000911427296
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.4310245938907,
-          "lat": -26.8622353459017
-        }
-      },
-      {
-        "id": "90119",
-        "nombre": "Yerba Buena",
-        "nombre_completo": "Departamento Yerba Buena",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.00659759435683079
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.3411739273315,
-          "lat": -26.7839244723358
-        }
-      },
-      {
-        "id": "90105",
-        "nombre": "Tafí Viejo",
-        "nombre_completo": "Departamento Tafí Viejo",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.051819330596634
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.4640739296384,
-          "lat": -26.6601491447319
-        }
-      },
-      {
         "id": "74063",
         "nombre": "Libertador General San Martín",
         "nombre_completo": "Departamento Libertador General San Martín",
@@ -7012,38 +6900,6 @@
         "centroide": {
           "lon": -65.5597745631101,
           "lat": -33.8922244453095
-        }
-      },
-      {
-        "id": "90112",
-        "nombre": "Trancas",
-        "nombre_completo": "Departamento Trancas",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.132761548897074
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.4058207897255,
-          "lat": -26.3434123363847
-        }
-      },
-      {
-        "id": "90098",
-        "nombre": "Tafí del Valle",
-        "nombre_completo": "Departamento Tafí del Valle",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.108190872092607
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.8893504834043,
-          "lat": -26.5914686020616
         }
       },
       {
@@ -7396,134 +7252,6 @@
         "centroide": {
           "lon": -66.1302641083269,
           "lat": -44.4231369267293
-        }
-      },
-      {
-        "id": "90049",
-        "nombre": "La Cocha",
-        "nombre_completo": "Departamento La Cocha",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0427746144311694
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.5977877083311,
-          "lat": -27.7940604809292
-        }
-      },
-      {
-        "id": "90035",
-        "nombre": "Graneros",
-        "nombre_completo": "Departamento Graneros",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0753677871399028
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.2550360276541,
-          "lat": -27.7132775964524
-        }
-      },
-      {
-        "id": "90042",
-        "nombre": "Juan Bautista Alberdi",
-        "nombre_completo": "Departamento Juan Bautista Alberdi",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0328360714392479
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.7831912587906,
-          "lat": -27.6060757021473
-        }
-      },
-      {
-        "id": "90077",
-        "nombre": "Río Chico",
-        "nombre_completo": "Departamento Río Chico",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0272145631674211
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.7518266389415,
-          "lat": -27.4501203542874
-        }
-      },
-      {
-        "id": "90091",
-        "nombre": "Simoca",
-        "nombre_completo": "Departamento Simoca",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0594692915388672
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.2924847788807,
-          "lat": -27.4238370613532
-        }
-      },
-      {
-        "id": "90021",
-        "nombre": "Chicligasta",
-        "nombre_completo": "Departamento Chicligasta",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0573707648111362
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.8110637206058,
-          "lat": -27.2696018679715
-        }
-      },
-      {
-        "id": "90070",
-        "nombre": "Monteros",
-        "nombre_completo": "Departamento Monteros",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.052778773338602
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.6430768814482,
-          "lat": -27.1106201705702
-        }
-      },
-      {
-        "id": "90056",
-        "nombre": "Leales",
-        "nombre_completo": "Departamento Leales",
-        "provincia": {
-          "id": "90",
-          "nombre": "Tucumán",
-          "interseccion": 0.0875078813280736
-        },
-        "fuente": "IGN",
-        "categoria": "Departamento",
-        "centroide": {
-          "lon": -65.0848647351414,
-          "lat": -27.1918831757327
         }
       },
       {
