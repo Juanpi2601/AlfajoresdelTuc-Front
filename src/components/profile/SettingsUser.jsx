@@ -12,7 +12,6 @@ const SettingsUserV1 = () => {
   const navigate = useNavigate();
   const { user, updatePassword, errors: updateErrors } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  const [users, setUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -153,22 +152,24 @@ const SettingsUserV1 = () => {
             <Button
               variant="primary"
               type="submit"
-              className="mt-3"
+              className="mb-5"
             >
               Actualizar Contraseña
             </Button>
           </Form>
 
-          <div className="mt-4 pb-3">
-            <h5 className="text-black">¿Deseas eliminar la cuenta?</h5>
-            <Button
+          {user.role === 'client' && (
+            <div className="pb-5">
+              <h3 className="text-black">¿Deseas eliminar la cuenta?</h3>
+              <Button
                 variant="danger"
                 onClick={handleDeleteAccount}
                 disabled={isLoading}
               >
-              Eliminar Cuenta
+                Eliminar Cuenta
               </Button>
-          </div>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>
