@@ -31,7 +31,6 @@ const SectionNovedadV1 = () => {
                                         {novedad.imgUrl && (
                                             <img className="imgProduct" src={novedad.imgUrl} alt={novedad.nombre} style={{ maxWidth: '100%', height: 'auto', paddingTop: '0' }} />
                                         )}
-                                        <h4>{novedad.nombre}</h4>
                                     </section>
                                 </div>
                             </Col>

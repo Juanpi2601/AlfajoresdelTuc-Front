@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import '../paginaPrincipal/paginaPrincipal.css'
 import { Container, Row, Carousel, Card, CardText } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 const PaginaPrincipalV1 = () => {
 
@@ -39,23 +40,38 @@ const PaginaPrincipalV1 = () => {
                     </section>
                     <section className='cardContainer cards2'>
                         <section className='mt-5'>
-                            <Card style={{ width: '18rem' }} className='card1 cards3'>
-                                <Card.Img variant="top" src="/src/assets/E-Comerce.png" className='img1' />
-                                <div className='cardText'>
-                                    <h4 className='text1'><img src="/src/assets/Nuestro-E-comerce.png" alt="E-Comerce" className='img3' /></h4>
-                                </div>
-                            </Card>
+                            <a href="/products">
+                                <Card style={{ width: '18rem' }} className='card1 cards3'>
+                                    <Card.Img variant="top" src="/src/assets/E-Comerce.png" className='img1' />
+                                    <div className='cardText'>
+                                        <h4 className='text1'><img src="/src/assets/Nuestro-E-comerce.png" alt="E-Comerce" className='img3' /></h4>
+                                    </div>
+                                </Card>
+                            </a>
                         </section>
                         <section className='mt-5'>
+                            <a href="/locales">
                             <Card style={{ width: '18rem' }} className='card1 cards3'>
                                 <Card.Img variant="top" src="/src/assets/Sucursales.png" className='img1' />
                                 <div className='cardText'>
                                     <h4 className='text1'><img src="/src/assets/Sucursales2.png" alt="Sucursales solo" className='img2' /></h4>
                                 </div>
                             </Card>
+                            </a>
+                        </section>
+                        <section className='mt-5'>
+                            <a href="/locales">
+                            <Card style={{ width: '18rem' }} className='card1 cards3'>
+                                <Card.Img variant="top" src="/src/assets/Sucursales.png" className='img1' />
+                                <div className='cardText'>
+                                    <h4 className='text1'><img src="/src/assets/Sucursales2.png" alt="Sucursales solo" className='img2' /></h4>
+                                </div>
+                            </Card>
+                            </a>
                         </section>
                     </section>
-                    
+
+
                 </Row>
             </Container>
         </>

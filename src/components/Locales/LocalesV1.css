@@ -1,27 +1,39 @@
-
-.cardCompleta{
-    background-image: url("/src/assets/productosLocales.png");
-    background-color: #fff;
+:root {
+    --colorOne: #e3c567;
+    --colorTwo: #c8963e;
+    --colorThree: #d1462f;
+    --colorFour: #fff;
+    --colorFive: rgba(227, 196, 103, 0.508);
 }
 
-.cardbody , .mapa , iframe {
+.cardCompleta {
+    background-color: transparent;
+}
+
+.cardbody,
+.mapa,
+iframe {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.7);
 }
-.ubicacion{
+
+.ubicacion {
     background-color: rgba(0, 0, 0, 0.7);
 
 }
-.cardbody div{
+
+.cardbody div {
     background-position: center;
     background-size: contain;
-    
+
 }
-.cardbody p{
+
+.cardbody p {
     color: #fff;
     padding: 10px;
 }
-.titulo{
+
+.titulo {
     color: #fff !important;
     font-weight: bold;
     height: 100px;
@@ -30,9 +42,38 @@
 }
 
 
-.cardbody .direccion , .direccion{
-    color: #ffbf00;
+.cardbody .direccion,
+.direccion {
+    color: var(--colorTwo);
     padding: 20px;
     font-size: 25px;
 }
 
+
+.cardCompleta {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardCompleta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cardbody {
+    background-color: black;
+    padding: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cardCompleta:hover .cardbody {
+    background-color: var(--colorOne);
+}
+
+
+.nuevoLocal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

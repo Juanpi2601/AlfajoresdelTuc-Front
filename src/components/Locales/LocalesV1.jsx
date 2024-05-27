@@ -1,5 +1,4 @@
 import React from 'react'
-import { Container, Col } from 'react-bootstrap'
 import '/src/components/Locales/LocalesV1.css'
 
 
@@ -7,11 +6,11 @@ export const LocalesV1 = () => {
     return (
         <>
             <div class="container">
-                <h1 class="text-dark text-center bg-light w-100 m-auto p-4 mb-4 fs-4">Nos podes encontrar en nuestros locales ubicados en distintos puntos de la provincia.</h1>
+                <h2 class="text-dark text-center bg-light w-100 m-auto p-4 mb-4 fs-4">Nos podes encontrar en nuestras Sucursales ubicados en distintos puntos de la provincia.</h2>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4 mb-4">
                         <div class="cardCompleta">
-                            <div class="cardbody p-0 ">
+                            <div class="cardbody p-0">
                                 <div>
                                     <h2 class="titulo text-center">Nuestra Fábrica</h2>
                                 </div>
@@ -128,6 +127,16 @@ export const LocalesV1 = () => {
                             </div>
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 mb-4">
+                        <div class="nuevoLocal">
+                            <div class="p-0">
+                                <div>
+                                    <h2 class=" nuevoLocal text-center nuevoLocal ">Pronto podrás encontar nuevas Sucursales.</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
 

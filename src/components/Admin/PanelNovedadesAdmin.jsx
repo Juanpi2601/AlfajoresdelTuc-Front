@@ -151,7 +151,7 @@ const PanelNovedadesAdmin = () => {
                         {errors.imgUrl && <Alert className='my-3 ' variant="danger"><ErrorIcon/>{errors.imgUrl}</Alert>}
                     </Form.Group>
                     <FormGroup className='text-center'>
-                        <Button type="submit" className='my-3'>{editIndex !== null ? 'Editar Producto' : 'Agregar Producto'}</Button>
+                        <Button type="submit" variant="warning" className='my-3 color-warning'>{editIndex !== null ? 'Editar Producto' : 'Agregar Novedad'}</Button>
                     </FormGroup>
                 </Form>
             </Container>

@@ -82,7 +82,7 @@ const Contact = () => {
                 {errors?.mensaje && <div className="invalid-feedback">{errors.mensaje.message}</div>}
               </div>
               {isLoading && <LoadingScreen />}
-              <button type="submit" className="btn btn-primary btnEnviarCont">
+              <button  type="submit" className="btn btn-warning btnEnviarCont">
                 Enviar
               </button>
             </form>
