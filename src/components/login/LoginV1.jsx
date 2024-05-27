@@ -77,13 +77,13 @@ const LoginV1 = () => {
             {/* <p>o</p>
             <LoginGoogle/> */}
             <Link to="/forgot-password" className="text-black">¿Olvidaste tu contraseña?</Link>
-            <Button variant="primary" type="submit" className="btnLogin mt-2 mb-3">
+            <Button variant="warning" type="submit" className="btnLogin mt-2 mb-3">
               Iniciar sesión
             </Button>
           </Form>
           <p className="mt-2 d-flex justify-content-between text-black">
             Todavia no tienes cuenta?
-            <Link to="/register" className="btnReg">
+            <Link to="/register" className="btnReg text-dark">
               Registrate
             </Link>
           </p>

@@ -195,7 +195,7 @@ const PanelProductos = () => {
                         <Form.Control type='text' name="cantidad" placeholder='Cantidad del Producto' aria-label="Amount (to the nearest dollar)" value={formData.cantidad} onChange={handleChange}/>
                         {errors.cantidad && <Alert className='my-3' variant="danger"><ErrorIcon/>{errors.cantidad}</Alert>}
                     </Form.Group>
-                    <Button type="submit" className='my-3'>{editIndex !== null ? 'Editar Producto' : 'Agregar Producto'}</Button>
+                    <Button type="submit" variant="warning" className='my-3'>{editIndex !== null ? 'Editar Producto' : 'Agregar Producto'}</Button>
                 </Form>
             </Container>
 

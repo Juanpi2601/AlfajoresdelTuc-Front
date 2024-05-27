@@ -61,7 +61,7 @@ const NavBarV1 = ({ producto }) => {
                 <Nav.Link className='text-danger' href="/novedad">NOVEDADES</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/locales">LOCALES</Nav.Link>
+                <Nav.Link className='text-danger' href="/locales">SUCURSALES</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link className='text-danger' href="/about">SOBRE NOSOTROS</Nav.Link>

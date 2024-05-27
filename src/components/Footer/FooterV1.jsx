@@ -37,7 +37,7 @@ const FooterV1 = () => {
 
               </ul>
             </div>
-            <div>
+            <div className='mt-3'>
               <img src="/src/assets/Tucuman-TieneMuchoParaVos.png" alt="tucumantieneMucho" className='tucumantieneMucho' />
             </div>
           </div>

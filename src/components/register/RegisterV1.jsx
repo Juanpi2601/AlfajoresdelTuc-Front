@@ -194,7 +194,7 @@ const RegisterUser = () => {
               )}
             </Form.Group>
             <Button
-              variant="primary"
+              variant="warning"
               type="submit"
               className="btnRegister mt-3"
             >
@@ -203,7 +203,7 @@ const RegisterUser = () => {
           </Form>
           <p className="mt-2 d-flex justify-content-between text-black mt-5">
             Ya tienes una cuenta?
-            <Link to="/login" className="text-decoration-none iniciarSesion">
+            <Link to="/login"  className="text-dark iniciarSesion">
               Iniciar sesión
             </Link>
           </p>
