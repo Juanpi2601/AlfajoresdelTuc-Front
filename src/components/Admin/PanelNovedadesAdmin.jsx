@@ -6,7 +6,6 @@ import Checkbox from '@mui/material/Checkbox';
 import axios from '../../api/axios';
 import { alertCustom, alertConfirm } from '../../utils/alertCustom';
 import PaginationRounded from '../pagination/Pagination';
-import SectionNovedadV1 from '../Novedades/SectionNovedadV1';
 
 const PanelNovedadesAdmin = () => {
     const [novedades, setNovedades] = useState([]);

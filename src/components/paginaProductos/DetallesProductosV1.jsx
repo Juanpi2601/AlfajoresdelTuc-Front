@@ -42,7 +42,7 @@ const DetallesProductosV1 = ({ producto }) => {
                                 <Button className='añadirAlCarrito' onClick={() => handleAddToCart(producto)} variant='none'>
                                     Añadir al carrito
                                 </Button>
-                                <Button className='btnComprar mx-3' variant='none'>
+                                <Button className='mx-3' variant='warning'>
                                     Comprar ahora
                                 </Button>
                             </div>

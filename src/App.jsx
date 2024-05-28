@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -27,6 +27,7 @@ import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
 import RecoverPassword from './pages/RecoverPassword';
 import SectionNovedades from './pages/SectionNovedades'
 import Locales from './pages/Locales'
+import Alfatuc from './pages/Alfatuc';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
                 <Route path="/forgot-password" element={<RecoverPassword />} />
                 <Route path="/CarritoCheck" element={<CarritoCheck />} />
                 <Route path="/novedad" element={<SectionNovedades/>} />
+                <Route path="/alfatuc" element={<Alfatuc/>} />
                 <Route element={<ProtectedRouteAdmin/>}>
                   <Route path="/admin" element={<Admin/>}/>
                   <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
@@ -63,12 +65,40 @@ function App() {
               </Routes>
               <ButtonWhatsapp/>
             </main>
-            <Footer/>
+            <ConditionalFooter/>
+            <ConditionalStyles />
           </CartProvider>
         </ProductProvider>
       </UserProvider>
     </BrowserRouter>
   );
 }
+function ConditionalFooter() {
+  const location = useLocation();
+  const noFooterPaths = ['/alfatuc', '/admin/usuarios', '/admin/novedad', '/admin/productos'];
+
+  if (noFooterPaths.includes(location.pathname)) {
+    return null;
+  }
+
+  return <Footer />;
+}
+function ConditionalStyles() {
+  const location = useLocation();
+  const alfatucStyles = `
+    body {
+      font-family: Arial, sans-serif;
+      font-weight: normal;
+      background: antiquewhite;
+    }
+  `;
+
+  if (location.pathname === "/alfatuc") {
+    return <style>{alfatucStyles}</style>;
+  }
+
+  return null;
+}
+
 
 export default App;

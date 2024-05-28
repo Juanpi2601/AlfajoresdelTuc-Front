@@ -43,7 +43,7 @@ const CardProductos = ({ formData }) => {
                                         <div className="product-buttons">
                                             <Button
                                                 className="btnAddCart mx-2 text-center p-2 "
-                                                data-text="Agregar al Carrito" variant="none"
+                                                data-text="Agregar al Carrito" variant="warning"
                                                 onClick={() => handleAddToCart(producto)}>
                                                 <ShoppingCartIcon />
                                             </Button>

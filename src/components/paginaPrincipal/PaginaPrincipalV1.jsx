@@ -60,12 +60,19 @@ const PaginaPrincipalV1 = () => {
                             </a>
                         </section>
                         <section className='mt-5'>
-                            <a href="/locales">
+                            <a href="/novedad">
                             <Card style={{ width: '18rem' }} className='card1 cards3'>
-                                <Card.Img variant="top" src="/src/assets/Sucursales.png" className='img1' />
+                                <Card.Img variant="top" src="/src/assets/Novedades.png" className='img1' />
                                 <div className='cardText'>
-                                    <h4 className='text1'><img src="/src/assets/Sucursales2.png" alt="Sucursales solo" className='img2' /></h4>
+                                    <h4 className='text1'><img src="/src/assets/Novedades2.png" alt="Sucursales solo" className='img6' /></h4>
                                 </div>
+                            </Card>
+                            </a>
+                        </section>
+                        <section className='mt-5'>
+                            <a href="/alfatuc">
+                            <Card style={{ width: '18rem' }} className='card1 cards3'>
+                                <Card.Img variant="top" src="/src/assets/conoceAlfatuc.png" className='img1' />
                             </Card>
                             </a>
                         </section>
