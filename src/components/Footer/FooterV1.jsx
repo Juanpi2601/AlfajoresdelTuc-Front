@@ -17,7 +17,7 @@ const FooterV1 = () => {
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/products">Productos</a></li>
                 <li><a href="/locales">Novedades</a></li>
-                <li><a href="/locales">Locales</a></li>
+                <li><a href="/locales">Sucursales</a></li>
                 <li> <a href="/about">Sobre Nosotros</a></li>
                 <li><a href="/alfatuc"><img src="/src/assets/LOGO ALFATUC.png" alt="Alfatuc" className='alfatuc' /></a></li>
               </ul>

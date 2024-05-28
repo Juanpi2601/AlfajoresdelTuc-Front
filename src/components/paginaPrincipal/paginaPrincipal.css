@@ -33,11 +33,12 @@
 .img2 {
     width: 90%;
     margin-top: 270px;
+    height: 60px;
 }
 
 .img3 {
     width: 90%;
-    margin-top: 270px;
+    margin-top: 220px;
     margin-left: 20px;
 }
 
@@ -52,6 +53,14 @@
 .img5 {
    width: 400px;
    margin-left: 1px;
+}
+
+.img6 {
+    width: 200px;
+   margin-top: 35px;
+   height: 280px;
+   margin-left: 20px;
+   
 }
 
 .card1 {
