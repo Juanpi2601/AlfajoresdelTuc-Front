@@ -11,6 +11,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import NewReleasesIcon from '@mui/icons-material/NewReleases';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 const ProfileUser = () => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const ProfileUser = () => {
       dropdownItems.unshift({ label: "Panel Novedades", action: () => navigate("/admin/novedad"), icon: <NewReleasesIcon fontSize="small" /> });
       dropdownItems.unshift({ label: "Panel Usuarios", action: () => navigate("/admin/usuarios"), icon: <GroupIcon fontSize="small" /> });
       dropdownItems.unshift({ label: "Panel Productos", action: () => navigate("/admin/productos"), icon: <InventoryIcon fontSize="small" /> });
+      dropdownItems.unshift({ label: "Panel Ordenes", action: () => navigate("/admin/orders"), icon: <LocalShippingIcon fontSize="small" /> });
     } else if (user.role === "client") {
       dropdownItems.unshift({ label: "Configuración", action: () => navigate("/profile/settings"), icon: <SettingsIcon fontSize="small" /> });
       dropdownItems.unshift({ label: "Mis pedidos", action: () => navigate("/profile/myorders"), icon: <EditNoteIcon fontSize="small" /> });
