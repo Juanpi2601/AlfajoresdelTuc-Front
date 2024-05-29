@@ -245,7 +245,7 @@ const LocationUserV1 = ({ userId }) => {
                       <td>{address.province}</td>
                       <td>{address.postalCode}</td>
                       <td>
-                        <Button variant="warning" onClick={() => handleEditAddress(address)}>
+                        <Button variant="warning mb-2" onClick={() => handleEditAddress(address)}>
                           <EditIcon />
                         </Button>{' '}
                         <Button variant="danger" onClick={() => handleDeleteAddress(address._id, address.address)}>

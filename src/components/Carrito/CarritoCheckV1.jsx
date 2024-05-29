@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useCartAuth } from '../../context/CartContext';
-import { Container, Row, Button, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Alert } from 'react-bootstrap';
 import axios from '../../api/axios'; 
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 
@@ -20,34 +20,36 @@ const CarritoCheckV1 = () => {
     setSelectedAddress(address);
   };
 
-  const handleBuy = async () => {
-    try {
-      if (cartItems.length > 0) {
-        const body = {
-          items: cartItems.map(item => ({
-            title: item.name,
-            quantity: item.quantity,
-            unit_price: item.price,
-            currency_id: 'ARS',
-          })),
-          back_urls: {
-            success: 'http://localhost:5173',
-            failure: 'http://localhost:5173',
-            pending: 'http://localhost:5173',
-          },
-          auto_return: 'approved',
-        };
-        
-        const response = await axios.post('/mercadopago/create_preference', body); 
-        const { id } = response.data;
-        setPreferenceId(id);
-      } else {
-        console.error('No hay productos en el carrito');
+  useEffect(() => {
+    const createPreference = async () => {
+      try {
+        if (cartItems.length > 0 && selectedAddress) {
+          const body = {
+            items: cartItems.map(item => ({
+              title: item.name,
+              quantity: item.quantity,
+              unit_price: item.price,
+              currency_id: 'ARS',
+            })),
+            back_urls: {
+              success: 'http://localhost:5173',
+              failure: 'http://localhost:5173',
+              pending: 'http://localhost:5173',
+            },
+            auto_return: 'approved',
+          };
+          
+          const response = await axios.post('/mercadopago/create_preference', body); 
+          const { id } = response.data;
+          setPreferenceId(id);
+        }
+      } catch (error) {
+        console.error('Error al crear preferencia:', error);
       }
-    } catch (error) {
-      console.error('Error al crear preferencia:', error);
-    }
-  };
+    };
+
+    createPreference();
+  }, [cartItems, selectedAddress]);
 
   return (
     <Container className='vh-100'>
@@ -86,9 +88,6 @@ const CarritoCheckV1 = () => {
                 ))}
               </Form.Control>
             </Form.Group>
-            <Button className="btn bg-warning text-dark border-0 mt-3" disabled={!selectedAddress} onClick={handleBuy}>
-              Comprar
-            </Button>
             {preferenceId && (
               <div className="mt-3">
                 <Wallet initialization={{ preferenceId }} />
@@ -97,6 +96,9 @@ const CarritoCheckV1 = () => {
           </Col>
         </Col>
       </Row>
+      <Alert variant="danger" className='mt-3'>
+        Si eres de la provincia de Tucuman, ponte en contacto con nosotros para iniciar una compra rápida.
+      </Alert>
     </Container>
   );
 };
