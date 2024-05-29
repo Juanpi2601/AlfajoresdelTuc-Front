@@ -11,8 +11,10 @@ import Admin from './pages/Admin';
 import PanelUserAdmin from './components/Admin/PanelUserAdmin';
 import PanelProductosAdmin from './components/Admin/PanelProductosAdmin';
 import PanelNovedadesAdmin from './components/Admin/PanelNovedadesAdmin';
+import PanelOrdersAdmin from './components/Admin/PanelOrdersAdmin';
 import { ProductProvider } from './context/ProductContext';
 import { CartProvider } from './context/CartContext';
+import { OrderProvider } from './context/OrderContext';
 import ContactPage from './pages/Contact';
 import ButtonWhatsapp from './components/Contact/ButtonWhatsapp';
 import PaginaProductos from './pages/PaginaProductos';
@@ -35,6 +37,7 @@ function App() {
       <UserProvider>
         <ProductProvider>
           <CartProvider>
+          <OrderProvider>
             <NavBarV1 />
             <main>
               <Routes>
@@ -55,6 +58,7 @@ function App() {
                   <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
                   <Route path="/admin/novedad" element={<PanelNovedadesAdmin/>}/>
                   <Route path="/admin/productos" element={<PanelProductosAdmin />} />
+                  <Route path="/admin/orders" element={<PanelOrdersAdmin />} />
                 </Route>
                 <Route element={<ProtectedRouteUser/>}>
                   <Route path="/profile" element={<Profile/>}/>
@@ -67,6 +71,7 @@ function App() {
             </main>
             <ConditionalFooter/>
             <ConditionalStyles />
+            </OrderProvider>
           </CartProvider>
         </ProductProvider>
       </UserProvider>

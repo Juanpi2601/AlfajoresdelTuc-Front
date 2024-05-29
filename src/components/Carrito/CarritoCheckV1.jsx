@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCartAuth } from '../../context/CartContext';
-import { Container, Row, Col, Form, Alert } from 'react-bootstrap';
+import { useOrderAuth } from '../../context/OrderContext'; 
+import { Container, Row, Col, Form, Alert, Button } from 'react-bootstrap';
 import axios from '../../api/axios'; 
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 
@@ -8,6 +9,7 @@ const KEY_MP = import.meta.env.VITE_KEY_MP;
 
 const CarritoCheckV1 = () => {
   const { cartItems, totalPrice, savedAddresses, selectedAddress, setSelectedAddress } = useCartAuth();
+  const { createOrder } = useOrderAuth();
   const [preferenceId, setPreferenceId] = useState(null);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ const CarritoCheckV1 = () => {
   return (
     <Container className='vh-100'>
       <Row>
-        <h3 className='mt-3'>Confirmar Pedido</h3>
+      <h3 className='mt-3'>Confirmar Pedido</h3>
         <Col className='d-flex justify-content-center p-0'>
           <Col xs={8} className='p-5 bg-white'>
             {cartItems.length > 0 ? (
@@ -93,6 +95,9 @@ const CarritoCheckV1 = () => {
                 <Wallet initialization={{ preferenceId }} />
               </div>
             )}
+            <Button variant="primary" onClick={createOrder} className='mt-3'>
+              Confirmar Pedido
+            </Button>
           </Col>
         </Col>
       </Row>
@@ -104,3 +109,4 @@ const CarritoCheckV1 = () => {
 };
 
 export default CarritoCheckV1;
+
