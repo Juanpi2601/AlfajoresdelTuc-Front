@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Container } from "react-bootstrap";
 import axios from '../../api/axios';
 
 const SectionNovedadV1 = () => {
@@ -19,8 +19,8 @@ const SectionNovedadV1 = () => {
     }, []);
 
     return (
-        <>
-            {novedadesState.length > 0 ? (
+        <Container fluid >
+           {novedadesState.length > 0 ? (
                 <Row className="justify-content-center">
                     {novedadesState
                         .filter(novedad => novedad.visible)
@@ -43,7 +43,7 @@ const SectionNovedadV1 = () => {
                     </Card.Body>
                 </Card>
             )}
-        </>
+        </Container>
     );
 }
 
