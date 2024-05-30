@@ -46,7 +46,7 @@ const AdminPanel = () => {
           {orders.map(order => (
             <tr key={order._id}>
               <td>{order._id}</td>
-              <td>{order.name}</td>
+              <td>{order.userName}</td> 
               <td>
                 <ul>
                   {order.products.map(product => (
