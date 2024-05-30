@@ -2,19 +2,38 @@ import React, { useState } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { useOrderAuth } from '../../context/OrderContext';
 import PaginationRounded from "../pagination/Pagination";
+import { alertCustom } from '../../utils/alertCustom';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const AdminPanel = () => {
-  const { orders, updateOrderStatus } = useOrderAuth();
+  const { orders, updateOrderStatus, fetchOrders, deleteOrder } = useOrderAuth(); // Agregar deleteOrder
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [changeFlag, setChangeFlag] = useState(false);
+  const [trackingNumber, setTrackingNumber] = useState('');
 
-  const handleUpdateOrderStatus = (orderId, newStatus) => {
-    updateOrderStatus(orderId, newStatus);
+  const handleUpdateOrderStatus = async (newStatus, order) => {
+    try {
+      const updatedOrder = { ...order, status: newStatus };
+      await updateOrderStatus(order._id, newStatus, updatedOrder, trackingNumber);
+      setTrackingNumber('');
+      alertCustom('Éxito', 'Estado actualizado exitosamente.', 'success');
+      fetchOrders();
+    } catch (error) {
+      alertCustom('Error', 'Ha ocurrido un error al actualizar la orden', 'error');
+    }
+  };
+
+  const handleCancelOrder = async (orderId) => {
+    try {
+      await deleteOrder(orderId);
+      alertCustom('Éxito', 'La orden ha sido cancelada correctamente.', 'success');
+      fetchOrders();
+    } catch (error) {
+      alertCustom('Error', 'Ha ocurrido un error al cancelar la orden', 'error');
+    }
   };
 
   const totalPages = Math.ceil(orders.length / itemsPerPage);
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentOrders = orders.slice(indexOfFirstItem, indexOfLastItem);
@@ -42,7 +61,7 @@ const AdminPanel = () => {
           </thead>
           <tbody>
             {currentOrders.map(order => (
-              <OrderRow key={order._id} order={order} updateOrderStatus={handleUpdateOrderStatus} />
+              <OrderRow key={order._id} order={order} updateOrderStatus={handleUpdateOrderStatus} trackingNumber={trackingNumber} setTrackingNumber={setTrackingNumber} onCancelOrder={handleCancelOrder} />
             ))}
           </tbody>
         </Table>
@@ -56,11 +75,7 @@ const AdminPanel = () => {
   );
 };
 
-const OrderRow = ({ order, updateOrderStatus }) => {
-  const handleUpdateOrderStatus = (newStatus) => {
-    updateOrderStatus(order._id, newStatus);
-  };
-
+const OrderRow = ({ order, updateOrderStatus, trackingNumber, setTrackingNumber, onCancelOrder }) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString();
@@ -83,13 +98,24 @@ const OrderRow = ({ order, updateOrderStatus }) => {
       <td>{order.status}</td>
       <td>{formatDate(order.createdAt)}</td>
       <td>
+        <input
+          type="text"
+          value={trackingNumber}
+          onChange={(e) => setTrackingNumber(e.target.value)} 
+          placeholder="Código de Seguimiento"
+        />
         {order.status === 'pendiente' && (
-          <Button variant="primary" onClick={() => handleUpdateOrderStatus('enviado')}>
-            Enviar
-          </Button>
+          <>
+            <Button className='mx-1' variant="primary" onClick={() => updateOrderStatus('enviado', order)}>
+              Enviar
+            </Button>
+            <Button className='mx-1' variant="danger" onClick={() => onCancelOrder(order._id)}>
+              <DeleteIcon fontSize="small" />
+            </Button>
+          </>
         )}
         {order.status === 'enviado' && (
-          <Button variant="success" onClick={() => handleUpdateOrderStatus('completado')}>
+          <Button className='mx-2' variant="success" onClick={() => updateOrderStatus('completado', order)}>
             Completar
           </Button>
         )}

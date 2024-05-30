@@ -53,24 +53,23 @@ export const OrderProvider = ({ children }) => {
             };
     
             const response = await axios.post("/order/create", body);
-            alertCustom('Éxito', 'Orden creada exitosamente', 'success');
+            alertCustom('Éxito', 'Orden creada exitosamente.', 'success');
             setOrder(response.data.order);
     
         } catch (error) {
             alertCustom("Upps", "Ha ocurrido un error al crear la orden", "error.")
         }
     };
-    
 
-    const updateOrderStatus = async (orderId, status) => {
+    const updateOrderStatus = async (orderId, status, order, trackingNumber) => {
         try {
-            await axios.patch(`/order/status/${orderId}`, { status });
+            await axios.patch(`/order/status/${orderId}`, { status, order,trackingNumber });
             fetchOrders(); 
         } catch (error) {
             alertCustom('Error', 'Ha ocurrido un error al actualizar la orden', 'error');
         }
     };
-
+    
     const deleteOrder = async (orderId) => {
         try {
             await axios.delete(`/order/delete/${orderId}`);
