@@ -7,6 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ProfileUser from "../profile/ProfileUser";
 import { useAuth } from "../../context/UserContext";
 import NavbarCart from "../Carrito/Carrito"; 
+import '../Carrito/CarritoStyles.css';
 
 const NavBarV1 = ({ producto }) => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -71,7 +72,7 @@ const NavBarV1 = ({ producto }) => {
         </Row>
       </Container>
                   
-      <Offcanvas show={showOffcanvas} onHide={handleOffcanvas} placement="end">
+      <Offcanvas show={showOffcanvas} className={showOffcanvas ? 'offcanvas-anim' : ''} onHide={handleOffcanvas} placement="end">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
@@ -96,7 +97,7 @@ const NavBarV1 = ({ producto }) => {
         </Offcanvas.Body>
       </Offcanvas>
     </Container>
-  )
-}
+  );
+};
 
 export default NavBarV1;

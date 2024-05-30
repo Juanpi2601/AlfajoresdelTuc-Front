@@ -28,7 +28,7 @@ const LoginV1 = () => {
             {error}
           </Alert>
         ))}
-          <h3 className="text-black mb-5">Iniciar sesión</h3>
+          <h3 className="text-black mb-5 text-center">Iniciar sesión</h3>
           <Form  onSubmit={onSubmit}>
             <Form.Group >
               <Form.Label  htmlFor="email"></Form.Label>
@@ -83,7 +83,7 @@ const LoginV1 = () => {
           </Form>
           <p className="mt-2 d-flex justify-content-between text-black">
             Todavia no tienes cuenta?
-            <Link to="/register" className="btnReg text-dark">
+            <Link to="/register" className="btnReg text-dark ">
               Registrate
             </Link>
           </p>

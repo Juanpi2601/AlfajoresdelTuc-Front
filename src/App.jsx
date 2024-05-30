@@ -80,7 +80,7 @@ function App() {
 }
 function ConditionalFooter() {
   const location = useLocation();
-  const noFooterPaths = ['/alfatuc', '/admin/usuarios', '/admin/novedad', '/admin/productos'];
+  const noFooterPaths = ['/alfatuc', '/admin/usuarios', '/admin/novedad', '/admin/productos', '/admin/orders'];
 
   if (noFooterPaths.includes(location.pathname)) {
     return null;
@@ -94,7 +94,7 @@ function ConditionalStyles() {
     body {
       font-family: Arial, sans-serif;
       font-weight: normal;
-      background: antiquewhite;
+      background: white;
     }
   `;
 

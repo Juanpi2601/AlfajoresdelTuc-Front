@@ -46,7 +46,7 @@ const FooterV1 = () => {
           <a href='https://marcatucuman.com.ar/'><img src="/src/assets/TucumanTurismo.png" alt="TucumanTurismo" className='tucumanTurismo align-end' /></a>
         </div>
         <div className='ft1'>
-          <p className='legal'>2024 Alfajores Del Tucumán®. All rights reserved. Tucumán. Argentina</p>
+          <p className='legal'>Alfajores Del Tucumán®. All rights reserved. Tucumán. Argentina</p>
         </div>
       </Row>
     </Container>

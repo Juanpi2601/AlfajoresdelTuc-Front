@@ -86,7 +86,7 @@ const CarritoCheckV1 = () => {
   return (
     <Container className='vh-100'>
       <Row>
-      <h3 className='mt-3'>Confirmar Pedido</h3>
+      <h3 className='mt-3 text-center bg-white'>Confirmar Pedido</h3>
         <Col className='d-flex justify-content-center p-0'>
           <Col xs={8} className='p-5 bg-white'>
             {cartItems.length > 0 ? (
