@@ -1,0 +1,24 @@
+.cart-item {
+    transition: transform 1.10s ease, box-shadow 1.10s ease, opacity 1.10s ease;
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  
+  .cart-item.enter-active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .offcanvas-anim {
+    animation: slide-in 0.8s forwards;
+  }
+  
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
