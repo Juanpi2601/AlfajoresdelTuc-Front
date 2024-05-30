@@ -80,7 +80,6 @@ const PanelNovedadesAdmin = () => {
             setSubmitButtonText('Agregar Producto');
         } catch (error) {
             alertCustom('Upps', 'Ha ocurrido un error al crear la Novedad', 'error');
-            console.log(error);
         }
     };
 
@@ -98,7 +97,6 @@ const PanelNovedadesAdmin = () => {
                     alertCustom('Éxito', 'Novedad eliminada correctamente', 'success');
                 } catch (error) {
                     alertCustom('Error', 'Ha ocurrido un error al eliminar la Novedad', 'error');
-                    console.log(error);
                 }
             }
         );

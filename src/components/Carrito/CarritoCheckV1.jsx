@@ -4,54 +4,84 @@ import { useOrderAuth } from '../../context/OrderContext';
 import { Container, Row, Col, Form, Alert, Button } from 'react-bootstrap';
 import axios from '../../api/axios'; 
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { alertConfirm, alertCustomWithTimerInterval, alertCustom } from '../../utils/alertCustom';
 
 const KEY_MP = import.meta.env.VITE_KEY_MP;
 
 const CarritoCheckV1 = () => {
   const { cartItems, totalPrice, savedAddresses, selectedAddress, setSelectedAddress } = useCartAuth();
-  const { createOrder } = useOrderAuth();
+  const { createOrder, deleteOrder, order } = useOrderAuth();
   const [preferenceId, setPreferenceId] = useState(null);
+  const [showMercadoPago, setShowMercadoPago] = useState(false);
 
   useEffect(() => {
     initMercadoPago(KEY_MP, { locale: 'es-AR' });
   }, []);
-  
+
   const handleAddressChange = (e) => {
     const addressId = e.target.value;
     const address = savedAddresses.find((addr) => addr._id === addressId);
     setSelectedAddress(address);
   };
 
-  useEffect(() => {
-    const createPreference = async () => {
-      try {
-        if (cartItems.length > 0 && selectedAddress) {
-          const body = {
-            items: cartItems.map(item => ({
-              title: item.name,
-              quantity: item.quantity,
-              unit_price: item.price,
-              currency_id: 'ARS',
-            })),
-            back_urls: {
-              success: 'http://localhost:5173',
-              failure: 'http://localhost:5173',
-              pending: 'http://localhost:5173',
-            },
-            auto_return: 'approved',
-          };
-          
-          const response = await axios.post('/mercadopago/create_preference', body); 
-          const { id } = response.data;
-          setPreferenceId(id);
-        }
-      } catch (error) {
-        console.error('Error al crear preferencia:', error);
-      }
-    };
+  const handleConfirmOrder = async () => {
+    await createOrder();
 
-    createPreference();
-  }, [cartItems, selectedAddress]);
+    if (cartItems.length > 0 && selectedAddress) {
+      try {
+        const body = {
+          items: cartItems.map(item => ({
+            title: item.name,
+            quantity: item.quantity,
+            unit_price: item.price,
+            currency_id: 'ARS',
+          })),
+          back_urls: {
+            success: 'http://localhost:5173',
+            failure: 'http://localhost:5173',
+            pending: 'http://localhost:5173',
+          },
+          auto_return: 'approved',
+        };
+
+        const response = await axios.post('/mercadopago/create_preference', body); 
+        const { id } = response.data;
+        setPreferenceId(id);
+        setShowMercadoPago(true);
+      } catch (error) {
+        alertCustom("Upps", "Ha ocurrido un error.", "error")
+      }
+    }
+  };
+
+  const handleCancelOrder = async () => {
+    if (order) {
+      try {
+        alertConfirm(
+          '¿Estás seguro?',
+          'Estás por eliminar tu orden de manera definitiva. Esta acción no se puede deshacer.',
+          'warning',
+          'Eliminar Orden',
+          async () => {
+            try {
+              await deleteOrder(order._id);
+              setPreferenceId(null);
+              setShowMercadoPago(false);
+              alertCustomWithTimerInterval('¡Adiós!', 'Tu orden ha sido eliminada correctamente.', 'success', () => {
+                window.location.href = '/';
+              });
+            } catch (error) {
+              alertCustom('Error', 'Ha ocurrido un error al cancelar la orden', 'error');
+            }
+          }
+        );
+      } catch (error) {
+        alertCustom('Error', 'Ha ocurrido un error al cancelar la orden', 'error');
+      }
+    }
+  };
+  
+
 
   return (
     <Container className='vh-100'>
@@ -90,14 +120,17 @@ const CarritoCheckV1 = () => {
                 ))}
               </Form.Control>
             </Form.Group>
-            {preferenceId && (
+            <Button className="btn bg-warning text-dark border-0 mt-3" disabled={!selectedAddress} onClick={handleConfirmOrder}>
+              Confirmar pedido
+            </Button>
+            {showMercadoPago && preferenceId && (
               <div className="mt-3">
                 <Wallet initialization={{ preferenceId }} />
+                <Button className="btn btn-danger mt-2" onClick={handleCancelOrder}>
+                  Cancelar pedido
+                </Button>
               </div>
             )}
-            <Button variant="primary" onClick={createOrder} className='mt-3'>
-              Confirmar Pedido
-            </Button>
           </Col>
         </Col>
       </Row>
@@ -109,4 +142,3 @@ const CarritoCheckV1 = () => {
 };
 
 export default CarritoCheckV1;
-

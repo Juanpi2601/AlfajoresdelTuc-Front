@@ -26,11 +26,9 @@ export const ProductProvider = ({ children }) => {
             } else {
                 alertCustom('Upps', 'El producto se creó, pero se recibió un código de estado inesperado.', 'warning');
             }
-            console.log(product);
         } catch (error) {
             const errorMessage = error.response?.data?.message || 'Ha ocurrido un error.';
             alertCustom('Upps', errorMessage, 'error');
-            console.log(error);
         }
     };
     const addToCart = (product) => {
