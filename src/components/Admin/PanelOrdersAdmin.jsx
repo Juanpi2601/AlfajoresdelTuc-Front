@@ -9,13 +9,13 @@ const AdminPanel = () => {
   const { orders, updateOrderStatus, fetchOrders, deleteOrder } = useOrderAuth(); // Agregar deleteOrder
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [trackingNumber, setTrackingNumber] = useState('');
+  const [trackingNumbers, setTrackingNumbers] = useState({});
 
   const handleUpdateOrderStatus = async (newStatus, order) => {
     try {
       const updatedOrder = { ...order, status: newStatus };
-      await updateOrderStatus(order._id, newStatus, updatedOrder, trackingNumber);
-      setTrackingNumber('');
+      await updateOrderStatus(order._id, newStatus, updatedOrder, trackingNumbers[order._id]);
+      setTrackingNumbers(prevState => ({ ...prevState, [order._id]: '' }));
       alertCustom('Éxito', 'Estado actualizado exitosamente.', 'success');
       fetchOrders();
     } catch (error) {
@@ -31,6 +31,10 @@ const AdminPanel = () => {
     } catch (error) {
       alertCustom('Error', 'Ha ocurrido un error al cancelar la orden', 'error');
     }
+  };
+
+  const handleTrackingNumberChange = (orderId, value) => {
+    setTrackingNumbers(prevState => ({ ...prevState, [orderId]: value }));
   };
 
   const totalPages = Math.ceil(orders.length / itemsPerPage);
@@ -61,7 +65,14 @@ const AdminPanel = () => {
           </thead>
           <tbody>
             {currentOrders.map(order => (
-              <OrderRow key={order._id} order={order} updateOrderStatus={handleUpdateOrderStatus} trackingNumber={trackingNumber} setTrackingNumber={setTrackingNumber} onCancelOrder={handleCancelOrder} />
+              <OrderRow
+                key={order._id}
+                order={order}
+                updateOrderStatus={handleUpdateOrderStatus}
+                trackingNumber={trackingNumbers[order._id] || ''}
+                setTrackingNumber={(value) => handleTrackingNumberChange(order._id, value)}
+                onCancelOrder={handleCancelOrder}
+              />
             ))}
           </tbody>
         </Table>
@@ -101,7 +112,7 @@ const OrderRow = ({ order, updateOrderStatus, trackingNumber, setTrackingNumber,
         <input
           type="text"
           value={trackingNumber}
-          onChange={(e) => setTrackingNumber(e.target.value)} 
+          onChange={(e) => setTrackingNumber(e.target.value)}
           placeholder="Código de Seguimiento"
         />
         {order.status === 'pendiente' && (

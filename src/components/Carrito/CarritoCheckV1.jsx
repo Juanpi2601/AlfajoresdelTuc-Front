@@ -80,22 +80,20 @@ const CarritoCheckV1 = () => {
       }
     }
   };
-  
-
 
   return (
-    <Container className='vh-100'>
+    <Container className='vh-100 '>
       <Row>
       <h3 className='mt-3 text-center bg-white'>Confirmar Pedido</h3>
         <Col className='d-flex justify-content-center p-0'>
           <Col xs={8} className='p-5 bg-white'>
             {cartItems.length > 0 ? (
               cartItems.map((item, index) => (
-                <div key={index} className="mb-3 d-flex align-items-center">
-                  <div className='divImg me-3'>
+                <div key={index} className="mb-3 d-flex flex-column flex-md-row align-items-md-center">
+                  <div className='divImg me-3 mb-2 order-1 order-md-0'>
                     <img src={item.productId.imagenUrl} alt={item.name} className="imgProducto img-fluid" />
                   </div>
-                  <div className='col-6'>
+                  <div className='col-6 order-1 order-md-1'>
                     <h5>{item.name}</h5>
                     <p>Precio: ${item.price}</p>
                     <p>Cantidad: {item.quantity}</p>
