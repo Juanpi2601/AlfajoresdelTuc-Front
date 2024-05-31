@@ -45,7 +45,7 @@ const NavBarV1 = ({ producto }) => {
               </Nav>
             </Col>
             <Col className='d-flex justify-content-end d-lg-none'>
-              <Navbar.Toggle className='p-2 justify-content-end' aria-controls="basic-navbar-nav" onClick={handleCarrito}><ShoppingCartIcon fontSize="large" style={{ color: 'black'}}/></Navbar.Toggle>
+              <Navbar.Toggle className='p-2 mx-2 justify-content-end border-0' aria-controls="basic-navbar-nav" onClick={handleCarrito}><NavbarCart /></Navbar.Toggle>
               <Navbar.Toggle className="justify-content-end" aria-controls="basic-navbar-nav" onClick={handleOffcanvas} />
             </Col>
           </Container>
