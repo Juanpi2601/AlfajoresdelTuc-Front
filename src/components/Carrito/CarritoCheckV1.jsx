@@ -82,7 +82,7 @@ const CarritoCheckV1 = () => {
   };
 
   return (
-    <Container className='vh-100 '>
+    <Container className='vh-75'>
       <Row>
       <h3 className='mt-3 text-center bg-white'>Confirmar Pedido</h3>
         <Col className='d-flex justify-content-center p-0'>

@@ -22,11 +22,18 @@ const NavbarCart = ({ id }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     handleClose();
-    navigate('/CarritoCheck');
+    const cartProducts = cartItems.map(item => ({ productId: item.productId._id, quantity: item.quantity }));
+    navigate('/CarritoCheck', { replace: true });
     location.reload();
-  };
+    try {
+      const response = await axios.post('/confirmarPedido', { cartProducts });
+      console.log(response.data.message);
+    } catch (error) {
+      console.error('Error al confirmar el pedido:', error);
+    }
+  };  
 
   return (
     <div>
@@ -52,24 +59,24 @@ const NavbarCart = ({ id }) => {
                   <p>Cantidad: {item.quantity}</p>
                   <p className="fw-bold">Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
                   <Button
-                    className="btnQuantity"
-                    variant="warning"
-                    onClick={() => decrementQuantity(item.productId._id)}
+                      className="btnQuantity"
+                      variant="warning"
+                      onClick={() => decrementQuantity(item.productId._id)}
                   >
-                    -
+                      -
                   </Button>
                   <Button
-                    className="mx-2 btnQuantity"
-                    variant="warning"
-                    onClick={() => incrementQuantity(item.productId._id)}
+                      className="mx-2 btnQuantity"
+                      variant="warning"
+                      onClick={() => incrementQuantity(item.productId._id)}
                   >
-                    +
+                      +
                   </Button>
                   <Button
-                    variant="danger"
-                    onClick={() => removeFromCart(item.productId._id)}
+                      variant="danger"
+                      onClick={() => removeFromCart(item.productId._id)}
                   >
-                    Eliminar
+                      Eliminar
                   </Button>
                 </div>
               ))}

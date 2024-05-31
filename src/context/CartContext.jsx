@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "../api/axios";
 import { useProductAuth } from "./ProductContext";
 import { useAuth } from "./UserContext";
+import { alertCustom } from '../utils/alertCustom';
 
 export const CartContext = createContext();
 
@@ -29,7 +30,7 @@ export const CartProvider = ({ children }) => {
                 calculateTotal(response.data.products);
             }
         } catch (error) {
-            console.error("Error al obtener los productos del carrito:", error);
+            alertCustom("Upps", "Ha ocurrido un error.", "error")
         }
     };
     
@@ -38,7 +39,7 @@ export const CartProvider = ({ children }) => {
             const response = await axios.get(`/address/getAddresses`);
             setSavedAddresses(response.data);
         } catch (error) {
-            console.error("Error al obtener las direcciones guardadas:", error);
+            alertCustom("Upps", "Error al obtener las direcciones guardadas.", "error")
         }
     };
 
@@ -57,9 +58,15 @@ export const CartProvider = ({ children }) => {
     const addToCart = async (product, quantity) => {
         try {
             if (!user) {
-                console.error("No hay usuario autenticado");
+                alertCustom("Upps", "Ha ocurrido un error.", "error")
                 return;
             }
+    
+            if (quantity <= 0) {
+                alertCustom("Upps", "La cantidad debe ser mayor que cero.", "error")
+                return;
+            }
+    
             await axios.post("/cart/add", {
                 userId: user._id,
                 product,
@@ -67,42 +74,45 @@ export const CartProvider = ({ children }) => {
             });
             getCartItems();
         } catch (error) {
-            console.error("Error al agregar el producto al carrito:", error);
+            alertCustom("Upps", "Error al agregar el producto al carrito.", "error")
         }
     };
-
+    
+    
     const removeFromCart = async (productId) => {
         try {
             await axios.delete(`/cart/${user._id}/${productId}`);
             getCartItems();
         } catch (error) {
-            console.error("Error al eliminar el producto del carrito:", error);
+            alertCustom("Upps", "Error al eliminar el producto del carrito.", "error")
         }
     };
 
     const incrementQuantity = async (productId) => {
         try {
-            await axios.post(`/cart/increment`, {
-                userId: user._id,
-                productId
-            });
+            if (!user) {
+                console.error("No hay usuario autenticado");
+                return;
+            }
+            await axios.post(`/cart/increment/${user._id}/${productId}`);
             getCartItems();
         } catch (error) {
-            console.error("Error al incrementar la cantidad del producto en el carrito:", error);
+            alertCustom("Upps", "El producto se encuentra sin stock.", "error")
         }
     };
-
+    
     const decrementQuantity = async (productId) => {
         try {
-            await axios.post(`/cart/decrement`, {
-                userId: user._id,
-                productId
-            });
+            if (!user) {
+                console.error("No hay usuario autenticado");
+                return;
+            }
+            await axios.post(`/cart/decrement/${user._id}/${productId}`); 
             getCartItems();
         } catch (error) {
-            console.error("Error al decrementar la cantidad del producto en el carrito:", error);
+            alertCustom("Upps", "Error al decrementar la cantidad del producto en el carrito.", "error")
         }
-    };
+    };    
 
     return (
         <CartContext.Provider
