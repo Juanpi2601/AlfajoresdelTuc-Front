@@ -9,8 +9,9 @@ const NavbarCart = ({ id }) => {
   const { removeFromCart, incrementQuantity, decrementQuantity, totalPrice, cartItems } = useCartAuth();
   const [show, setShow] = useState(false);
   const [animateItems, setAnimateItems] = useState(false);
-  const totalItems = cartItems ? cartItems.reduce((acc, item) => acc + item.quantity, 0) : 0;
   const navigate = useNavigate();
+
+  const totalItems = cartItems ? cartItems.reduce((acc, item) => acc + item.quantity, 0) : 0;
 
   useEffect(() => {
     if (show && cartItems.length > 0) {
@@ -33,7 +34,9 @@ const NavbarCart = ({ id }) => {
     } catch (error) {
       console.error('Error al confirmar el pedido:', error);
     }
-  };  
+  };
+
+  const filteredCartItems = cartItems.filter(item => item.quantity > 0);
 
   return (
     <div>
@@ -46,9 +49,9 @@ const NavbarCart = ({ id }) => {
           <Offcanvas.Title>Carrito de compra</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {!!cartItems?.length ? (
+          {!!filteredCartItems?.length ? (
             <>
-              {cartItems.map((item, index) => (
+              {filteredCartItems.map((item, index) => (
                 <div
                   key={index}
                   className={`mb-3 cart-item ${animateItems ? 'enter-active' : ''}`}
@@ -69,7 +72,7 @@ const NavbarCart = ({ id }) => {
                     className="mx-2 btnQuantity"
                     variant="warning"
                     onClick={() => incrementQuantity(item.productId._id)}
-                    disabled={item.quantity >= item.productId.cantidad} // Verificar la cantidad disponible en el stock
+                    disabled={item.quantity >= item.productId.cantidad}
                   >
                     +
                   </Button>
@@ -99,3 +102,4 @@ const NavbarCart = ({ id }) => {
 };
 
 export default NavbarCart;
+
