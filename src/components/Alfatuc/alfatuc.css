@@ -23,8 +23,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
-.botonwp1 {
-    margin-left: 250px;
+.botonwp2 {
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.488);
 }

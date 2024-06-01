@@ -27,6 +27,8 @@ const FooterV1 = () => {
               <ul className='text-center list-unstyled'>
                 <li>Depto de Marketing y Ventas Tel:+54 9 381 254 2853</li>
                 <li>Email: info@alfajoresdeltucuman.com</li>
+                <li>alfajoresdeltucuman@hotmail.com.ar</li>
+                <li>alfajoresdeltucuman71@gmail.com</li>
               </ul>
             </div>
             <div>
