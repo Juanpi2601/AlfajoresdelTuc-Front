@@ -12,14 +12,15 @@ const AlfatucV1 = () => {
                 <Row className="mt-1 align-items-center">
                     <Col md={6} className='alfajorDescription'>
                         <div className='descripción1'>
-                            <p className='text-dark fs-5'>
+                            <p className='text-dark fs-5 text-center'>
                                 <small className='fs-3 text-primary'>Alfajor de Dulce de Leche Bañado en Chocolate:</small>
                                 Sumérgete en una experiencia irresistible con nuestro alfajor artesanal: suave dulce de leche rodeado de intenso chocolate, un equilibrio perfecto de sabores en cada bocado.
                             </p>
-                            <p className='text-dark mt-4 fs-5'>
+                            <p className='text-dark mt-4 fs-5 text-center'>
                                 <small className='fs-3 text-danger'>Alfajor de Dulce de Leche Glaseado:</small>
                                 Déjate seducir por la suavidad de nuestro dulce de leche en un alfajor único: un delicado glaseado añade un toque de elegancia a esta delicia artesanal, una experiencia gourmet incomparable.
                             </p>
+                            <p className='text-dark mt-5 fs-5 text-center'>Lo puedes encontrar en cada kiosco de la provincia.</p>
                         </div>
                     </Col>
                     <Col md={6}>
@@ -28,21 +29,10 @@ const AlfatucV1 = () => {
                         </div>
                     </Col>
                     <Col>
-                        <div>
-                            <h2 className='text-center text-primary'>¿Donde nos podés encontrar?</h2>
-                            <div className='mt-4'>
-                                <p className='fs-5 text-center'>En <small className='text-danger fs-5'>San Miguel</small> nos podes encontar en los siguientes puntos de venta:</p>
-                                <p className='fs-5'>Puntos de venta San Miguel</p>
-                                <p className='fs-5 text-center'>En <small className='text-primary fs-5'>Yerba Buena</small> nos podes encontar en los siguientes puntos de venta:</p>
-                                <p className='fs-5'>Puntos de venta Yb</p>
-                            </div>
-                        </div>
-                        <div>
-                            <h2 className='text-center text-danger mt-5'>¿Comprar por mayor? También.</h2>
-                                <p className='mt-3 fs-5 text-center'>Este es el numero de contacto. No dudes en sacarte tus dudas.</p>
-                            <div className='mt-5 divwp'>
-                                <Col md={6}>
-                                <Button variant='success' className='al'>
+                            <div className=' divwp'>
+                                <p className='text-dark mt-4 fs-5 text-center'>Si prestas algún servicio/cafetería/kiosco y quieres incluír estos deliciosos alfajores en tu lista, te dejamos los números de nuestros revendedores</p>
+                                <Col md={2}>
+                                <Button variant='success' className='botonwp2'>
                                     <a href="https://api.whatsapp.com/send?phone=5493814666960&text=¡Hola! Me encantaría obtener más información sobre Alfatuc. ¿Podría ayudarme?" target="_blank" rel="noopener noreferrer">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" viewBox="0 0 48 48" style={{ cursor: 'pointer' }}>
                                             <path fill="#fff" fillRule="evenodd" d="M4.9,43.3l2.7-9.8C5.9,30.6,5,27.3,5,24C5,13.5,13.5,5,24,5c5.1,0,9.8,2,13.4,5.6	C41,14.2,43,18.9,43,24c0,10.5-8.5,19-19,19c0,0,0,0,0,0h0c-3.2,0-6.3-0.8-9.1-2.3L4.9,43.3z"></path>
@@ -52,9 +42,11 @@ const AlfatucV1 = () => {
                                             <path fill="#fff" fillRule="evenodd" d="M19.3,16c-0.4-0.8-0.7-0.8-1.1-0.8c-0.3,0-0.6,0-0.9,0	s-0.8,0.1-1.3,0.6c-0.4,0.5-1.7,1.6-1.7,4s1.7,4.6,1.9,4.9s3.3,5.3,8.1,7.2c4,1.6,4.8,1.3,5.7,1.2c0.9-0.1,2.8-1.1,3.2-2.3	c0.4-1.1,0.4-2.1,0.3-2.3c-0.1-0.2-0.4-0.3-0.9-0.6s-2.8-1.4-3.2-1.5c-0.4-0.2-0.8-0.2-1.1,0.2c-0.3,0.5-1.2,1.5-1.5,1.9	c-0.3,0.3-0.6,0.4-1,0.1c-0.5-0.2-2-0.7-3.8-2.4c-1.4-1.3-2.4-2.8-2.6-3.3c-0.3-0.5,0-0.7,0.2-1c0.2-0.2,0.5-0.6,0.7-0.8	c0.2-0.3,0.3-0.5,0.5-0.8c0.2-0.3,0.1-0.6,0-0.8C20.6,19.3,19.7,17,19.3,16z" clipRule="evenodd"></path>
                                         </svg>
                                     </a>
-                                    <p>Mayorista Sán Miguel</p>
+                                    <p>San Miguel</p>
                                 </Button>
-                                <Button variant='success' className='botonwp1'>
+                                </Col>
+                                <Col md={2}>
+                                <Button variant='success' className='botonwp2'>
                                     <a href="https://api.whatsapp.com/send?phone=5493816008225&text=¡Hola! Me encantaría obtener más información sobre Alfatuc. ¿Podría ayudarme?" target="_blank" rel="noopener noreferrer">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" viewBox="0 0 48 48" style={{ cursor: 'pointer' }}>
                                             <path fill="#fff" fillRule="evenodd" d="M4.9,43.3l2.7-9.8C5.9,30.6,5,27.3,5,24C5,13.5,13.5,5,24,5c5.1,0,9.8,2,13.4,5.6	C41,14.2,43,18.9,43,24c0,10.5-8.5,19-19,19c0,0,0,0,0,0h0c-3.2,0-6.3-0.8-9.1-2.3L4.9,43.3z"></path>
@@ -64,11 +56,10 @@ const AlfatucV1 = () => {
                                             <path fill="#fff" fillRule="evenodd" d="M19.3,16c-0.4-0.8-0.7-0.8-1.1-0.8c-0.3,0-0.6,0-0.9,0	s-0.8,0.1-1.3,0.6c-0.4,0.5-1.7,1.6-1.7,4s1.7,4.6,1.9,4.9s3.3,5.3,8.1,7.2c4,1.6,4.8,1.3,5.7,1.2c0.9-0.1,2.8-1.1,3.2-2.3	c0.4-1.1,0.4-2.1,0.3-2.3c-0.1-0.2-0.4-0.3-0.9-0.6s-2.8-1.4-3.2-1.5c-0.4-0.2-0.8-0.2-1.1,0.2c-0.3,0.5-1.2,1.5-1.5,1.9	c-0.3,0.3-0.6,0.4-1,0.1c-0.5-0.2-2-0.7-3.8-2.4c-1.4-1.3-2.4-2.8-2.6-3.3c-0.3-0.5,0-0.7,0.2-1c0.2-0.2,0.5-0.6,0.7-0.8	c0.2-0.3,0.3-0.5,0.5-0.8c0.2-0.3,0.1-0.6,0-0.8C20.6,19.3,19.7,17,19.3,16z" clipRule="evenodd"></path>
                                         </svg>
                                     </a>
-                                    <p>Mayorista Yerba Buena</p>
+                                    <p clas>Yerba Buena</p>
                                 </Button>
                                 </Col>
                             </div>
-                        </div>
                     </Col>
                                 <p className='fs-5 mt-5 text-center'>Seguinos en instagram <a href="https://www.instagram.com/alfajoresdeltucuman/" className='text-warning '>alfajoresdeltucuman</a></p>
                 </Row>
