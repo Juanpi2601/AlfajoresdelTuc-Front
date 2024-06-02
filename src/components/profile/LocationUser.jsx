@@ -206,7 +206,7 @@ const LocationUserV1 = ({ userId }) => {
                 )}
               </Form.Group>
               <Form.Group>
-                <Button className="mt-4 mb-5" variant="primary" type="submit">
+                <Button className="mt-4 mb-5" variant="warning" type="submit">
                   {editingAddress ? 'Guardar Dirección' : 'Crear Dirección'}
                 </Button>
                 {editingAddress && (

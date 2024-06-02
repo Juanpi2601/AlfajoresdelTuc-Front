@@ -13,11 +13,11 @@ const AlfatucV1 = () => {
                     <Col md={6} className='alfajorDescription'>
                         <div className='descripción1'>
                             <p className='text-dark fs-5 text-center'>
-                                <small className='fs-3 text-primary'>Alfajor de Dulce de Leche Bañado en Chocolate:</small>
+                                <small className='fs-3 text-primary alfajorclas'>Alfajor de Dulce de Leche Bañado en Chocolate:</small>
                                 Sumérgete en una experiencia irresistible con nuestro alfajor artesanal: suave dulce de leche rodeado de intenso chocolate, un equilibrio perfecto de sabores en cada bocado.
                             </p>
                             <p className='text-dark mt-4 fs-5 text-center'>
-                                <small className='fs-3 text-danger'>Alfajor de Dulce de Leche Glaseado:</small>
+                                <small className='fs-3 text-danger alfajorclas '>Alfajor de Dulce de Leche Glaseado:</small>
                                 Déjate seducir por la suavidad de nuestro dulce de leche en un alfajor único: un delicado glaseado añade un toque de elegancia a esta delicia artesanal, una experiencia gourmet incomparable.
                             </p>
                             <p className='text-dark mt-5 fs-5 text-center'>Lo puedes encontrar en cada kiosco de la provincia.</p>

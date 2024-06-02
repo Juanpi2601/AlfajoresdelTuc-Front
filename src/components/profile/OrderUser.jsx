@@ -29,7 +29,7 @@ const OrderUserV1 = () => {
 
   return (
     <div>
-      <h1>Mis pedidos</h1>
+      <h1 className='text-center'>Mis pedidos</h1>
       {currentOrders.length > 0 ? (
         <>
           <Table striped bordered hover>
