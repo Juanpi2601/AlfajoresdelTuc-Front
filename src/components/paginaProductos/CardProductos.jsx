@@ -11,9 +11,11 @@ const CardProductos = ({ formData }) => {
     const { addToCart } = useCartAuth();
     const { productos } = useProductAuth();
 
-    const handleAddToCart = (product) => {
-        addToCart(product, 1);
-        alertAdd("top-end", "success", "Su pedido fue agregado al carrito");
+    const handleAddToCart = async (product) => {
+        const success = await addToCart(product, 1);
+        if (success) {
+            alertAdd("top-end", "success", "Su pedido fue agregado al carrito");
+        }
     };
 
     return (

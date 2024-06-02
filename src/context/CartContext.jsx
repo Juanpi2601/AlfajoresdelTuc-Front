@@ -30,9 +30,9 @@ export const CartProvider = ({ children }) => {
                 calculateTotal(response.data.products);
             }
         } catch (error) {
-            alertCustom("Upps", "Ha ocurrido un error.", "error")
+            alertCustom("Upps", "Ha ocurrido un error al obtener el carrito.", "error")
         }
-    };
+    };    
     
     const fetchSavedAddresses = async () => {
         try {
@@ -58,13 +58,13 @@ export const CartProvider = ({ children }) => {
     const addToCart = async (product, quantity) => {
         try {
             if (!user) {
-                alertCustom("Upps", "Ha ocurrido un error.", "error")
-                return;
+                alertCustom("Upps", "Por favor inicia sesión o regístrate para agregar un producto.", "error");
+                return false;
             }
     
             if (quantity <= 0) {
-                alertCustom("Upps", "La cantidad debe ser mayor que cero.", "error")
-                return;
+                alertCustom("Upps", "La cantidad debe ser mayor que cero.", "error");
+                return false;
             }
     
             await axios.post("/cart/add", {
@@ -73,46 +73,47 @@ export const CartProvider = ({ children }) => {
                 quantity,
             });
             getCartItems();
+            return true;
         } catch (error) {
-            alertCustom("Upps", "Error al agregar el producto al carrito.", "error")
+            alertCustom("Upps", "Error al agregar el producto al carrito.", "error");
+            return false;
         }
     };
-    
-    
+
     const removeFromCart = async (productId) => {
         try {
             await axios.delete(`/cart/${user._id}/${productId}`);
             getCartItems();
         } catch (error) {
-            alertCustom("Upps", "Error al eliminar el producto del carrito.", "error")
+            alertCustom("Upps", "Error al eliminar el producto del carrito.", "error");
         }
     };
 
     const incrementQuantity = async (productId) => {
         try {
             if (!user) {
-                console.error("No hay usuario autenticado");
+                alertCustom("Upps", "No hay usuario autenticado.", "error");
                 return;
             }
             await axios.post(`/cart/increment/${user._id}/${productId}`);
             getCartItems();
         } catch (error) {
-            alertCustom("Upps", "El producto se encuentra sin stock.", "error")
+            alertCustom("Upps", "El producto se encuentra sin stock.", "error");
         }
     };
     
     const decrementQuantity = async (productId) => {
         try {
             if (!user) {
-                console.error("No hay usuario autenticado");
+                alertCustom("Upps", "No hay usuario autenticado.", "error");
                 return;
             }
             await axios.post(`/cart/decrement/${user._id}/${productId}`); 
             getCartItems();
         } catch (error) {
-            alertCustom("Upps", "Error al decrementar la cantidad del producto en el carrito.", "error")
+            alertCustom("Upps", "Error al decrementar la cantidad del producto en el carrito.", "error");
         }
-    };    
+    };
 
     return (
         <CartContext.Provider
