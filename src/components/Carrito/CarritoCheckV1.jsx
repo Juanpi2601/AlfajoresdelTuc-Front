@@ -49,7 +49,7 @@ const CarritoCheckV1 = () => {
         setPreferenceId(id);
         setShowMercadoPago(true);
       } catch (error) {
-        alertCustom("Upps", "Ha ocurrido un error.", "error")
+        alertCustom("Upps", "Ha ocurrido un error al iniciar el pago.", "error")
       }
     }
   };

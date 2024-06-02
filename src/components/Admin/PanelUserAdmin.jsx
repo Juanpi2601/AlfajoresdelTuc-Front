@@ -44,7 +44,7 @@ const PanelUserAdmin = () => {
         }
       );
     } catch (error) {
-      alertCustom('Upps', 'Ha ocurrido un error.', 'error');
+      alertCustom('Upps', 'Ha ocurrido un error al eliminar al usuario.', 'error');
     } finally {
       setIsLoading(false);
     }

@@ -27,7 +27,7 @@ export const ProductProvider = ({ children }) => {
                 alertCustom('Upps', 'El producto se creó, pero se recibió un código de estado inesperado.', 'warning');
             }
         } catch (error) {
-            const errorMessage = error.response?.data?.message || 'Ha ocurrido un error.';
+            const errorMessage = error.response?.data?.message || 'Ha ocurrido un error al crear el producto.';
             alertCustom('Upps', errorMessage, 'error');
         }
     };
@@ -85,7 +85,7 @@ export const ProductProvider = ({ children }) => {
         } catch (error) {
             setErrors(
                 error.response.data.message ||
-                alertCustom("Upps", "Ha ocurrido un error.", "error")
+                alertCustom("Upps", "Ha ocurrido un error al traer los productos.", "error")
             );
         }
     };

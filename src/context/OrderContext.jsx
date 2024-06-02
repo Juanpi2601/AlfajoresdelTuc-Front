@@ -25,7 +25,7 @@ export const OrderProvider = ({ children }) => {
             const response = await axios.get('/order/getAll');
             setOrders(response.data);
         } catch (error) {
-            alertCustom("Upps", "Ha ocurrido un error.", "error")
+            alertCustom("Upps", "Ha ocurrido un error al obtener la orden.", "error")
         }
     };
 

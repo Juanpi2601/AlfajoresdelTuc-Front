@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import './CarritoStyles.css';
 
 const NavbarCart = ({ id }) => {
-  const { removeFromCart, incrementQuantity, decrementQuantity, totalPrice, cartItems } = useCartAuth();
+  const { removeFromCart, incrementQuantity, decrementQuantity, totalPrice, cartItems = [] } = useCartAuth();
   const [show, setShow] = useState(false);
   const [animateItems, setAnimateItems] = useState(false);
   const navigate = useNavigate();
 
-  const totalItems = cartItems ? cartItems.reduce((acc, item) => acc + item.quantity, 0) : 0;
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   useEffect(() => {
     if (show && cartItems.length > 0) {
@@ -26,17 +26,11 @@ const NavbarCart = ({ id }) => {
   const handleConfirm = async () => {
     handleClose();
     const cartProducts = cartItems.map(item => ({ productId: item.productId._id, quantity: item.quantity }));
-    navigate('/CarritoCheck', { replace: true });
+    navigate('/CarritoCheck', { replace: true, state: { cartProducts } });
     location.reload();
-    try {
-      const response = await axios.post('/confirmarPedido', { cartProducts });
-      console.log(response.data.message);
-    } catch (error) {
-      console.error('Error al confirmar el pedido:', error);
-    }
   };
 
-  const filteredCartItems = cartItems.filter(item => item.quantity > 0);
+  const filteredCartItems = cartItems?.filter(item => item.quantity > 0);
 
   return (
     <div>
@@ -49,7 +43,7 @@ const NavbarCart = ({ id }) => {
           <Offcanvas.Title>Carrito de compra</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {!!filteredCartItems?.length ? (
+          {filteredCartItems.length ? (
             <>
               {filteredCartItems.map((item, index) => (
                 <div
@@ -102,4 +96,3 @@ const NavbarCart = ({ id }) => {
 };
 
 export default NavbarCart;
-
