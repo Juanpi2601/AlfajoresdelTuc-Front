@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import CardProductos from '../components/paginaProductos/CardProductos';
 import { useProductAuth } from '../context/ProductContext';
 import { Container, Row, Form, Button, Modal } from 'react-bootstrap';
+import LoadingScreen from "../components/loadingScreen/LoadingScreen";
 import Categorias from '../components/paginaProductos/Categorias';
 import "../components/paginaProductos/paginaProductos.css";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -29,6 +30,7 @@ const PaginaProductos = () => {
     }, [productos]);
 
     useEffect(() => {
+        setLoading(true);
         getAllProduct();
     }, []);
 
@@ -112,8 +114,8 @@ const PaginaProductos = () => {
                                 <option value="" disabled hidden>
                                     Filtrar por precio
                                 </option>
-                                <option value="asc">menor - mayor</option>
-                                <option value="desc">mayor - menor</option>
+                                <option value="asc">Menor - Mayor</option>
+                                <option value="desc">Mayor - Menor</option>
                             </Form.Select>
 
                             <Categorias className="" categoria={['Todas las categorias', ...todasLasCategorias]} handleCategoriaSeleccionada={setCategoriaSeleccionada} />
