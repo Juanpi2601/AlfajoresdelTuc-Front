@@ -12,6 +12,8 @@ const OrderUserV1 = () => {
 
   const userOrders = orders.filter(order => order.userId === user._id);
 
+  userOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('es-AR', options);
