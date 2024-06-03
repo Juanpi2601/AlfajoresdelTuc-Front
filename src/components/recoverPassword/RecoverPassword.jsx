@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingScreen from "../../components/loadingScreen/LoadingScreen";
@@ -19,7 +19,6 @@ const RecoverPassword = () => {
         navigate("/login");
         reset();
     } catch (error) {
-        console.error('Error al enviar el formulario:', error);
         alertCustom('Error', 'Hubo un error al enviar el formulario', 'error');
     } finally {
         setIsLoading(false);
@@ -27,10 +26,10 @@ const RecoverPassword = () => {
 };
 
   return (
-    <Container className="mt-2 w-75">
-      <h1 className="text-center contacto">Recuperar Contraseña</h1>
-      <Row className="justify-content-center mt-5">
-        <Col xs={12}>
+    <Container className="bg-white mt-5 w-75 border py-5">
+      <Row className="justify-content-center">
+        <Col xs={12} md={8} lg={6}>
+      <h2 className="text-center contacto mb-3">Recuperar Contraseña</h2>
           <div className="formulario-contacto">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-3">
@@ -64,9 +63,9 @@ const RecoverPassword = () => {
                 {errors?.email && <div className="invalid-feedback">{errors.email.message}</div>}
               </div>
               {isLoading && <LoadingScreen />}
-              <button type="submit" className="btn btn-primary btnEnviarCont">
+              <Button type="submit" variant="warning" className="btnEnviarCont">
                 Enviar
-              </button>
+              </Button>
             </form>
           </div>
         </Col>

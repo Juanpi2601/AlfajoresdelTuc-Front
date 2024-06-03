@@ -4,21 +4,25 @@ import { useOrderAuth } from '../../context/OrderContext';
 import PaginationRounded from "../pagination/Pagination";
 import { alertCustom } from '../../utils/alertCustom';
 import DeleteIcon from '@mui/icons-material/Delete';
+import LoadingScreen from "../../components/loadingScreen/LoadingScreen";
 
 const AdminPanel = () => {
-  const { orders, updateOrderStatus, fetchOrders, deleteOrder } = useOrderAuth(); // Agregar deleteOrder
+  const { orders, updateOrderStatus, fetchOrders, deleteOrder } = useOrderAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [trackingNumbers, setTrackingNumbers] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleUpdateOrderStatus = async (newStatus, order) => {
     try {
+      setIsLoading(true);
       const updatedOrder = { ...order, status: newStatus };
       await updateOrderStatus(order._id, newStatus, updatedOrder, trackingNumbers[order._id]);
       setTrackingNumbers(prevState => ({ ...prevState, [order._id]: '' }));
       alertCustom('Éxito', 'Estado actualizado exitosamente.', 'success');
       fetchOrders();
     } catch (error) {
+      setIsLoading(false);
       alertCustom('Error', 'Ha ocurrido un error al actualizar la orden', 'error');
     }
   };
@@ -37,21 +41,22 @@ const AdminPanel = () => {
     setTrackingNumbers(prevState => ({ ...prevState, [orderId]: value }));
   };
 
-  const totalPages = Math.ceil(orders.length / itemsPerPage);
+  const sortedOrders = orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  const totalPages = Math.ceil(sortedOrders.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentOrders = orders.slice(indexOfFirstItem, indexOfLastItem);
+  const currentOrders = sortedOrders.slice(indexOfFirstItem, indexOfLastItem);
 
   const handleChangePage = (event, value) => {
     setCurrentPage(value);
   };
 
   return (
-    <div>
-      <h1>Panel de Administrador</h1>
-      <h2>Órdenes:</h2>
+    <div className="table-responsive">
+      <h3 className='text-center'>Administración de Ordenes</h3>
       {currentOrders.length > 0 ? (
-        <Table striped bordered hover>
+        <Table striped bordered hover responsive>
           <thead>
             <tr>
               <th>Usuario</th>
