@@ -33,9 +33,9 @@ const RegisterUser = () => {
   const handleShow = () => setShow(true);
 
   return (
-    <Container className="bg-white mt-5 w-50 border py-5">
+    <Container className="bg-white mt-5 w-75 border py-5">
       <Row className="justify-content-center">
-        <Col xs={12} md={12} lg={6}>
+        <Col xs={12} md={8} lg={6}>
           {registerErrors.map((error, i) => (
             <Alert key={i} variant="danger">
               {error}
@@ -256,23 +256,27 @@ const RegisterUser = () => {
               <span className="text-danger">{errors.checkbox.message}</span>
             )}
           </Form.Group>
-          <Button
-            variant="warning"
-            type="submit"
-            className="btnRegister mt-3"
-          >
-            Registrarse
-          </Button>
-        </Form>
-        <p className="mt-2 d-flex justify-content-between text-black mt-5">
-          Ya tienes una cuenta?
-          <Link to="/login" className="text-dark iniciarSesion">
-            Iniciar sesión
-          </Link>
-        </p>
-      </Col>
-    </Row>
-    </Container >
+            <Button
+              variant="warning"
+              type="submit"
+              className="btnRegister mt-3"
+            >
+              Registrarse
+            </Button>
+          </Form>
+            <Row className="mt-4">
+              <Col xs={12} md={10} lg={6} className="text-black">
+                Ya tienes una cuenta?
+              </Col>
+              <Col xs={12} md={10} lg={6} className="text-md-right">
+                <Link to="/login" className="text-dark iniciarSesion">
+                  Iniciar sesión
+                </Link>
+              </Col>
+            </Row>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

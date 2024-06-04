@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
 import PassText from '../passText/PassText';
-import LoginGoogle from './LoginGoogle';
+// import LoginGoogle from './LoginGoogle';
 
 const LoginV1 = () => {
 	const { register, handleSubmit, formState: { errors } } = useForm();
@@ -20,9 +20,9 @@ const LoginV1 = () => {
   });
 
   return (
-    <Container className="bg-white mt-5 w-75 border py-5">
-      <Row >
-        <Col xs={12} className='mx-auto'>
+    <Container className="bg-white mt-5 w-75 border py-5" >
+      <Row className="justify-content-center">
+        <Col  xs={12} md={6} lg={6}>
         {signinErrors && signinErrors.map((error, i) => (
           <Alert key={i} variant="danger">
             {error}
@@ -74,19 +74,25 @@ const LoginV1 = () => {
                 label="Mostrar contraseña"
               />
             </Form.Group>
-            <p>o</p>
-            <LoginGoogle/>
-            <Link to="/forgot-password" className="text-black">¿Olvidaste tu contraseña?</Link>
-            <Button variant="warning" type="submit" className="btnLogin mt-2 mb-3">
-              Iniciar sesión
-            </Button>
+            {/* <p>o</p>
+            <LoginGoogle/> */}
+           <div>
+              <Button variant="warning" type="submit" className="btnLogin mt-2">
+                Iniciar sesión
+              </Button>
+              <Link to="/forgot-password" className="text-black mt-3 d-block">¿Olvidaste tu contraseña?</Link>
+            </div>
           </Form>
-          <p className="mt-2 d-flex justify-content-between text-black">
-            Todavia no tienes cuenta?
-            <Link to="/register" className="btnReg text-dark ">
-              Registrate
-            </Link>
-          </p>
+          <Row className="mt-3">
+            <Col xs={12} md={12} lg={6} className="text-black">
+              Todavía no tienes cuenta?
+            </Col>
+            <Col xs={12} md={12} lg={6} className="text-md-right">
+              <Link to="/register" className="btnReg text-dark">
+                Regístrate
+              </Link>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Container>
