@@ -72,8 +72,7 @@ ul li {
 
 .tucumanTurismo {
     width: 100px;
-    margin-bottom: 20px;
-    margin-right: 30px;
+    margin: 0px 30px 20px 0px;
 }
 
 .ft2 {
@@ -117,6 +116,8 @@ ul li {
 
     .tucumanTurismo {
         width: 80px;
+        margin: 0px;
+        margin-bottom: 20px;
     }
 
     .ft2 {

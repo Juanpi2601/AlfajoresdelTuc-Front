@@ -187,7 +187,7 @@ const RegisterUser = () => {
                 className="text-black mt-3"
                 type="checkbox"
                 label={
-                  <span>
+                  <span style = {{ cursor: 'pointer' }}>
                     Acepto los <a onClick={handleShow} className='text-decoration'>Términos y Condiciones</a>
                   </span>
                 }
@@ -202,7 +202,7 @@ const RegisterUser = () => {
                 <span className="text-danger">{errors.checkbox.message}</span>
               )}
             </Form.Group>
-            <Modal show={show} onHide={handleClose} backdrop="static">
+            <Modal show={show} onHide={handleClose} backdrop="static" >
               <Modal.Header closeButton>
                 <Modal.Title>Términos y Condiciones</Modal.Title>
               </Modal.Header>
