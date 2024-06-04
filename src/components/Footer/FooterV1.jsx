@@ -54,9 +54,9 @@ const FooterV1 = () => {
         </div>
         <div className='ft1'>
           <p className='text-center'>
-            <a onClick={handleShow} className='text-decoration'> <small>Términos y Condicones</small></a>
+            <a onClick={handleShow} className='text-decoration'> <small style={{ cursor: 'pointer' }}>Términos y Condicones</small></a>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} backdrop="static" >
               <Modal.Header closeButton>
                 <Modal.Title>Términos y Condiciones</Modal.Title>
               </Modal.Header>
@@ -119,6 +119,5 @@ const FooterV1 = () => {
   )
 
 }
-
 
 export default FooterV1
