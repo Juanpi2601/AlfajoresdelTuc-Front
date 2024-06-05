@@ -1,13 +1,14 @@
 import React from 'react'
 import '../Alfatuc/alfatuc.css'
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Instagram } from '@mui/icons-material'
 
 const AlfatucV1 = () => {
     return (
         <>
             <Container>
                 <div>
-                    <img src="src/assets/LOGO ALFATUC.png" alt="LogoAlfatuc" className='img8' />
+                    <img src="https://i.postimg.cc/FFyBT9tn/LOGO-ALFATUC.png" alt="LogoAlfatuc" className='img8' />
                 </div>
                 <Row className="mt-1 align-items-center">
                     <Col md={6} className='alfajorDescription'>
@@ -25,7 +26,7 @@ const AlfatucV1 = () => {
                     </Col>
                     <Col md={6}>
                         <div className='text-center'>
-                            <img src="/src/assets/AlfatucBYN.png" alt="AlfatucBlancoyNegro" className='imgAlfatuc' />
+                            <img src="https://i.postimg.cc/25tsNTTc/Alfatuc-BYN.png" alt="AlfatucBlancoyNegro" className='imgAlfatuc' />
                         </div>
                     </Col>
                     <Col>
@@ -62,7 +63,7 @@ const AlfatucV1 = () => {
                         </div>
                     </Col>
                 </Row>
-                <p className='fs-5 mt-5 text-center'>Seguinos en instagram <a href="https://www.instagram.com/alfajoresdeltucuman/" className='text-warning'>alfajoresdeltucuman</a></p>
+                <p className='fs-5 mt-5 text-center'> Seguinos en <Instagram></Instagram> <a href="https://www.instagram.com/alfajoresdeltucuman/" className='text-warning'>alfajoresdeltucuman</a></p>
             </Container>
         </>
     )

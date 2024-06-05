@@ -11,7 +11,7 @@ const AboutV1 = () => {
                         <h2 className='fondoImagen'>Sobre Nosotros</h2>
                     </div>
                     <Container className='bg-light '>
-                        <img src="/src/assets/LogoCasaHistoricaColor2.png" alt="LogoAlfajoresDelTucuman" className='img4' />
+                        <img src="https://i.postimg.cc/PJW9ZHH9/Logo-Casa-Historica-Color2.png" alt="LogoAlfajoresDelTucuman" className='img4' />
                     <div className='p-3'>
                         <div className='sobreNosotros'>
                             <p>

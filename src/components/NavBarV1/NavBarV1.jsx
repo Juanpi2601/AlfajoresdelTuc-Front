@@ -24,7 +24,7 @@ const NavBarV1 = ({ producto }) => {
           <Container>
             <Col sm={2} md={2} lg={2}>
               <Link to="/">
-                <img className="img-fluid imgNav" src="/src/assets/LetrasDelTucuman.png" alt="" />
+                <img className="img-fluid imgNav" src="https://i.postimg.cc/1XFPjbQr/Letras-Del-Tucuman.png" alt="Alfajores-Del-Tucuman-Letras" />
               </Link>
             </Col>
             <Col className=" d-none d-lg-block">
