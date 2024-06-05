@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '/src/components/Footer/footer.css'
 import { Container, Row, Button, Modal } from 'react-bootstrap'
+import { Facebook, Instagram } from '@mui/icons-material'
 
 const FooterV1 = () => {
   const [show, setShow] = useState(false);
@@ -13,7 +14,7 @@ const FooterV1 = () => {
       <Row>
         <div className='ft1 display-flex mt-4'>
           <div className='logo5 mt-3'>
-            <span><img src="/src/assets/LogoCasaHistorica.png" alt="Alfajores-Del-Tucuman" className='img7' /></span>
+            <span><img src="https://i.postimg.cc/tJjm9c65/Copia-de-Logo-Casa-Historica.png" alt="Alfajores-Del-Tucuman" className='img7' /></span>
           </div>
           <div className='secsion1 mt-5'>
             <div className='footer-section'>
@@ -24,7 +25,7 @@ const FooterV1 = () => {
                 <li><a href="/locales">Novedades</a></li>
                 <li><a href="/locales">Sucursales</a></li>
                 <li> <a href="/about">Sobre Nosotros</a></li>
-                <li><a href="/alfatuc"><img src="/src/assets/LOGO ALFATUC.png" alt="Alfatuc" className='alfatuc' /></a></li>
+                <li><a href="/alfatuc"><img src="https://i.postimg.cc/FFyBT9tn/LOGO-ALFATUC.png" alt="Alfatuc" className='alfatuc' /></a></li>
               </ul>
             </div>
             <div>
@@ -39,18 +40,18 @@ const FooterV1 = () => {
             <div>
               <h2 className='title3'>Redes Sociales</h2>
               <ul className='text-center list-unstyled'>
-                <li> <img src="/src/assets/Facebook.png" alt="facebook" className='facebook p-1 m-1' /> <a target="_blank" href="https://www.facebook.com/alfajores.deltucuman">Facebook</a> </li>
-                <li> <img src="/src/assets/instagram.png" alt="Instagram" className='facebook p-1 m-1' /> <a target="_blank" href="https://www.instagram.com/alfajoresdeltucuman/">Instagram</a></li>
+                <li> <Facebook></Facebook> <a target="_blank" href="https://www.facebook.com/alfajores.deltucuman">Facebook</a> </li>
+                <li> <Instagram></Instagram> <a target="_blank" href="https://www.instagram.com/alfajoresdeltucuman/">Instagram</a></li>
 
               </ul>
             </div>
             <div className='mt-3'>
-              <img src="/src/assets/Tucuman-TieneMuchoParaVos.png" alt="tucumantieneMucho" className='tucumantieneMucho' />
+              <img src="https://i.postimg.cc/Bn67ZHjd/Tucuman-Tiene-Mucho-Para-Vos.png" alt="tucumantieneMucho" className='tucumantieneMucho' />
             </div>
           </div>
         </div>
         <div className='ft2 ft1'>
-          <a href='https://marcatucuman.com.ar/'><img src="/src/assets/TucumanTurismo.png" alt="TucumanTurismo" className='tucumanTurismo align-end' /></a>
+          <a href='https://marcatucuman.com.ar/'><img src="https://i.postimg.cc/0yBWzjmr/Tucuman-Turismo.png" alt="TucumanTurismo" className='tucumanTurismo align-end' /></a>
         </div>
         <div className='ft1'>
           <p className='text-center'>

@@ -42,9 +42,9 @@ const PaginaPrincipalV1 = () => {
                         <section className='mt-5'>
                             <a href="/products">
                                 <Card style={{ width: '18rem' }} className='card1 cards3'>
-                                    <Card.Img variant="top" src="/src/assets/E-Comerce.png" className='img1' />
+                                    <Card.Img variant="top" src="https://i.postimg.cc/6qfbqhLN/E-comerce.png" className='img1' />
                                     <div className='cardText'>
-                                        <h4 className='text1'><img src="/src/assets/Nuestro-E-comerce.png" alt="E-Comerce" className='img3' /></h4>
+                                        <h4 className='text1'><img src="https://i.postimg.cc/zGX6L4c2/Nuestro-E-Comerce.png" alt="E-Comerce" className='img3' /></h4>
                                     </div>
                                 </Card>
                             </a>
@@ -52,9 +52,9 @@ const PaginaPrincipalV1 = () => {
                         <section className='mt-5'>
                             <a href="/locales">
                             <Card style={{ width: '18rem' }} className='card1 cards3'>
-                                <Card.Img variant="top" src="/src/assets/Sucursales.png" className='img1' />
+                                <Card.Img variant="top" src="https://i.postimg.cc/WbsfKQTp/Sucursales.png" className='img1' />
                                 <div className='cardText'>
-                                    <h4 className='text1'><img src="/src/assets/Sucursales2.png" alt="Sucursales solo" className='img2' /></h4>
+                                    <h4 className='text1'><img src="https://i.postimg.cc/HkZKbBGY/Sucursales2.png" alt="Sucursales solo" className='img2' /></h4>
                                 </div>
                             </Card>
                             </a>
@@ -62,9 +62,9 @@ const PaginaPrincipalV1 = () => {
                         <section className='mt-5'>
                             <a href="/novedad">
                             <Card style={{ width: '18rem' }} className='card1 cards3'>
-                                <Card.Img variant="top" src="/src/assets/Novedades.png" className='img1' />
+                                <Card.Img variant="top" src="https://i.postimg.cc/NftWtK7c/Novedades.png" className='img1' />
                                 <div className='cardText'>
-                                    <h4 className='text1'><img src="/src/assets/Novedades2.png" alt="Sucursales solo" className='img6' /></h4>
+                                    <h4 className='text1'><img src="https://i.postimg.cc/wTknj90s/Novedades2.png" alt="Sucursales solo" className='img6' /></h4>
                                 </div>
                             </Card>
                             </a>
@@ -72,7 +72,7 @@ const PaginaPrincipalV1 = () => {
                         <section className='mt-5'>
                             <a href="/alfatuc">
                             <Card style={{ width: '18rem' }} className='card1 cards3'>
-                                <Card.Img variant="top" src="/src/assets/conoceAlfatuc.png" className='img1' />
+                                <Card.Img variant="top" src="https://i.postimg.cc/brc4sJ71/conoce-Alfatuc.png" className='img1' />
                             </Card>
                             </a>
                         </section>
