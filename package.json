@@ -1,6 +1,7 @@
 {
   "name": "alfa-front",
   "private": true,
+  "homepage": "https://alfajoresdeltucuman.com.ar",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -18,11 +19,13 @@
     "@react-oauth/google": "^0.12.1",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "gh-pages": "^6.1.1",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.3",
+    "react-player": "^2.16.0",
     "react-router-dom": "^6.23.0",
     "sweetalert2": "^11.10.8"
   },
