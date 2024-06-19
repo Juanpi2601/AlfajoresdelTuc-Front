@@ -19,20 +19,20 @@ const PaginaPrincipalV1 = () => {
                 <Row>
                     <section className='section1 mt-5 p-0'>
                         <Carousel>
-                            <Carousel.Item interval={10500}>
+                            <Carousel.Item interval={1050}>
                                 <video ref={videosRefs[0]} autoPlay muted className='video1 w-100 ' onEnded={() => handleVideoEnd(0)}>
-                                    <source src='/assets/alfajor1.mp4' type='video/mp4' />
+                                    <source src='/src/assets/alfajor1.mp4' type='video/mp4' />
                                 </video>
                             </Carousel.Item>
-                            <Carousel.Item interval={6000}>
+                            <Carousel.Item interval={600}>
                                 <video ref={videosRefs[1]} autoPlay muted className='video1 w-100' onEnded={() => handleVideoEnd(1)} >
-                                    <source src='/assets/Colacion.mp4' type='video/mp4' />
+                                    <source src='/src/assets/Colacion.mp4' type='video/mp4' />
                                 </video>
 
                             </Carousel.Item>
-                            <Carousel.Item interval={11000}>
+                            <Carousel.Item interval={1100}>
                                 <video ref={videosRefs[2]} autoPlay muted className='video1 w-100' onEnded={() => handleVideoEnd(2)}>
-                                    <source src='/assets/Conitos.mp4' type='video/mp4' />
+                                    <source src='/src/assets/Conitos.mp4' type='video/mp4' />
                                 </video>
                             </Carousel.Item>
                         </Carousel>
