@@ -59,7 +59,7 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await axios.post("user/login", user);
       const token = res.data.token;
-      localStorage.setItem("token", token);
+      Cookies.set("token", token, { expires: 1, secure: true }); 
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
@@ -68,9 +68,9 @@ export const UserProvider = ({ children }) => {
         "Upps",
         "Ocurrió un error al iniciar sesión. Por favor, intente nuevamente.",
         "error"
-      );
-    }
-  };
+      );
+    }
+  };
   
 
   const logout = () => {
