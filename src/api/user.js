@@ -1,15 +1,28 @@
 import axios from "./axios";
 
-export const registerRequest = (user) => axios.post(`user/create`, user);
+const axiosConfig = {
+  headers: {
+    'Content-Type': 'application/json',
+    "Accept": "/",                       
+    "Cache-Control": "no-cache",        
+    "Cookie": document.cookie            
+  },
+  withCredentials: true,                 
+};
 
+export const registerRequest = (user) => {
+  return axios.post('user/create', user, axiosConfig);  
+};
 
 export const verifyTokenRequest = async () => {
   try {
-    const res = await axios.post('user/verify-token'); 
+    const res = await axios.post('user/verify-token', {}, axiosConfig);  
     return res;
   } catch (error) {
     throw error;
   }
 };
-  
-export const updatePasswordRequest = (user) => axios.patch('user/update-password', user);
+
+export const updatePasswordRequest = (user) => {
+  return axios.patch('user/update-password', user, axiosConfig);  
+}
