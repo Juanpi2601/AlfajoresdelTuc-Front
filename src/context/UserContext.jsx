@@ -57,9 +57,9 @@ export const UserProvider = ({ children }) => {
 
   const signin = async (user) => {
     try {
-      const res = await axios.post("user/login", user);
+      const res = await axios.post("/user/login", user);
       const token = res.data.token;
-      Cookies.set("token", token, { expires: 1, secure: true }); 
+      document.cookie = `token=${token}; path=/`; 
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
@@ -68,13 +68,13 @@ export const UserProvider = ({ children }) => {
         "Upps",
         "Ocurrió un error al iniciar sesión. Por favor, intente nuevamente.",
         "error"
-      );
-    }
-  };
+      );
+    }
+  };
   
 
   const logout = () => {
-    localStorage.removeItem("token"); 
+    document.cookie = "token=; Max-Age=0; path=/"; 
     setIsAuthenticated(false);
     setUser(null);
   };
