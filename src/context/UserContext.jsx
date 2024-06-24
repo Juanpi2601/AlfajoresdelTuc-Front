@@ -113,19 +113,22 @@ export const UserProvider = ({ children }) => {
     const checkLogin = async () => {
       try {
         const res = await verifyTokenRequest();
-        if (!res.data) {
+        if (res.status === 200) {
+          const normalizedUser = normalizeUser(res.data);
+          setIsAuthenticated(true);
+          setUser(normalizedUser);
+          console.log("Usuario autenticado:", normalizedUser);
+        } else {
           setIsAuthenticated(false);
-          setLoading(false);
-          return;
+          setUser(null);
+          console.log("Usuario no autenticado");
         }
-        const normalizedUser = normalizeUser(res.data);
-        setIsAuthenticated(true);
-        setUser(normalizedUser);
         setLoading(false);
       } catch (error) {
         setIsAuthenticated(false);
         setUser(null);
         setLoading(false);
+        console.log("Error al verificar el token:", error);
       }
     };
     checkLogin();
