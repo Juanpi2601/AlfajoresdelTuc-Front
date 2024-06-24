@@ -111,7 +111,7 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       if (!token) {
         setIsAuthenticated(false);
         setLoading(false);
