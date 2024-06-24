@@ -75,7 +75,7 @@ export const UserProvider = ({ children }) => {
   
 
   const logout = () => {
-    axios.post("/user/logout"); 
+    axios.post("/user/logout", {}, axiosConfig);
     setIsAuthenticated(false);
     setUser(null);
   };
