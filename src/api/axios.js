@@ -9,17 +9,5 @@ const instance = axios.create({
     "Content-Type": "application/json",
   },
 });
-
-instance.interceptors.request.use(
-  (config) => {
-    const token = Cookies.get("token");
-    if (token) {
-      config.headers["Cookie"] = `token=${token}`;
-      config.headers["cookie"] = `token=${token}`;
-    }
-    return config;
-  },
-  (error) => error
-);
-
+//
 export default instance;
