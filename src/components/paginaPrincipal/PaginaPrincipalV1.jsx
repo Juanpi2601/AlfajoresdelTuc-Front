@@ -21,18 +21,18 @@ const PaginaPrincipalV1 = () => {
                         <Carousel>
                             <Carousel.Item interval={1050}>
                                 <video ref={videosRefs[0]} autoPlay muted className='video1 w-100 ' onEnded={() => handleVideoEnd(0)}>
-                                    <source src='/src/assets/alfajor1.mp4' type='video/mp4' />
+                                    <source src='https://drive.google.com/file/d/1DJrap7NhTbblTBFg8LbUv13oII90PZFQ/view?usp=drive_link' type='video/mp4' />
                                 </video>
                             </Carousel.Item>
                             <Carousel.Item interval={600}>
                                 <video ref={videosRefs[1]} autoPlay muted className='video1 w-100' onEnded={() => handleVideoEnd(1)} >
-                                    <source src='/src/assets/Colacion.mp4' type='video/mp4' />
+                                    <source src='https://drive.google.com/file/d/1oEgtF_rrEus_sKvRWtbzhSgHzRCf2ivS/view?usp=drive_link' type='video/mp4' />
                                 </video>
 
                             </Carousel.Item>
                             <Carousel.Item interval={1100}>
                                 <video ref={videosRefs[2]} autoPlay muted className='video1 w-100' onEnded={() => handleVideoEnd(2)}>
-                                    <source src='/src/assets/Conitos.mp4' type='video/mp4' />
+                                    <source src='https://drive.google.com/file/d/10HVLckSaHZ15ufu55i9kFDEfhzfR_tQl/view?usp=drive_link' type='video/mp4' />
                                 </video>
                             </Carousel.Item>
                         </Carousel>
