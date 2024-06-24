@@ -37,9 +37,9 @@ const CarritoCheckV1 = () => {
             currency_id: 'ARS',
           })),
           back_urls: {
-            success: 'http://localhost:5173',
-            failure: 'http://localhost:5173',
-            pending: 'http://localhost:5173',
+            success: 'https://alfajoresdeltucuman.netlify.app',
+            failure: 'https://alfajoresdeltucuman.netlify.app',
+            pending: 'https://alfajoresdeltucuman.netlify.app',
           },
           auto_return: 'approved',
         };
