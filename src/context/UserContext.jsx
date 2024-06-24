@@ -58,6 +58,8 @@ export const UserProvider = ({ children }) => {
   const signin = async (user) => {
     try {
       const res = await axios.post("user/login", user);
+      const token = res.data.token;
+      sessionStorage.setItem("token", token);
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
@@ -69,12 +71,14 @@ export const UserProvider = ({ children }) => {
       );
     }
   };
+  
 
   const logout = () => {
-    Cookies.remove("token");
+    sessionStorage.removeItem("token"); 
     setIsAuthenticated(false);
     setUser(null);
   };
+  
 
   const updatePassword = async (data) => {
     try {
@@ -107,7 +111,7 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const token = Cookies.get("token");
+      const token = sessionStorage.getItem("token");
       if (!token) {
         setIsAuthenticated(false);
         setLoading(false);
@@ -131,7 +135,8 @@ export const UserProvider = ({ children }) => {
       }
     };
     checkLogin();
-  }, []);
+  }, [userChangeFlag]);
+  
 
   return (
     <UserContext.Provider
