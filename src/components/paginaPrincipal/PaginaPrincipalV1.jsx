@@ -21,17 +21,17 @@ const PaginaPrincipalV1 = () => {
                 <Row>
                     <section className='section1 mt-5 p-0'>
                         <Carousel>
-                            <Carousel.Item interval={1050}>
+                            <Carousel.Item interval={10500}>
                                 <video ref={videosRefs[0]} autoPlay muted className='video1 w-100 ' onEnded={() => handleVideoEnd(0)}>
                                     <source src={video1} type='video/mp4' />
                                 </video>
                             </Carousel.Item>
-                            <Carousel.Item interval={600}>
+                            <Carousel.Item interval={10000}>
                                 <video ref={videosRefs[1]} autoPlay muted className='video1 w-100' onEnded={() => handleVideoEnd(1)}>
                                     <source src={video2} type='video/mp4' />
                                 </video>
                             </Carousel.Item>
-                            <Carousel.Item interval={1100}>
+                            <Carousel.Item interval={11000}>
                                 <video ref={videosRefs[2]} autoPlay muted className='video1 w-100' onEnded={() => handleVideoEnd(2)}>
                                     <source src={video3} type='video/mp4' />
                                 </video>
