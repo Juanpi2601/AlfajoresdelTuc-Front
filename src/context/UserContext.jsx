@@ -111,14 +111,8 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setIsAuthenticated(false);
-        setLoading(false);
-        return setUser(null);
-      }
       try {
-        const res = await verifyTokenRequest(token);
+        const res = await verifyTokenRequest();
         if (!res.data) {
           setIsAuthenticated(false);
           setLoading(false);
