@@ -61,10 +61,6 @@ export const UserProvider = ({ children }) => {
       const token = res.data.token;
       document.cookie = `token=${token}; path=/; SameSite=Strict`; 
       console.log({ token, "document.cookie": document.cookie });
-      axios.defaults.headers.common["Cookie"] = `token=${token}`;
-      axios.defaults.headers.common["cookie"] = `token=${token}`;
-      
-      console.log({ token, "document.cookie": document.cookie });
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
