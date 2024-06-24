@@ -59,7 +59,7 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
-      localStorage.setItem("token", token); 
+      document.cookie = `token=${token}; path=/`; 
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
@@ -74,7 +74,7 @@ export const UserProvider = ({ children }) => {
   
 
   const logout = () => {
-    localStorage.removeItem("token"); 
+    document.cookie = "token=; Max-Age=0; path=/"; 
     setIsAuthenticated(false);
     setUser(null);
   };
