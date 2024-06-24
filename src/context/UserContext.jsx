@@ -60,7 +60,7 @@ export const UserProvider = ({ children }) => {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
       document.cookie = `token=${token}; path=/; SameSite=Strict`; 
-      console.log({token, "document.cookie":document.cookie});
+      console.log({ token, "document.cookie": document.cookie });
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
