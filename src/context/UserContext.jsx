@@ -4,8 +4,7 @@ import axios from "../api/axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 export const UserContext = createContext();
-import { alertCustom,alertCustomWithTimerInterval } from "../utils/alertCustom.js";
-// import { updatePasswordRequest } from "../api/user";
+import { alertCustom, alertCustomWithTimerInterval } from "../utils/alertCustom.js";
 
 export const useAuth = () => {
   const context = useContext(UserContext);
@@ -30,8 +29,6 @@ export const UserProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userChangeFlag, setUserChangeFlag] = useState(false);
-  const [cart, setCart] = useState([]);
-
 
   const triggerUserUpdate = () => {
     setUserChangeFlag((prevFlag) => !prevFlag);
@@ -59,7 +56,7 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
-      document.cookie = `token=${token}; path=/; SameSite=Strict`; 
+      document.cookie = `token=${token}; path=/; SameSite=Strict`;
       console.log({ token, "document.cookie": document.cookie });
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
@@ -72,23 +69,21 @@ export const UserProvider = ({ children }) => {
       );
     }
   };
-  
 
   const logout = () => {
     axios.post("/user/logout", {}, axiosConfig);
     setIsAuthenticated(false);
     setUser(null);
   };
-  
 
   const updatePassword = async (data) => {
     try {
       setLoading(true);
-      await updatePasswordRequest(data); 
+      await updatePasswordRequest(data);
       alertCustomWithTimerInterval('¡Éxito!', 'Contraseña actualizada correctamente. Inicia sesión nuevamente.', 'success');
       const alertTimeout = setTimeout(() => {
         logout();
-      }, 2000); 
+      }, 2000);
       return () => clearTimeout(alertTimeout);
     } catch (error) {
       setErrors(["Error al actualizar la contraseña."]);
@@ -99,7 +94,7 @@ export const UserProvider = ({ children }) => {
       );
       setLoading(false);
     }
-  };   
+  };
 
   useEffect(() => {
     if (errors.length > 0) {
@@ -134,7 +129,6 @@ export const UserProvider = ({ children }) => {
     };
     checkLogin();
   }, [userChangeFlag]);
-  
 
   return (
     <UserContext.Provider
