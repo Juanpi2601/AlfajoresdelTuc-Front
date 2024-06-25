@@ -5,6 +5,7 @@ const axiosConfig = {
     'Content-Type': 'application/json',
     "Accept": "/",                       
     "Cache-Control": "no-cache",        
+              
   },
   withCredentials: true,                 
 };

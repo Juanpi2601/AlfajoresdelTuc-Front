@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import Login from './pages/Login';
@@ -27,59 +27,50 @@ import LocationUser from './pages/LocationUser';
 import OrderUser from './pages/OrderUser';
 import ProtectedRouteAdmin from './protectecRoute/ProtectedRouteAdmin';
 import RecoverPassword from './pages/RecoverPassword';
-import SectionNovedades from './pages/SectionNovedades';
-import Locales from './pages/Locales';
+import SectionNovedades from './pages/SectionNovedades'
+import Locales from './pages/Locales'
 import Alfatuc from './pages/Alfatuc';
-import axios from './api/axios';
-import Cookies from 'js-cookie';
 
 function App() {
-  useEffect(() => {
-    const token = Cookies.get('token');
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
-  }, []);
-
   return (
     <BrowserRouter>
       <UserProvider>
         <ProductProvider>
           <CartProvider>
-            <OrderProvider>
-              <NavBarV1 />
-              <main>
-                <Routes>
-                  <Route path='/' element={<PaginaPrincipal />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/products" element={<PaginaProductos />} />
-                  <Route path="/products/:id" element={<DetallesProductos />} />
-                  <Route path="/locales" element={<Locales />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/contact" element={<ContactPage />} />
-                  <Route path="/forgot-password" element={<RecoverPassword />} />
-                  <Route path="/CarritoCheck" element={<CarritoCheck />} />
-                  <Route path="/novedad" element={<SectionNovedades />} />
-                  <Route path="/alfatuc" element={<Alfatuc />} />
-                  <Route element={<ProtectedRouteAdmin />}>
-                    <Route path="/admin" element={<Admin />} />
-                    <Route path="/admin/usuarios" element={<PanelUserAdmin />} />
-                    <Route path="/admin/novedad" element={<PanelNovedadesAdmin />} />
-                    <Route path="/admin/productos" element={<PanelProductosAdmin />} />
-                    <Route path="/admin/orders" element={<PanelOrdersAdmin />} />
-                  </Route>
-                  <Route element={<ProtectedRouteUser />}>
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/profile/settings" element={<SettingsUser />} />
-                    <Route path="/profile/mylocation" element={<LocationUser />} />
-                    <Route path="/profile/myorders" element={<OrderUser />} />
-                  </Route>
-                </Routes>
-                <ButtonWhatsapp />
-              </main>
-              <ConditionalFooter />
-              <ConditionalStyles />
+          <OrderProvider>
+            <NavBarV1 />
+            <main>
+              <Routes>
+                <Route path='/' element={<PaginaPrincipal/>}/>
+                <Route path="/about" element={<About/>}/>
+                <Route path="/products" element={<PaginaProductos/>}/> 
+                <Route path="/products/:id" element={<DetallesProductos />} />
+                <Route path="/locales" element= {<Locales/>} ></Route>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/contact" element={<ContactPage/>}/>
+                <Route path="/forgot-password" element={<RecoverPassword />} />
+                <Route path="/CarritoCheck" element={<CarritoCheck />} />
+                <Route path="/novedad" element={<SectionNovedades/>} />
+                <Route path="/alfatuc" element={<Alfatuc/>} />
+                <Route element={<ProtectedRouteAdmin/>}>
+                  <Route path="/admin" element={<Admin/>}/>
+                  <Route path="/admin/usuarios" element={<PanelUserAdmin/>}/>
+                  <Route path="/admin/novedad" element={<PanelNovedadesAdmin/>}/>
+                  <Route path="/admin/productos" element={<PanelProductosAdmin />} />
+                  <Route path="/admin/orders" element={<PanelOrdersAdmin />} />
+                </Route>
+                <Route element={<ProtectedRouteUser/>}>
+                  <Route path="/profile" element={<Profile/>}/>
+                  <Route path="/profile/settings" element={<SettingsUser/>}/>
+                  <Route path="/profile/mylocation" element={<LocationUser/>}/>
+                  <Route path="/profile/myorders" element={<OrderUser/>}/>
+                </Route>
+              </Routes>
+              <ButtonWhatsapp/>
+            </main>
+            <ConditionalFooter/>
+            <ConditionalStyles />
             </OrderProvider>
           </CartProvider>
         </ProductProvider>
@@ -87,7 +78,6 @@ function App() {
     </BrowserRouter>
   );
 }
-
 function ConditionalFooter() {
   const location = useLocation();
   const noFooterPaths = ['/alfatuc', '/admin/usuarios', '/admin/novedad', '/admin/productos', '/admin/orders'];
@@ -98,7 +88,6 @@ function ConditionalFooter() {
 
   return <Footer />;
 }
-
 function ConditionalStyles() {
   const location = useLocation();
   const alfatucStyles = `
@@ -115,5 +104,6 @@ function ConditionalStyles() {
 
   return null;
 }
+
 
 export default App;

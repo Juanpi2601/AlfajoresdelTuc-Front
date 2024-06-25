@@ -3,9 +3,9 @@ import { registerRequest, verifyTokenRequest, updatePasswordRequest } from "../a
 import axios from "../api/axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { alertCustom, alertCustomWithTimerInterval } from "../utils/alertCustom.js";
-
 export const UserContext = createContext();
+import { alertCustom,alertCustomWithTimerInterval } from "../utils/alertCustom.js";
+// import { updatePasswordRequest } from "../api/user";
 
 export const useAuth = () => {
   const context = useContext(UserContext);
@@ -30,6 +30,8 @@ export const UserProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userChangeFlag, setUserChangeFlag] = useState(false);
+  const [cart, setCart] = useState([]);
+
 
   const triggerUserUpdate = () => {
     setUserChangeFlag((prevFlag) => !prevFlag);
@@ -44,30 +46,40 @@ export const UserProvider = ({ children }) => {
       alertCustom('¡Éxito!', 'Usuario creado correctamente.', 'success');
       navigate("/login");
     } catch (error) {
-      alertCustom("Upps", "Ocurrió un error al crear el usuario. Por favor, intente nuevamente.", "error");
+      alertCustom(
+        "Upps",
+        "Ocurrió un error al crear el usuario. Por favor, intente nuevamente.",
+        "error"
+      );
       setLoading(false);
     }
   };
 
-  const login = async (credentials) => {
+  const signin = async (user) => {
     try {
-      const response = await axios.post("user/login", credentials);
-      const { token } = response.data;
-      Cookies.set("token", token, { expires: 1, sameSite: "strict" });
-      setUser(response.data.user);
+      const res = await axios.post("/user/login", user);
+      const token = res.data.token;
+      document.cookie = `token=${token}; path=/; SameSite=Strict`; 
+      console.log({ token, "document.cookie": document.cookie });
+      const normalizedUser = normalizeUser(res.data);
+      setUser(normalizedUser);
       setIsAuthenticated(true);
-      navigate("/");
     } catch (error) {
-      console.error("Error logging in:", error);
+      alertCustom(
+        "Upps",
+        "Ocurrió un error al iniciar sesión. Por favor, intente nuevamente.",
+        "error"
+      );
     }
   };
+  
 
   const logout = () => {
-    Cookies.remove("token");
-    setUser(null);
+    axios.post("/user/logout", {}, axiosConfig);
     setIsAuthenticated(false);
-    navigate("/login");
+    setUser(null);
   };
+  
 
   const updatePassword = async (data) => {
     try {
@@ -80,10 +92,14 @@ export const UserProvider = ({ children }) => {
       return () => clearTimeout(alertTimeout);
     } catch (error) {
       setErrors(["Error al actualizar la contraseña."]);
-      alertCustom("Upps", "Ocurrió un error al actualizar la contraseña. Por favor, intente nuevamente.", "error");
+      alertCustom(
+        "Upps",
+        "Ocurrió un error al actualizar la contraseña. Por favor, intente nuevamente.",
+        "error"
+      );
       setLoading(false);
     }
-  };
+  };   
 
   useEffect(() => {
     if (errors.length > 0) {
@@ -98,31 +114,33 @@ export const UserProvider = ({ children }) => {
     const checkLogin = async () => {
       try {
         const res = await verifyTokenRequest();
-        const { token } = response.data;
-        Cookies.set("token", token, { expires: 1, sameSite: "strict" });
         if (res.status === 200) {
           const normalizedUser = normalizeUser(res.data);
           setIsAuthenticated(true);
           setUser(normalizedUser);
+          console.log("Usuario autenticado:", normalizedUser);
         } else {
           setIsAuthenticated(false);
           setUser(null);
+          console.log("Usuario no autenticado");
         }
         setLoading(false);
       } catch (error) {
         setIsAuthenticated(false);
         setUser(null);
         setLoading(false);
+        console.log("Error al verificar el token:", error);
       }
     };
     checkLogin();
   }, [userChangeFlag]);
+  
 
   return (
     <UserContext.Provider
       value={{
         signup,
-        login,
+        signin,
         setUser,
         triggerUserUpdate,
         user,
