@@ -4,8 +4,7 @@ import axios from "../api/axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 export const UserContext = createContext();
-import { alertCustom,alertCustomWithTimerInterval } from "../utils/alertCustom.js";
-// import  {updatePasswordRequest}  from "../api/user";
+import { alertCustom, alertCustomWithTimerInterval } from "../utils/alertCustom.js";
 
 export const useAuth = () => {
   const context = useContext(UserContext);
@@ -32,7 +31,6 @@ export const UserProvider = ({ children }) => {
   const [userChangeFlag, setUserChangeFlag] = useState(false);
   const [cart, setCart] = useState([]);
 
-
   const triggerUserUpdate = () => {
     setUserChangeFlag((prevFlag) => !prevFlag);
   };
@@ -46,11 +44,7 @@ export const UserProvider = ({ children }) => {
       alertCustom('¡Éxito!', 'Usuario creado correctamente.', 'success');
       navigate("/login");
     } catch (error) {
-      alertCustom(
-        "Upps",
-        "Ocurrió un error al crear el usuario. Por favor, intente nuevamente.",
-        "error"
-      );
+      alertCustom("Upps", "Ocurrió un error al crear el usuario. Por favor, intente nuevamente.", "error");
       setLoading(false);
     }
   };
@@ -59,27 +53,22 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
-      document.cookie = `token=${token}; path=/; SameSite=Strict`; 
+      Cookies.set('token', token, { path: '/', sameSite: 'Strict' });
       console.log({ token, "document.cookie": document.cookie });
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
     } catch (error) {
-      alertCustom(
-        "Upps",
-        "Ocurrió un error al iniciar sesión. Por favor, intente nuevamente.",
-        "error"
-      );
+      alertCustom("Upps", "Ocurrió un error al iniciar sesión. Por favor, intente nuevamente.", "error");
     }
   };
-  
 
   const logout = () => {
-    axios.post("/user/logout", {}, axiosConfig);
+    axios.post("/user/logout", {}, { withCredentials: true });
+    Cookies.remove('token', { path: '/' });
     setIsAuthenticated(false);
     setUser(null);
   };
-  
 
   const updatePassword = async (data) => {
     try {
@@ -92,14 +81,10 @@ export const UserProvider = ({ children }) => {
       return () => clearTimeout(alertTimeout);
     } catch (error) {
       setErrors(["Error al actualizar la contraseña."]);
-      alertCustom(
-        "Upps",
-        "Ocurrió un error al actualizar la contraseña. Por favor, intente nuevamente.",
-        "error"
-      );
+      alertCustom("Upps", "Ocurrió un error al actualizar la contraseña. Por favor, intente nuevamente.", "error");
       setLoading(false);
     }
-  };   
+  };
 
   useEffect(() => {
     if (errors.length > 0) {
@@ -134,7 +119,6 @@ export const UserProvider = ({ children }) => {
     };
     checkLogin();
   }, [userChangeFlag]);
-  
 
   return (
     <UserContext.Provider
