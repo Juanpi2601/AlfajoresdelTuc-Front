@@ -108,16 +108,23 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const res = await verifyTokenRequest();
-        if (res.status === 200) {
-          const normalizedUser = normalizeUser(res.data);
-          setIsAuthenticated(true);
-          setUser(normalizedUser);
-          console.log("Usuario autenticado:", normalizedUser);
+        const token = Cookies.get('token'); // Lee el token de las cookies
+        if (token) {
+          const res = await verifyTokenRequest();
+          if (res.status === 200) {
+            const normalizedUser = normalizeUser(res.data);
+            setIsAuthenticated(true);
+            setUser(normalizedUser);
+            console.log("Usuario autenticado:", normalizedUser);
+          } else {
+            setIsAuthenticated(false);
+            setUser(null);
+            console.log("Usuario no autenticado");
+          }
         } else {
           setIsAuthenticated(false);
           setUser(null);
-          console.log("Usuario no autenticado");
+          console.log("No se encontró el token");
         }
         setLoading(false);
       } catch (error) {
