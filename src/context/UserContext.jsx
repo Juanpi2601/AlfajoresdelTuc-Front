@@ -51,7 +51,6 @@ export const UserProvider = ({ children }) => {
       setLoading(false);
     }
   };
-
   const signin = async (user) => {
     try {
       const res = await axios.post("/user/login", user);
