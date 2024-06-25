@@ -56,7 +56,7 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
-      document.cookie = `token=${token}; path=/; SameSite=Strict`;
+      Cookies.set('token', token, { path: '/', sameSite: 'Strict' });
       console.log({ token, "document.cookie": document.cookie });
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
@@ -74,6 +74,7 @@ export const UserProvider = ({ children }) => {
     axios.post("/user/logout", {}, axiosConfig);
     setIsAuthenticated(false);
     setUser(null);
+    Cookies.remove('token'); // Eliminar el token de las cookies al cerrar sesión
   };
 
   const updatePassword = async (data) => {
@@ -108,8 +109,9 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const token = Cookies.get('token'); // Lee el token de las cookies
+        const token = Cookies.get('token'); // Leer el token de las cookies
         if (token) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const res = await verifyTokenRequest();
           if (res.status === 200) {
             const normalizedUser = normalizeUser(res.data);
