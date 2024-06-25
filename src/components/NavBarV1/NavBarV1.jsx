@@ -56,16 +56,16 @@ const NavBarV1 = ({ producto }) => {
           <Col className=" d-none d-lg-block pb-2">
             <Nav variant="underline" defaultActiveKey="/">
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/products">PRODUCTOS</Nav.Link>
+                <Link className='text-danger' href="/products">PRODUCTOS</Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/novedad">NOVEDADES</Nav.Link>
+                <Link className='text-danger' href="/novedad">NOVEDADES</Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/locales">SUCURSALES</Nav.Link>
+                <Link className='text-danger' href="/locales">SUCURSALES</Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/about">SOBRE NOSOTROS</Nav.Link>
+                <Link className='text-danger' href="/about">SOBRE NOSOTROS</Link>
               </Nav.Item>
             </Nav>
           </Col>
