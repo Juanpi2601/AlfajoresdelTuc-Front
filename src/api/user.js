@@ -1,21 +1,13 @@
 import axios from "./axios";
 
-const axiosConfig = {
-  headers: {
-    'Content-Type': 'application/json',
-    "Accept": "/",                       
-    "Cache-Control": "no-cache",        
-  },
-  withCredentials: true,                 
-};
 
 export const registerRequest = (user) => {
-  return axios.post('user/create', user, axiosConfig);  
+  return axios.post('user/create', user);  
 };
 
 export const verifyTokenRequest = async () => {
   try {
-    const res = await axios.post('user/verify-token', {}, axiosConfig);  
+    const res = await axios.post('user/verify-token');  
     return res;
   } catch (error) {
     throw error;
@@ -23,5 +15,5 @@ export const verifyTokenRequest = async () => {
 };
 
 export const updatePasswordRequest = (user) => {
-  return axios.patch('user/update-password', user, axiosConfig);  
+  return axios.patch('user/update-password', user);  
 }
