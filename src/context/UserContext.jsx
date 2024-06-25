@@ -49,24 +49,24 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const signin = async (user) => {
+  const login = async (credentials) => {
     try {
-      const res = await axios.post("/user/login", user);
-      const token = res.data.token;
-      Cookies.set('token', token, { path: '/', sameSite: 'Strict' });
-      const normalizedUser = normalizeUser(res.data);
-      setUser(normalizedUser);
+      const response = await axios.post("user/login", credentials);
+      const { token } = response.data;
+      Cookies.set("token", token, { expires: 1, sameSite: "strict" });
+      setUser(response.data.user);
       setIsAuthenticated(true);
+      navigate("/");
     } catch (error) {
-      alertCustom("Upps", "Ocurrió un error al iniciar sesión. Por favor, intente nuevamente.", "error");
+      console.error("Error logging in:", error);
     }
   };
 
   const logout = () => {
-    axios.post("/user/logout", {}, { withCredentials: true });
-    Cookies.remove('token', { path: '/' });
-    setIsAuthenticated(false);
+    Cookies.remove("token");
     setUser(null);
+    setIsAuthenticated(false);
+    navigate("/login");
   };
 
   const updatePassword = async (data) => {
@@ -122,7 +122,7 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         signup,
-        signin,
+        login,
         setUser,
         triggerUserUpdate,
         user,
