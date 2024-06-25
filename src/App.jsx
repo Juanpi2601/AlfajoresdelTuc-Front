@@ -35,7 +35,10 @@ import Cookies from 'js-cookie';
 
 function App() {
   useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${Cookies.get('token')}`;
+    const token = Cookies.get('token');
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
   }, []);
 
   return (
