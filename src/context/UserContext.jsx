@@ -98,6 +98,8 @@ export const UserProvider = ({ children }) => {
     const checkLogin = async () => {
       try {
         const res = await verifyTokenRequest();
+        const { token } = response.data;
+        Cookies.set("token", token, { expires: 1, sameSite: "strict" });
         if (res.status === 200) {
           const normalizedUser = normalizeUser(res.data);
           setIsAuthenticated(true);
