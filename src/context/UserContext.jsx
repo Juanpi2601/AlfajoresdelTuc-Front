@@ -3,8 +3,9 @@ import { registerRequest, verifyTokenRequest, updatePasswordRequest } from "../a
 import axios from "../api/axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-export const UserContext = createContext();
 import { alertCustom, alertCustomWithTimerInterval } from "../utils/alertCustom.js";
+
+export const UserContext = createContext();
 
 export const useAuth = () => {
   const context = useContext(UserContext);
@@ -29,7 +30,6 @@ export const UserProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userChangeFlag, setUserChangeFlag] = useState(false);
-  const [cart, setCart] = useState([]);
 
   const triggerUserUpdate = () => {
     setUserChangeFlag((prevFlag) => !prevFlag);
@@ -54,7 +54,6 @@ export const UserProvider = ({ children }) => {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
       Cookies.set('token', token, { path: '/', sameSite: 'Strict' });
-      console.log({ token, "document.cookie": document.cookie });
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
@@ -103,18 +102,15 @@ export const UserProvider = ({ children }) => {
           const normalizedUser = normalizeUser(res.data);
           setIsAuthenticated(true);
           setUser(normalizedUser);
-          console.log("Usuario autenticado:", normalizedUser);
         } else {
           setIsAuthenticated(false);
           setUser(null);
-          console.log("Usuario no autenticado");
         }
         setLoading(false);
       } catch (error) {
         setIsAuthenticated(false);
         setUser(null);
         setLoading(false);
-        console.log("Error al verificar el token:", error);
       }
     };
     checkLogin();
