@@ -49,9 +49,9 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const login = async (credentials) => {
+  const signin = async (credentials) => {
     try {
-      const response = await axios.post("user/login", credentials);
+      const response = await axios.post("/user/login", credentials);
       const { token } = response.data;
       Cookies.set("token", token, { expires: 1, sameSite: "strict" });
       setUser(response.data.user);
@@ -122,7 +122,7 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         signup,
-        login,
+        signin,
         setUser,
         triggerUserUpdate,
         user,
