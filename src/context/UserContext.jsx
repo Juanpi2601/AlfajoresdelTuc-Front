@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { registerRequest, verifyTokenRequest } from "../api/user";
+import { registerRequest, verifyTokenRequest, updatePasswordRequest } from "../api/user";
 import axios from "../api/axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
