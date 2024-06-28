@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { registerRequest, verifyTokenRequest, updatePasswordRequest } from "../api/user";
 import axios from "../api/axios";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 export const UserContext = createContext();
 import { alertCustom, alertCustomWithTimerInterval } from "../utils/alertCustom.js";
@@ -57,6 +56,7 @@ export const UserProvider = ({ children }) => {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
       localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
@@ -71,10 +71,10 @@ export const UserProvider = ({ children }) => {
   
 
   const logout = () => {
-    axios.post("/user/logout", {}, axiosConfig);
     setIsAuthenticated(false);
     setUser(null);
     localStorage.removeItem('token');
+    delete axios.defaults.headers.common['Authorization'];
   };
   
 
