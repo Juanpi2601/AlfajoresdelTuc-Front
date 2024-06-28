@@ -4,7 +4,6 @@ const URL_BASE = import.meta.env.VITE_URL_BASE;
 
 const instance = axios.create({
   baseURL: URL_BASE,
-  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     'Accept': '/',
@@ -16,5 +15,15 @@ const token = localStorage.getItem('token');
 if (token) {
   instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
+
+instance.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
 
 export default instance;
