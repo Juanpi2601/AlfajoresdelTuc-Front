@@ -55,7 +55,7 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('token', token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
@@ -73,7 +73,7 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     setIsAuthenticated(false);
     setUser(null);
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     delete axios.defaults.headers.common['Authorization'];
   };
   
@@ -110,7 +110,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const token = localStorage.getItem('token'); 
+        const token = sessionStorage.getItem('token'); 
         if (token) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const res = await verifyTokenRequest();

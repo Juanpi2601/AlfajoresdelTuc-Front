@@ -11,13 +11,13 @@ const instance = axios.create({
   },
 });
 
-const token = localStorage.getItem('token');
+const token = sessionStorage.getItem('token');
 if (token) {
   instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
 instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
