@@ -1,7 +1,6 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
-const URL_BASE = import.meta.env.VITE_URL_BASE;
 
+const URL_BASE = import.meta.env.VITE_URL_BASE;
 
 const instance = axios.create({
   baseURL: URL_BASE,
@@ -13,8 +12,7 @@ const instance = axios.create({
   },
 });
 
-
-const token = Cookies.get('token');
+const token = localStorage.getItem('token');
 if (token) {
   instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }

@@ -56,8 +56,7 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
-      Cookies.set('token', token, { path: '/', sameSite: 'Strict' });
-      console.log({ token, "document.cookie": document.cookie });
+      localStorage.setItem('token', token);
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
@@ -69,13 +68,15 @@ export const UserProvider = ({ children }) => {
       );
     }
   };
+  
 
   const logout = () => {
     axios.post("/user/logout", {}, axiosConfig);
     setIsAuthenticated(false);
     setUser(null);
-    Cookies.remove('token'); // Eliminar el token de las cookies al cerrar sesión
+    localStorage.removeItem('token');
   };
+  
 
   const updatePassword = async (data) => {
     try {
@@ -109,7 +110,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const token = Cookies.get('token'); // Leer el token de las cookies
+        const token = localStorage.getItem('token'); 
         if (token) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const res = await verifyTokenRequest();
@@ -138,6 +139,7 @@ export const UserProvider = ({ children }) => {
     };
     checkLogin();
   }, [userChangeFlag]);
+  
 
   return (
     <UserContext.Provider
