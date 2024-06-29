@@ -74,7 +74,7 @@ export const UserProvider = ({ children }) => {
     setUser(null);
     sessionStorage.removeItem('token');
     delete axios.defaults.headers.common['Authorization'];
-  };  
+  };   
 
   const updatePassword = async (data) => {
     try {
@@ -108,7 +108,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        const token = sessionStorage.getItem('token'); 
+        const token = sessionStorage.getItem('token');
         if (token) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const res = await verifyTokenRequest();
@@ -119,7 +119,7 @@ export const UserProvider = ({ children }) => {
           } else {
             setIsAuthenticated(false);
             setUser(null);
-            sessionStorage.removeItem('token'); 
+            sessionStorage.removeItem('token');
           }
         } else {
           setIsAuthenticated(false);
@@ -134,9 +134,8 @@ export const UserProvider = ({ children }) => {
       }
     };
     checkLogin();
-  }, [userChangeFlag]);
+  }, []);
   
-
   return (
     <UserContext.Provider
       value={{
