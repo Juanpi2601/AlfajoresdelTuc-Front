@@ -116,12 +116,13 @@ export const UserProvider = ({ children }) => {
         const token = sessionStorage.getItem('token');
         const userStr = sessionStorage.getItem('user');
         const isLogin = sessionStorage.getItem('isLogin');
-
+  
         console.log("SessionStorage values on load:", { token, userStr, isLogin });
-
+  
         if (token && userStr && isLogin) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const res = await verifyTokenRequest();
+          console.log("Token verification response:", res);
           if (res.status === 200) {
             const normalizedUser = normalizeUser(JSON.parse(userStr));
             setIsAuthenticated(true);
