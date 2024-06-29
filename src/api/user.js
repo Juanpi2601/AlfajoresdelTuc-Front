@@ -7,7 +7,7 @@ export const registerRequest = (user) => {
 
 export const verifyTokenRequest = async () => {
   try {
-    const res = await axios.get('user/verify-token');  
+    const res = await instance.get('/user/verify-token');
     return res;
   } catch (error) {
     throw error;
