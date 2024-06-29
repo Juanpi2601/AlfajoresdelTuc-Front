@@ -7,22 +7,24 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': `Bearer ${sessionStorage.getItem('token') || ''}`,
   },
 });
 
 instance.interceptors.request.use((config) => {
   const token = sessionStorage.getItem('token');
+  const user = sessionStorage.getItem('user');
+  
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
+  
+  if (user) {
+    config.headers['User-Data'] = user; 
+  }
+  
   return config;
 }, (error) => {
   return Promise.reject(error);
 });
-
-export const updateToken = (token) => {
-  instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-};
 
 export default instance;
