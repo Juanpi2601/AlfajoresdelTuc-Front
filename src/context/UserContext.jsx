@@ -29,6 +29,56 @@ export const UserProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const normalizeUser = (user) => {
+    if ("id" in user && !("_id" in user)) {
+      user._id = user.id;
+      delete user.id;
+    }
+    return user;
+  };
+
+  const checkLogin = async () => {
+    try {
+      const token = sessionStorage.getItem('token');
+      const userStr = sessionStorage.getItem('user');
+      const isLogin = sessionStorage.getItem('isLogin');
+
+      console.log("SessionStorage values on load:", { token, userStr, isLogin });
+
+      if (token && userStr && isLogin) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        const res = await verifyTokenRequest();
+        console.log("Token verification response:", res);
+        if (res.status === 200) {
+          const normalizedUser = normalizeUser(JSON.parse(userStr));
+          setIsAuthenticated(true);
+          setUser(normalizedUser);
+        } else {
+          console.log("Token verification failed with status:", res.status);
+          setIsAuthenticated(false);
+          setUser(null);
+          sessionStorage.removeItem('token');
+          sessionStorage.removeItem('user');
+          sessionStorage.removeItem('isLogin');
+        }
+      } else {
+        setIsAuthenticated(false);
+        setUser(null);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log("Error during token verification:", error);
+      setIsAuthenticated(false);
+      setUser(null);
+      setLoading(false);
+    }
+  };
+
+
+  useEffect(() => {
+    checkLogin();
+  }, []); 
+
   const signup = async (user) => {
     try {
       setLoading(true);
@@ -58,8 +108,10 @@ export const UserProvider = ({ children }) => {
       sessionStorage.setItem('isLogin', true);
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
       setUser(normalizedUser);
       setIsAuthenticated(true);
+
       navigate("/"); 
     } catch (error) {
       alertCustom(
@@ -69,7 +121,7 @@ export const UserProvider = ({ children }) => {
       );
     }
   };
-  
+
   const logout = () => {
     setIsAuthenticated(false);
     setUser(null);
@@ -79,7 +131,7 @@ export const UserProvider = ({ children }) => {
     delete axios.defaults.headers.common['Authorization'];
     navigate("/login"); 
     window.location.reload(); 
-  };   
+  };
 
   const updatePassword = async (data) => {
     try {
@@ -110,60 +162,20 @@ export const UserProvider = ({ children }) => {
     }
   }, [errors]);
 
-  useEffect(() => {
-    const checkLogin = async () => {
-      try {
-        const token = sessionStorage.getItem('token');
-        const userStr = sessionStorage.getItem('user');
-        const isLogin = sessionStorage.getItem('isLogin');
-  
-        console.log("SessionStorage values on load:", { token, userStr, isLogin });
-  
-        if (token && userStr && isLogin) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const res = await verifyTokenRequest();
-          console.log("Token verification response:", res);
-          if (res.status === 200) {
-            const normalizedUser = normalizeUser(JSON.parse(userStr));
-            setIsAuthenticated(true);
-            setUser(normalizedUser);
-          } else {
-            console.log("Token verification failed with status:", res.status);
-            setIsAuthenticated(false);
-            setUser(null);
-            sessionStorage.removeItem('token');
-            sessionStorage.removeItem('user');
-            sessionStorage.removeItem('isLogin');
-          }
-        } else {
-          setIsAuthenticated(false);
-          setUser(null);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.log("Error during token verification:", error);
-        setIsAuthenticated(false);
-        setUser(null);
-        setLoading(false);
-      }
-    };
-    checkLogin();
-  }, []);   
+  const contextValues = {
+    signup,
+    signin,
+    setUser,
+    user,
+    loading,
+    isAuthenticated,
+    errors,
+    logout,
+    updatePassword
+  };
 
   return (
-    <UserContext.Provider
-      value={{
-        signup,
-        signin,
-        setUser,
-        user,
-        loading,
-        isAuthenticated,
-        errors,
-        logout,
-        updatePassword
-      }}
-    >
+    <UserContext.Provider value={contextValues}>
       {children}
     </UserContext.Provider>
   );
