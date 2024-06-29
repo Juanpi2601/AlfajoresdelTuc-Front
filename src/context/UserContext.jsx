@@ -2,8 +2,9 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 import { registerRequest, verifyTokenRequest, updatePasswordRequest } from "../api/user";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
-export const UserContext = createContext();
 import { alertCustom, alertCustomWithTimerInterval } from "../utils/alertCustom.js";
+
+export const UserContext = createContext();
 
 export const useAuth = () => {
   const context = useContext(UserContext);
@@ -55,9 +56,13 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
-      sessionStorage.setItem('token', token); 
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; 
       const normalizedUser = normalizeUser(res.data);
+
+      // Guardar token y usuario en sessionStorage
+      sessionStorage.setItem('token', token);
+      sessionStorage.setItem('user', JSON.stringify(normalizedUser));
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(normalizedUser);
       setIsAuthenticated(true);
     } catch (error) {
@@ -73,6 +78,7 @@ export const UserProvider = ({ children }) => {
     setIsAuthenticated(false);
     setUser(null);
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
     delete axios.defaults.headers.common['Authorization'];
   };   
 
@@ -109,17 +115,19 @@ export const UserProvider = ({ children }) => {
     const checkLogin = async () => {
       try {
         const token = sessionStorage.getItem('token');
-        if (token) {
+        const userStr = sessionStorage.getItem('user');
+        if (token && userStr) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const res = await verifyTokenRequest();
           if (res.status === 200) {
-            const normalizedUser = normalizeUser(res.data);
+            const normalizedUser = normalizeUser(JSON.parse(userStr));
             setIsAuthenticated(true);
             setUser(normalizedUser);
           } else {
             setIsAuthenticated(false);
             setUser(null);
             sessionStorage.removeItem('token');
+            sessionStorage.removeItem('user');
           }
         } else {
           setIsAuthenticated(false);
@@ -135,7 +143,7 @@ export const UserProvider = ({ children }) => {
     };
     checkLogin();
   }, []);
-  
+
   return (
     <UserContext.Provider
       value={{
