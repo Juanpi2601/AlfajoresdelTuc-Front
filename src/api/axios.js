@@ -6,8 +6,8 @@ const instance = axios.create({
   baseURL: URL_BASE,
   headers: {
     'Content-Type': 'application/json',
-    'Accept': '/',
-    'Cache-Control': 'no-cache',
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
   },
 });
 
