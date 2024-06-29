@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Col, Container, Nav, NavLink, Navbar, Offcanvas, Row } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Col, Container, Nav, Navbar, Offcanvas, Row } from 'react-bootstrap';
+import { Link, NavLink } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import CallIcon from '@mui/icons-material/Call';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -27,20 +27,20 @@ const NavBarV1 = ({ producto }) => {
                 <img className="img-fluid imgNav" src="https://i.postimg.cc/1XFPjbQr/Letras-Del-Tucuman.png" alt="Alfajores-Del-Tucuman-Letras" />
               </Link>
             </Col>
-            <Col className=" d-none d-lg-block">
-              <Nav className="d-flex justify-content-end ">
-                <Link to='./contact' className="mx-3">
+            <Col className="d-none d-lg-block">
+              <Nav className="d-flex justify-content-end">
+                <NavLink to='/contact' className="mx-3">
                   <CallIcon fontSize="large" style={{ color: 'black'}}/>
-                </Link>
+                </NavLink>
                 <NavLink to='' className="p-0 mx-3 cursor-pointer" onClick={handleCarrito}>
-                <NavbarCart />
+                  <NavbarCart />
                 </NavLink>
                 {isAuthenticated ? (
                   <ProfileUser/>
                 ) : (
-                  <Link to='./login' className="mx-3">
+                  <NavLink to='/login' className="mx-3">
                     <PersonIcon fontSize="large" style={{ color: 'black'}}/>
-                  </Link>
+                  </NavLink>
                 )}
               </Nav>
             </Col>
@@ -53,19 +53,19 @@ const NavBarV1 = ({ producto }) => {
       </Row>
       <Container>
         <Row>
-          <Col className=" d-none d-lg-block pb-2">
+          <Col className="d-none d-lg-block pb-2">
             <Nav variant="underline" defaultActiveKey="/">
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/products">PRODUCTOS</Nav.Link>
+                <Nav.Link as={NavLink} className='text-danger' to="/products">PRODUCTOS</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/novedad">NOVEDADES</Nav.Link>
+                <Nav.Link as={NavLink} className='text-danger' to="/novedad">NOVEDADES</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/locales">SUCURSALES</Nav.Link>
+                <Nav.Link as={NavLink} className='text-danger' to="/locales">SUCURSALES</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link className='text-danger' href="/about">SOBRE NOSOTROS</Nav.Link>
+                <Nav.Link as={NavLink} className='text-danger' to="/about">SOBRE NOSOTROS</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
@@ -84,15 +84,15 @@ const NavBarV1 = ({ producto }) => {
                 <p className="fs-5 m-0 text-black">Hola!! {user && user.name}</p>
               </div>
             ) : (
-              <Link to='./login' className="mx-3">
+              <NavLink to='/login' className="mx-3">
                 <PersonIcon fontSize="large" style={{ color: 'black'}}/>
-              </Link>
+              </NavLink>
             )}
-            <Nav.Link className='text-danger' href="/about">NOSOTROS</Nav.Link>
-            <Nav.Link className='text-danger' href="/products">PRODUCTOS</Nav.Link>
-            <Nav.Link className='text-danger' href="/novedad">NOVEDADES</Nav.Link>
-            <Nav.Link className='text-danger' href="/locales">LOCALES</Nav.Link>
-            <Nav.Link className='text-danger' href="/contact">CONTACTO</Nav.Link>
+            <Nav.Link as={NavLink} className='text-danger' to="/about">NOSOTROS</Nav.Link>
+            <Nav.Link as={NavLink} className='text-danger' to="/products">PRODUCTOS</Nav.Link>
+            <Nav.Link as={NavLink} className='text-danger' to="/novedad">NOVEDADES</Nav.Link>
+            <Nav.Link as={NavLink} className='text-danger' to="/locales">LOCALES</Nav.Link>
+            <Nav.Link as={NavLink} className='text-danger' to="/contact">CONTACTO</Nav.Link>
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>
