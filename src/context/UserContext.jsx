@@ -53,14 +53,13 @@ export const UserProvider = ({ children }) => {
       const token = res.data.token;
       const normalizedUser = normalizeUser(res.data);
 
-      // Guardar token y usuario en sessionStorage
       sessionStorage.setItem('token', token);
       sessionStorage.setItem('user', JSON.stringify(normalizedUser));
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(normalizedUser);
       setIsAuthenticated(true);
-      navigate("/"); // Redirigir a la página principal
+      navigate("/"); 
     } catch (error) {
       alertCustom(
         "Upps",
@@ -76,8 +75,8 @@ export const UserProvider = ({ children }) => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('user');
     delete axios.defaults.headers.common['Authorization'];
-    navigate("/login"); // Redirigir al usuario a la página de inicio de sesión
-    window.location.reload(); // Refrescar la página para limpiar todos los datos del usuario
+    navigate("/login"); 
+    window.location.reload(); 
   };   
 
   const updatePassword = async (data) => {
@@ -140,7 +139,7 @@ export const UserProvider = ({ children }) => {
       }
     };
     checkLogin();
-  }, []);
+  }, []);  
 
   return (
     <UserContext.Provider
