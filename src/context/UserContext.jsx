@@ -28,11 +28,6 @@ export const UserProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [userChangeFlag, setUserChangeFlag] = useState(false);
-
-  const triggerUserUpdate = () => {
-    setUserChangeFlag((prevFlag) => !prevFlag);
-  };
 
   const signup = async (user) => {
     try {
@@ -65,6 +60,7 @@ export const UserProvider = ({ children }) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(normalizedUser);
       setIsAuthenticated(true);
+      navigate("/"); // Redirigir a la página principal
     } catch (error) {
       alertCustom(
         "Upps",
@@ -80,6 +76,8 @@ export const UserProvider = ({ children }) => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('user');
     delete axios.defaults.headers.common['Authorization'];
+    navigate("/login"); // Redirigir al usuario a la página de inicio de sesión
+    window.location.reload(); // Refrescar la página para limpiar todos los datos del usuario
   };   
 
   const updatePassword = async (data) => {
@@ -150,7 +148,6 @@ export const UserProvider = ({ children }) => {
         signup,
         signin,
         setUser,
-        triggerUserUpdate,
         user,
         loading,
         isAuthenticated,
