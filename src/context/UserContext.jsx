@@ -55,28 +55,26 @@ export const UserProvider = ({ children }) => {
     try {
       const res = await axios.post("/user/login", user);
       const token = res.data.token;
-      sessionStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      sessionStorage.setItem('token', token); 
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; 
       const normalizedUser = normalizeUser(res.data);
       setUser(normalizedUser);
       setIsAuthenticated(true);
     } catch (error) {
       alertCustom(
         "Upps",
-        "Ocurrió un error al iniciar sesión. Por favor, intente nuevamente.",
+        "Ocurrió un error al iniciar sesión. Por favor, inténtelo nuevamente.",
         "error"
       );
     }
   };
   
-
   const logout = () => {
     setIsAuthenticated(false);
     setUser(null);
     sessionStorage.removeItem('token');
     delete axios.defaults.headers.common['Authorization'];
-  };
-  
+  };  
 
   const updatePassword = async (data) => {
     try {
@@ -118,16 +116,14 @@ export const UserProvider = ({ children }) => {
             const normalizedUser = normalizeUser(res.data);
             setIsAuthenticated(true);
             setUser(normalizedUser);
-            console.log("Usuario autenticado:", normalizedUser);
           } else {
             setIsAuthenticated(false);
             setUser(null);
-            console.log("Usuario no autenticado");
+            sessionStorage.removeItem('token'); 
           }
         } else {
           setIsAuthenticated(false);
           setUser(null);
-          console.log("No se encontró el token");
         }
         setLoading(false);
       } catch (error) {
