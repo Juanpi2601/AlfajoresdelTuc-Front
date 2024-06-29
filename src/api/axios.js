@@ -7,7 +7,7 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+    'Authorization': `Bearer ${sessionStorage.getItem('token') || ''}`,
   },
 });
 
@@ -20,5 +20,9 @@ instance.interceptors.request.use((config) => {
 }, (error) => {
   return Promise.reject(error);
 });
+
+export const updateToken = (token) => {
+  instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+};
 
 export default instance;
