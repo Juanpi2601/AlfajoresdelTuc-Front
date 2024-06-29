@@ -29,14 +29,6 @@ export const UserProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const normalizeUser = (user) => {
-    if ("id" in user && !("_id" in user)) {
-      user._id = user.id;
-      delete user.id;
-    }
-    return user;
-  };
-
   const checkLogin = async () => {
     try {
       const token = sessionStorage.getItem('token');
@@ -74,10 +66,9 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-
   useEffect(() => {
     checkLogin();
-  }, []); 
+  }, []);
 
   const signup = async (user) => {
     try {
@@ -112,7 +103,7 @@ export const UserProvider = ({ children }) => {
       setUser(normalizedUser);
       setIsAuthenticated(true);
 
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       alertCustom(
         "Upps",
@@ -129,8 +120,8 @@ export const UserProvider = ({ children }) => {
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('isLogin');
     delete axios.defaults.headers.common['Authorization'];
-    navigate("/login"); 
-    window.location.reload(); 
+    navigate("/login");
+    window.location.reload();
   };
 
   const updatePassword = async (data) => {
