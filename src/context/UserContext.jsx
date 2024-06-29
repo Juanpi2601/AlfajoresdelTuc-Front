@@ -128,7 +128,7 @@ export const UserProvider = ({ children }) => {
             setIsAuthenticated(true);
             setUser(normalizedUser);
           } else {
-            console.log("Token verification failed:", res.status);
+            console.log("Token verification failed with status:", res.status);
             setIsAuthenticated(false);
             setUser(null);
             sessionStorage.removeItem('token');
@@ -148,7 +148,7 @@ export const UserProvider = ({ children }) => {
       }
     };
     checkLogin();
-  }, []);  
+  }, []);   
 
   return (
     <UserContext.Provider
