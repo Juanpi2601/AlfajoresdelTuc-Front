@@ -55,6 +55,7 @@ export const UserProvider = ({ children }) => {
 
       sessionStorage.setItem('token', token);
       sessionStorage.setItem('user', JSON.stringify(normalizedUser));
+      sessionStorage.setItem('isLogin', true);
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(normalizedUser);
@@ -74,6 +75,7 @@ export const UserProvider = ({ children }) => {
     setUser(null);
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('user');
+    sessionStorage.removeItem('isLogin');
     delete axios.defaults.headers.common['Authorization'];
     navigate("/login"); 
     window.location.reload(); 
@@ -113,7 +115,8 @@ export const UserProvider = ({ children }) => {
       try {
         const token = sessionStorage.getItem('token');
         const userStr = sessionStorage.getItem('user');
-        if (token && userStr) {
+        const isLogin = sessionStorage.getItem('isLogin');
+        if (token && userStr && isLogin) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const res = await verifyTokenRequest();
           if (res.status === 200) {
@@ -125,6 +128,7 @@ export const UserProvider = ({ children }) => {
             setUser(null);
             sessionStorage.removeItem('token');
             sessionStorage.removeItem('user');
+            sessionStorage.removeItem('isLogin');
           }
         } else {
           setIsAuthenticated(false);
