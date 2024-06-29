@@ -1,13 +1,13 @@
-import axios from "./axios";
+import instance from "./axios";
 
 
 export const registerRequest = (user) => {
-  return axios.post('user/create', user);  
+  return instance.post('user/create', user);  
 };
 
 export const verifyTokenRequest = async () => {
   try {
-    const res = await instance.get('/user/verify-token');
+    const res = await instance.get('user/verify-token');  
     return res;
   } catch (error) {
     throw error;
@@ -15,5 +15,5 @@ export const verifyTokenRequest = async () => {
 };
 
 export const updatePasswordRequest = (user) => {
-  return axios.patch('user/update-password', user);  
+  return instance.patch('user/update-password', user);  
 }

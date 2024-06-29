@@ -12,16 +12,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   const token = sessionStorage.getItem('token');
-  const user = sessionStorage.getItem('user');
-  
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
-  
-  if (user) {
-    config.headers['User-Data'] = user; 
-  }
-  
   return config;
 }, (error) => {
   return Promise.reject(error);

@@ -116,6 +116,9 @@ export const UserProvider = ({ children }) => {
         const token = sessionStorage.getItem('token');
         const userStr = sessionStorage.getItem('user');
         const isLogin = sessionStorage.getItem('isLogin');
+
+        console.log("SessionStorage values on load:", { token, userStr, isLogin });
+
         if (token && userStr && isLogin) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const res = await verifyTokenRequest();
@@ -124,6 +127,7 @@ export const UserProvider = ({ children }) => {
             setIsAuthenticated(true);
             setUser(normalizedUser);
           } else {
+            console.log("Token verification failed:", res.status);
             setIsAuthenticated(false);
             setUser(null);
             sessionStorage.removeItem('token');
@@ -136,10 +140,10 @@ export const UserProvider = ({ children }) => {
         }
         setLoading(false);
       } catch (error) {
+        console.log("Error during token verification:", error);
         setIsAuthenticated(false);
         setUser(null);
         setLoading(false);
-        console.log("Error al verificar el token:", error);
       }
     };
     checkLogin();
