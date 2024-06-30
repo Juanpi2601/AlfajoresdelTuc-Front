@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useContext, useEffect, useRef } from "react";
 import { registerRequest, verifyTokenRequest, updatePasswordRequest } from "../api/user";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
@@ -28,30 +28,29 @@ export const UserProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const logoutTimerRef = useRef(null);
 
   const checkLogin = async () => {
     try {
       const token = sessionStorage.getItem('token');
       const userStr = sessionStorage.getItem('user');
-      const isLogin = sessionStorage.getItem('isLogin');
 
-      console.log("SessionStorage values on load:", { token, userStr, isLogin });
+      // console.log("SessionStorage values on load:", { token, userStr });
 
-      if (token && userStr && isLogin) {
+      if (token && userStr) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         const res = await verifyTokenRequest();
-        console.log("Token verification response:", res);
+        // console.log("Token verification response:", res);
         if (res.status === 200) {
           const normalizedUser = normalizeUser(JSON.parse(userStr));
           setIsAuthenticated(true);
           setUser(normalizedUser);
         } else {
-          console.log("Token verification failed with status:", res.status);
+          // console.log("Token verification failed with status:", res.status);
           setIsAuthenticated(false);
           setUser(null);
           sessionStorage.removeItem('token');
           sessionStorage.removeItem('user');
-          sessionStorage.removeItem('isLogin');
         }
       } else {
         setIsAuthenticated(false);
@@ -59,7 +58,7 @@ export const UserProvider = ({ children }) => {
       }
       setLoading(false);
     } catch (error) {
-      console.log("Error during token verification:", error);
+      // console.log("Error during token verification:", error);
       setIsAuthenticated(false);
       setUser(null);
       setLoading(false);
@@ -68,6 +67,45 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     checkLogin();
+  }, []);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden' || !navigator.onLine) {
+        startLogoutTimer();
+      } else {
+        clearLogoutTimer();
+      }
+    };
+
+    const startLogoutTimer = () => {
+      if (logoutTimerRef.current) {
+        clearTimeout(logoutTimerRef.current);
+      }
+      logoutTimerRef.current = setTimeout(() => {
+        alertCustom('Sesión cerrada', 'Tu sesión ha sido cerrada por inactividad.', 'info');
+        logout();
+        window.location.reload();
+      }, 300000);
+    };
+
+    const clearLogoutTimer = () => {
+      if (logoutTimerRef.current) {
+        clearTimeout(logoutTimerRef.current);
+        logoutTimerRef.current = null;
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('offline', handleVisibilityChange);
+    window.addEventListener('online', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('offline', handleVisibilityChange);
+      window.removeEventListener('online', handleVisibilityChange);
+      clearLogoutTimer();
+    };
   }, []);
 
   const signup = async (user) => {
@@ -96,7 +134,6 @@ export const UserProvider = ({ children }) => {
 
       sessionStorage.setItem('token', token);
       sessionStorage.setItem('user', JSON.stringify(normalizedUser));
-      sessionStorage.setItem('isLogin', true);
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
@@ -118,7 +155,6 @@ export const UserProvider = ({ children }) => {
     setUser(null);
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('user');
-    sessionStorage.removeItem('isLogin');
     delete axios.defaults.headers.common['Authorization'];
     navigate("/login");
     window.location.reload();
